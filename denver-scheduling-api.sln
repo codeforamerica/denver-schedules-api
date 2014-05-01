@@ -14,6 +14,9 @@ Global
 		{EA3E213F-5730-4232-BF4C-09068467EB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA3E213F-5730-4232-BF4C-09068467EB96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Schedule.API\Schedule.API.csproj
 	EndGlobalSection
