@@ -1,10 +1,16 @@
 denver-scheduling-api
 =====================
 
+[![Build Status](https://travis-ci.org/codeforamerica/denver-scheduling-api.png?branch=master)](https://travis-ci.org/codeforamerica/denver-sceduling-api)
+
 A light-weight api for city events &amp; schedules.
 
 ## Development Environment
-* `git config core.autocrlf true` This project is being developed cross-platform. To avoid noisy commits with changes to line-endings, we set autocrlf to true to standardize. When adding files, you may see the following warning **warning: LF will be replaced by CRLF in .travis.yml. The file will have its original line endings in your working directory.** It's informing you it's throwing out your line endings in favor of the standard CRLF ones and can be ignored.
+
+This project is cross-platform. To avoid noisy commits from changes to line-endings, set autocrlf to true. 
+`git config core.autocrlf true` 
+
+When adding files, you may see the following: **warning: LF will be replaced by CRLF in .travis.yml. The file will have its original line endings in your working directory.** It's throwing out your line endings in favor of the standard CRLF ones. It can be ignored.
 
 ### Windows
 * Use [Visual Studio Express] [express]
