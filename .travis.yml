@@ -9,4 +9,6 @@ deploy:
     secure: TauFvTIpQb2y2yclPNDnYZx4p4jc3Cx398lirLdU40kMIEz4Pbe7JwGqw8Sq8jzlvxXvIB9QxaEyjZpFT8bsy01wC8ENC9VY2yomBs44kvkvMPDC7STyH4AT1bWjxQKtAshnEAi6DR3XAYlQS1N/JvHmO/NDzkphWv+NdIMPNOU=
   app: staging-denver-now-api
   on:
+    branch: fix-heroku-deployment
     repo: codeforamerica/denver-scheduling-api
+  skip_cleanup: true
