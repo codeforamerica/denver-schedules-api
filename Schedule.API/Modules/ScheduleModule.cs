@@ -4,6 +4,6 @@ public class ScheduleModule : NancyModule
 {
 	public ScheduleModule()
 	{
-		Get["/"] = parameters => "Hello World";
+		Get["/"] = parameters => "Hello Worlds";
 	}
 }
