@@ -5,10 +5,11 @@ script:
 - xbuild denver-scheduling-api.sln
 deploy:
   provider: heroku
+  buildpack_url: https://github.com/friism/heroku-buildpack-mono
   api_key:
     secure: TauFvTIpQb2y2yclPNDnYZx4p4jc3Cx398lirLdU40kMIEz4Pbe7JwGqw8Sq8jzlvxXvIB9QxaEyjZpFT8bsy01wC8ENC9VY2yomBs44kvkvMPDC7STyH4AT1bWjxQKtAshnEAi6DR3XAYlQS1N/JvHmO/NDzkphWv+NdIMPNOU=
   app: staging-denver-now-api
   on:
-    branch: fix-heroku-deployment
     repo: codeforamerica/denver-scheduling-api
+    branch: fix-heroku-deployment
   skip_cleanup: true
