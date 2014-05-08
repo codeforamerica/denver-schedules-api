@@ -12,4 +12,3 @@ deploy:
   on:
     repo: codeforamerica/denver-scheduling-api
     branch: fix-heroku-deployment
-  skip_cleanup: true
