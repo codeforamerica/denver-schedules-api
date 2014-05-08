@@ -1,4 +1,4 @@
-denver-scheduling-api
+denver-schedules-api
 =====================
 
 [![Build Status][build_png]][travis]

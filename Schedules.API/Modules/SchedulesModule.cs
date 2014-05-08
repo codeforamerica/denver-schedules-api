@@ -1,8 +1,8 @@
 ﻿using Nancy;
 
-public class ScheduleModule : NancyModule
+public class SchedulesModule : NancyModule
 {
-	public ScheduleModule()
+	public SchedulesModule()
 	{
 		Get["/"] = parameters => "Hello Worlds";
 	}

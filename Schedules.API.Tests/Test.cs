@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace Schedule.API.Tests
+namespace Schedules.API.Tests
 {
 	[TestFixture ()]
 	public class Test
@@ -10,7 +10,7 @@ namespace Schedule.API.Tests
 		public void TestCase ()
 		{
 			// A passing test! So proud.
-			Assert.True (true);
+			Assert.IsTrue(true);
 		}
 	}
 }
