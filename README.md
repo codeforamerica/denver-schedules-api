@@ -8,7 +8,7 @@ A light-weight api for city events &amp; schedules.
 * [Staging][staging]
 
 [build_png]: https://travis-ci.org/codeforamerica/denver-schedules-api.png?branch=master
-[travis]: https://travis-ci.org/codeforamerica/denver-scedules-api
+[travis]: https://travis-ci.org/codeforamerica/denver-schedules-api
 [staging]: http://staging-denver-now-api.herokuapp.com/
 
 ## Development Environment
