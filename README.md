@@ -7,8 +7,8 @@ A light-weight api for city events &amp; schedules.
 
 * [Staging][staging]
 
-[build_png]: https://travis-ci.org/codeforamerica/denver-scheduling-api.png?branch=master
-[travis]: https://travis-ci.org/codeforamerica/denver-sceduling-api
+[build_png]: https://travis-ci.org/codeforamerica/denver-schedules-api.png?branch=master
+[travis]: https://travis-ci.org/codeforamerica/denver-scedules-api
 [staging]: http://staging-denver-now-api.herokuapp.com/
 
 ## Development Environment
@@ -51,4 +51,4 @@ We use the GitHub issue tracker to track bugs and features. Before submitting a 
 # License
 See the [LICENSE][] for details.
 
-[license]: https://github.com/codeforamerica/denver-scheduling-api/blob/master/LICENSE
+[license]: https://github.com/codeforamerica/denver-schedules-api/blob/master/LICENSE
