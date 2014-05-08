@@ -3,6 +3,7 @@ install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console
 script:
   - xbuild denver-scheduling-api.sln
+  - nunit-console Schedule.API.Tests/bin/Debug/Schedule.API.Tests.dll
 deploy:
   provider: heroku
   api_key:
