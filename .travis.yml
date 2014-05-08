@@ -11,4 +11,4 @@ deploy:
   strategy: git
   app: staging-denver-now-api
   on:
-    repo: codeforamerica/denver-scheduling-api
+    repo: codeforamerica/denver-schedules-api
