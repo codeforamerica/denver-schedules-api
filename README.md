@@ -1,14 +1,22 @@
 denver-scheduling-api
 =====================
 
-[![Build Status](https://travis-ci.org/codeforamerica/denver-scheduling-api.png?branch=master)](https://travis-ci.org/codeforamerica/denver-sceduling-api)
-
+[![Build Status][build_png]][travis]
+ 
 A light-weight api for city events &amp; schedules.
+
+* [Staging][staging]
+
+[build_png]: https://travis-ci.org/codeforamerica/denver-scheduling-api.png?branch=master
+[travis]: https://travis-ci.org/codeforamerica/denver-sceduling-api
+[staging]: http://staging-denver-now-api.herokuapp.com/
 
 ## Development Environment
 
 This project is cross-platform. To avoid noisy commits from changes to line-endings, set autocrlf to true. 
-`git config core.autocrlf true` 
+```
+git config core.autocrlf true
+```
 
 When adding files, you may see the following: **warning: LF will be replaced by CRLF in .travis.yml. The file will have its original line endings in your working directory.** It's throwing out your line endings in favor of the standard CRLF ones. It can be ignored.
 
