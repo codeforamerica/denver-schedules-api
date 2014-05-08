@@ -12,3 +12,5 @@ deploy:
   app: staging-denver-now-api
   on:
     repo: codeforamerica/denver-schedules-api
+notifications:
+	webhooks: http://project-monitor.codeforamerica.org/projects/5410eca6-0a90-4bf0-b9c0-39f679940ba4/status
