@@ -4,57 +4,68 @@ public class SchedulesModule : NancyModule
 {
 	public SchedulesModule()
 	{
-		Get["/schedules"] = _ =>
-		{
-			return Response.AsJson(@"{
-			title: 'City Holidays',
-			events: [
-				{
-					desc: 'New Years Day',
-					day: 'Wednesday',
-					startdate: '01.01.2014'
-				},
-				{
-					desc: 'Martin Luther King Day',
-					day: 'Monday',
-					startdate: '01.20.2014'
-				},
-				{
-					desc: 'President's Day',
-					day: 'Monday',
-					startdate: '02.27.2014'
-				},
-				{
-					desc: 'Cesar Chavez Day',
-					day: 'Monday',
-					startdate: '03.31.2014'
-				},
-				{
-					desc: 'Memorial Day',
-					day: 'Monday',
-					startdate: '05.26.2014'
-				},
-				{
-					desc: 'Independence Day',
-					day: 'Friday',
-					startdate: '07.04.2014'
-				},
-				{
-					desc: 'Labor Day',
-					day: 'Monday',
-					startdate: '11.01.2014'
-				},
-				{
-					desc: 'Thanksgiving Day',
-					day: 'Thursday',
-					startdate: '11.27.2014'
-				},
-				{
-					desc: 'Christmas Day',
-					day: 'Monday',
-					startdate: '12.25.2014'
-				}
-		]");
+		Get ["/schedules"] = _ => {
+			var holidays = new {
+				Title = "City Holidays",
+				Events = new [] {
+				new 
+					{
+						Desc = "New Years Day",
+						Day = "Wednesday",
+						StartDate = "01.01.2014"
+					},
+				new 
+					{
+						Desc = "Martin Luther King Day",
+						Day = "Monday",
+						StartDate = "01.20.2014"
+					},
+				new 
+					{
+						Desc = "President's Day",
+						Day = "Monday",
+						StartDate = "02.27.2014"
+					},
+				new 
+					{
+						Desc = "Cesar Chavez Day",
+						Day = "Monday",
+						StartDate = "03.31.2014"
+					},
+				new 
+					{
+						Desc = "Memorial Day",
+						Day = "Monday",
+						StartDate = "05.26.2014"
+					},
+				new 
+					{
+						Desc = "Independence Day",
+						Day = "Friday",
+						StartDate = "07.04.2014"
+					},
+				new 
+					{
+						Desc = "Labor Day",
+						Day = "Monday",
+						StartDate = "11.01.2014"
+					},
+				new 
+					{
+						Desc = "Thanksgiving Day",
+						Day = "Thursday",
+						StartDate = "11.27.2014"
+					},
+				new 
+					{
+						Desc = "Christmas Day",
+						Day = "Monday",
+						StartDate = "12.25.2014"
+					}
+			}
+			};
+
+			return Response.AsJson (holidays);
 		};
 	}
 }
