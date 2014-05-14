@@ -24,8 +24,15 @@ namespace Schedules.API.Tests
 		[Test ()]
 		public void ListIndexShouldReturnOk()
 		{
-			Nancy.Testing.BrowserResponse result = browser.Get("/schedules", with => with.HttpRequest());
-			Assert.AreEqual(Nancy.HttpStatusCode.OK, result.StatusCode);
+			var response = browser.Get("/schedules", with => with.HttpRequest());
+			Assert.AreEqual(Nancy.HttpStatusCode.OK, response.StatusCode);
+		}
+
+		[Test ()]
+		public void ListIndexShouldReturnJson()
+		{
+			var response = browser.Get("/schedules", with => with.HttpRequest());
+			Assert.AreEqual ("application/json; charset=utf-8", response.ContentType);
 		}
 	}
 }

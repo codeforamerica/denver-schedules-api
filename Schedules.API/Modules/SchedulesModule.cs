@@ -6,7 +6,7 @@ public class SchedulesModule : NancyModule
 	{
 		Get["/schedules"] = _ =>
 		{
-			return @"{
+			return Response.AsJson(@"{
 			title: 'City Holidays',
 			events: [
 				{
@@ -54,7 +54,7 @@ public class SchedulesModule : NancyModule
 					day: 'Monday',
 					startdate: '12.25.2014'
 				}
-		]";
+		]");
 		};
 	}
 }
