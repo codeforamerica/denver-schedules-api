@@ -111,5 +111,7 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Modules\SchedulesModule.cs" />
+    <Compile Include="CustomBootstrapper.cs" />
+    <Compile Include="CustomJsonSerializer.cs" />
   </ItemGroup>
 </Project>
