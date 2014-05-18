@@ -40,7 +40,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SchedulesTests.cs" />
+    <Compile Include="Modules\RemindersTests.cs" />
+    <Compile Include="Modules\SchedulesTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -51,5 +52,8 @@
       <Project>{EA3E213F-5730-4232-BF4C-09068467EB96}</Project>
       <Name>Schedules.API</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
   </ItemGroup>
 </Project>
