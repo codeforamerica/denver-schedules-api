@@ -7,7 +7,7 @@ using Nancy;
 namespace Schedules.API.Tests
 {
 	[TestFixture ()]
-	public class Test
+	public class SchedulesTest
 	{
 		Browser browser;
 
