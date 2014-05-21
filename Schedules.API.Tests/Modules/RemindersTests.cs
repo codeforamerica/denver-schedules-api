@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
-using System.Net;
 using System;
 using Nancy.Testing;
-using Nancy;
 using Schedules.API.Models;
 
 namespace Schedules.API.Tests
@@ -12,6 +10,11 @@ namespace Schedules.API.Tests
     {
         Browser browser;
 
+        const string requestHeaders = "Access-Control-Request-Headers";
+        const string allowOrigin = "Access-Control-Allow-Origin";
+        const string allowMethods = "Access-Control-Allow-Methods";
+        const string allowHeaders = "Access-Control-Allow-Headers";
+
         [SetUp]
         public void SetUp()
         {
@@ -20,6 +23,37 @@ namespace Schedules.API.Tests
                     with.Module<RemindersModule>();
                     with.EnableAutoRegistration();
                 });
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowAllOrigins()
+        {
+            var response = browser.Options("/reminders", with => with.HttpRequest());
+            Assert.That(response.Headers[allowOrigin], Is.EqualTo("*"));
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowPost()
+        {
+            var response = browser.Options("/reminders", with => with.HttpRequest());
+            Assert.That(response.Headers[allowMethods], Is.EqualTo("*").Or.Contains("POST"));
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowRequestedHeaders()
+        {
+            var response = browser.Options("/reminders", with => {
+                with.HttpRequest();
+                with.Header(requestHeaders, "MyCustomHeader");
+            });
+            Assert.That(response.Headers[allowHeaders], Contains.Substring("MyCustomHeader"));
+        }
+
+        [Test ()]
+        public void PostShouldAllowAllOrigins()
+        {
+            var response = browser.Post("/reminders", with => with.HttpRequest());
+            Assert.That(response.Headers[allowOrigin], Is.EqualTo("*"));
         }
 
         [Test ()]

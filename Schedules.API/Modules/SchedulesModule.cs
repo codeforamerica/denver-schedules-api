@@ -1,9 +1,11 @@
 ﻿using Nancy;
+using Schedules.API;
 
 public class SchedulesModule : NancyModule
 {
     public SchedulesModule()
     {
+        Options["/schedules"] = _ => Response.AllowCorsFor(Request);
         Get ["/schedules"] = _ => {
             var holidays = new {
                 Title = "City Holidays",
@@ -65,7 +67,7 @@ public class SchedulesModule : NancyModule
             }
             };
 
-            return Response.AsJson (holidays);
+            return Response.AsJson(holidays).AddCorsHeader();
         };
     }
 }
