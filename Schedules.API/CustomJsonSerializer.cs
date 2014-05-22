@@ -8,19 +8,18 @@ using Nancy.IO;
 
 namespace Schedules.API
 {
-	public class CustomJsonSerializer : JsonSerializer
-	{
-		public CustomJsonSerializer ()
-		{
-			// Map C# naming conventions to javascript
-			ContractResolver = new CamelCasePropertyNamesContractResolver();
+    public class CustomJsonSerializer : JsonSerializer
+    {
+        public CustomJsonSerializer ()
+        {
+            // Map C# naming conventions to javascript
+            ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-			// Standardize datetime objects
-			Converters.Add(new IsoDateTimeConverter
-			{
-				DateTimeStyles = DateTimeStyles.AssumeLocal | DateTimeStyles.AdjustToUniversal
-			});
-		}
-	}
+            // Standardize datetime objects
+            Converters.Add(new IsoDateTimeConverter
+            {
+                DateTimeStyles = DateTimeStyles.AssumeLocal | DateTimeStyles.AdjustToUniversal
+            });
+        }
+    }
 }
-
