@@ -8,50 +8,38 @@ namespace Schedules.API.Tests
     {
         Browser browser;
 
-        const string requestHeaders = "Access-Control-Request-Headers";
-        const string allowOrigin = "Access-Control-Allow-Origin";
-        const string allowMethods = "Access-Control-Allow-Methods";
-        const string allowHeaders = "Access-Control-Allow-Headers";
-
         [SetUp]
         public void SetUp()
         {
-            browser = new Browser(with =>
-                {
-                    with.Module<SchedulesModule>();
-                    with.EnableAutoRegistration();
-                });
+            browser = new Browser(new CustomBootstrapper());
         }
 
         [Test ()]
         public void OptionsShouldAllowAllOrigins()
         {
             var response = browser.Options("/schedules", with => with.HttpRequest());
-            Assert.That(response.Headers[allowOrigin], Is.EqualTo("*"));
+            Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
         }
 
         [Test ()]
-        public void OptionsShouldAllowPost()
+        public void OptionsShouldAllowGet()
         {
             var response = browser.Options("/schedules", with => with.HttpRequest());
-            Assert.That(response.Headers[allowMethods], Is.EqualTo("*").Or.Contains("POST"));
+            Assert.That(response.Headers["Access-Control-Allow-Methods"], Contains.Substring("GET"));
         }
 
         [Test ()]
-        public void OptionsShouldAllowRequestedHeaders()
+        public void OptionsShouldAllowContentType()
         {
-            var response = browser.Options("/schedules", with => {
-                with.HttpRequest();
-                with.Header(requestHeaders, "MyCustomHeader");
-            });
-            Assert.That(response.Headers[allowHeaders], Contains.Substring("MyCustomHeader"));
+            var response = browser.Options("/schedules", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Headers"], Contains.Substring("Content-Type"));
         }
 
         [Test ()]
         public void ListIndexShouldAllowAllOrigins()
         {
             var response = browser.Get("/schedules", with => with.HttpRequest());
-            Assert.That(response.Headers[allowOrigin], Is.EqualTo("*"));
+            Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
         }
 
         [Test ()]
