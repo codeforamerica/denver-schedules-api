@@ -1,8 +1,5 @@
 ﻿using NUnit.Framework;
-using System.Net;
-using System;
 using Nancy.Testing;
-using Nancy;
 
 namespace Schedules.API.Tests
 {
@@ -14,11 +11,35 @@ namespace Schedules.API.Tests
         [SetUp]
         public void SetUp()
         {
-            browser = new Browser(with =>
-                {
-                    with.Module<SchedulesModule>();
-                    with.EnableAutoRegistration();
-                });
+            browser = new Browser(new CustomBootstrapper());
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowAllOrigins()
+        {
+            var response = browser.Options("/schedules", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowGet()
+        {
+            var response = browser.Options("/schedules", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Methods"], Contains.Substring("GET"));
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowContentType()
+        {
+            var response = browser.Options("/schedules", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Headers"], Contains.Substring("Content-Type"));
+        }
+
+        [Test ()]
+        public void ListIndexShouldAllowAllOrigins()
+        {
+            var response = browser.Get("/schedules", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
         }
 
         [Test ()]

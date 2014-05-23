@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
-using System.Net;
 using System;
 using Nancy.Testing;
-using Nancy;
 using Schedules.API.Models;
 
 namespace Schedules.API.Tests
@@ -15,11 +13,35 @@ namespace Schedules.API.Tests
         [SetUp]
         public void SetUp()
         {
-            browser = new Browser(with =>
-                {
-                    with.Module<RemindersModule>();
-                    with.EnableAutoRegistration();
-                });
+            browser = new Browser(new CustomBootstrapper());
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowAllOrigins()
+        {
+            var response = browser.Options("/reminders", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowPost()
+        {
+            var response = browser.Options("/reminders", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Methods"], Contains.Substring("POST"));
+        }
+
+        [Test ()]
+        public void OptionsShouldAllowContentType()
+        {
+            var response = browser.Options("/reminders", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Headers"], Contains.Substring("Content-Type"));
+        }
+
+        [Test ()]
+        public void PostShouldAllowAllOrigins()
+        {
+            var response = browser.Post("/reminders", with => with.HttpRequest());
+            Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
         }
 
         [Test ()]
