@@ -48,6 +48,7 @@
     <Compile Include="Modules\RemindersTests.cs" />
     <Compile Include="Modules\SchedulesTests.cs" />
     <Compile Include="Extensions\UnixTimeStampTest.cs" />
+    <Compile Include="Modules\StatusTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

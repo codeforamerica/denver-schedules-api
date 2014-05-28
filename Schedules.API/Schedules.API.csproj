@@ -116,9 +116,11 @@
     <Compile Include="Modules\RemindersModule.cs" />
     <Compile Include="Models\Reminder.cs" />
     <Compile Include="Extensions\DateTimeUnixTimeStamp.cs" />
+    <Compile Include="Modules\StatusModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Modules\" />
   </ItemGroup>
 </Project>
