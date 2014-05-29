@@ -1,6 +1,7 @@
 ﻿using System;
 using Nancy;
 using Schedules.API.Extensions;
+using Schedules.API.Models;
 
 public class StatusModule : NancyModule
 {
@@ -8,15 +9,7 @@ public class StatusModule : NancyModule
 	{
 		// Engine Light App Monitoring - http://engine-light.codeforamerica.org/
 		Get ["/status"] = _ => {
-
-			var status = new {
-				Status = "ok",
-        Updated = DateTime.Now.ToUnixTimestamp(),
-				Dependenceies = new string[0],
-				Resources = new {}
-			};
-
-			return Response.AsJson (status);
+      return Response.AsJson (new State());
 		};
 	}
 }

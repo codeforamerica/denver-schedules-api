@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Nancy.Testing;
+using Schedules.API.Models;
 
 namespace Schedules.API.Tests
 {
@@ -29,7 +30,14 @@ namespace Schedules.API.Tests
       Assert.AreEqual ("application/json; charset=utf-8", response.ContentType);
     }
 
-
+    [Test ()]
+    public void StatusShouldHaveRequiredFields()
+    {
+      var response = browser.Get("/status", with => with.HttpRequest());
+      var state = response.Context.JsonBody<State>();
+      Assert.IsNotNullOrEmpty (state.Status);
+      Assert.That (state.Updated, Is.GreaterThan(0));
+    }
   }
 }
 
