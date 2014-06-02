@@ -79,6 +79,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties VerifyCodeBehindFields="True" VerifyCodeBehindEvents="True">
@@ -114,8 +115,13 @@
     <Compile Include="CustomJsonSerializer.cs" />
     <Compile Include="Modules\RemindersModule.cs" />
     <Compile Include="Models\Reminder.cs" />
+    <Compile Include="Extensions\DateTimeUnixTimeStamp.cs" />
+    <Compile Include="Modules\StatusModule.cs" />
+    <Compile Include="Models\State.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Modules\" />
   </ItemGroup>
 </Project>
