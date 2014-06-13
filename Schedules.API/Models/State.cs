@@ -1,6 +1,7 @@
 ﻿using System;
 using Schedules.API.Extensions;
 using System.Collections.Generic;
+using Schedules.API.Repositories;
 
 namespace Schedules.API.Models
 {
@@ -52,14 +53,34 @@ namespace Schedules.API.Models
     }
 
     /// <summary>
-    /// Um...this is a lie at the moment
+    /// Can the application connect to the database.
+    /// </summary>
+    /// <returns><c>true</c> if this instance can connect to database; otherwise, <c>false</c>.</returns>
+    private bool CanConnectToDatabase()
+    {
+      try
+      {
+        var repository = new SchedulesRepository ();
+        repository.connection.Open();
+        return true;
+      }
+      catch (Exception ex){
+        Console.WriteLine (ex.ToString ());
+        return false;
+      }
+    }
+
+    /// <summary>
+    /// Is everything working?
     /// </summary>
     /// <returns>The app for errors.</returns>
     private String CheckAppForErrors() {
-      // Check connection to database
       // Check error log, nancy has a catch all error
       // TODO: Nancy sends html on errors! But all is not lost, you can override
-      return "ok";
+      if (CanConnectToDatabase())
+        return "ok";
+      else
+        return "Unable to connect to database.";
     }
   }
 }
