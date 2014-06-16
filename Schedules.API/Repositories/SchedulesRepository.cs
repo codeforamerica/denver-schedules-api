@@ -1,72 +1,81 @@
 ﻿using System;
 using Schedules.API.Models;
+using System.Collections.Generic;
+using Nancy;
+using Dapper;
+using System.Linq;
 
 namespace Schedules.API.Repositories
 {
   public class SchedulesRepository:RepositoryBase
   {
+    public enum Categories
+    {
+      Holidays
+    }
+
     public SchedulesRepository ()
     {
     }
 
-    public object GetHolidays() {
-      return new {
-        Title = "City Holidays",
-        Events = new [] {
-          new
-          {
-            Desc = "New Years Day",
-            Day = "Wednesday",
-            StartDate = "01.01.2014"
-          },
-          new
-          {
-            Desc = "Martin Luther King Day",
-            Day = "Monday",
-            StartDate = "01.20.2014"
-          },
-          new
-          {
-            Desc = "President's Day",
-            Day = "Monday",
-            StartDate = "02.27.2014"
-          },
-          new
-          {
-            Desc = "Cesar Chavez Day",
-            Day = "Monday",
-            StartDate = "03.31.2014"
-          },
-          new
-          {
-            Desc = "Memorial Day",
-            Day = "Monday",
-            StartDate = "05.26.2014"
-          },
-          new
-          {
-            Desc = "Independence Day",
-            Day = "Friday",
-            StartDate = "07.04.2014"
-          },
-          new
-          {
-            Desc = "Labor Day",
-            Day = "Monday",
-            StartDate = "11.01.2014"
-          },
-          new
-          {
-            Desc = "Thanksgiving Day",
-            Day = "Thursday",
-            StartDate = "11.27.2014"
-          },
-          new
-          {
-            Desc = "Christmas Day",
-            Day = "Monday",
-            StartDate = "12.25.2014"
-          }
+    public List<Schedule> Get (SchedulesRepository.Categories category, Nancy.DynamicDictionary dictionary)
+    {
+      var schedules = new List<Schedule> ();
+      switch (category) {
+        case Categories.Holidays:
+        default:
+          schedules = GetHolidays ();
+          break;
+      }
+      return schedules;
+    }
+
+    public List<Schedule> GetHolidays() {
+      return new List<Schedule> (){
+        new Schedule(){
+          Name = "New Years Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 1, 1)}
+        },
+        new Schedule(){
+          Name = "Martin Luther King Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 1, 20)}
+        },
+        new Schedule(){
+          Name = "President's Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 2, 27)}
+        },
+        new Schedule(){
+          Name = "Cesar Chavez Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 3, 31)}
+        },
+        new Schedule(){
+          Name = "Memorial Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 5, 26)}
+        },
+        new Schedule(){
+          Name = "Independence Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 7, 4)}
+        },
+        new Schedule(){
+          Name = "Labor Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 11, 1)}
+        },
+        new Schedule(){
+          Name = "Thanksgiving Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 11, 27)}
+        },
+        new Schedule(){
+          Name = "Christmas Day",
+          Category = Categories.Holidays.ToString(),
+          Upcoming = new List<DateTime>(){ new DateTime(2014, 12, 25)}
         }
       };
     }
