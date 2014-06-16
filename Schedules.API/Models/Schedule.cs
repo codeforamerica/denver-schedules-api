@@ -46,6 +46,19 @@ namespace Schedules.API.Models
       get;
       set;
     }
+
+    public class ScheduleComparer : IEqualityComparer<Schedule>
+    {
+      public bool Equals(Schedule x, Schedule y)
+      {
+        return (x.Name == y.Name && x.Category == y.Category && x.Description == y.Description);
+      }
+
+      public int GetHashCode(Schedule obj)
+      {
+        return obj.Name.GetHashCode();
+      }
+    }
   }
 }
 

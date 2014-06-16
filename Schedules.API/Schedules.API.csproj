@@ -130,6 +130,8 @@
     <Compile Include="Repositories\SchedulesRepository.cs" />
     <Compile Include="Extensions\StringToEnum.cs" />
     <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\StreetSweeping.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
