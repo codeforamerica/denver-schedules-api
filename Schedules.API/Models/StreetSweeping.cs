@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Schedules.API.Extensions;
 using Schedules.API.Repositories;
+using Schedules.API.Helpers;
 
 namespace Schedules.API.Models
 {
@@ -12,6 +13,7 @@ namespace Schedules.API.Models
   {
     private static string leftString = "Left Side";
     private static string rightString = "Right Side";
+    private static bool [] streetSweepingMonths = new bool [] {false, false, false, true, true, true, true, true, true, true, true, false};
 
     public StreetSweeping ()
     {
@@ -199,31 +201,63 @@ namespace Schedules.API.Models
       set;
     }
 
+    /// <summary>
+    /// Gets or sets the error if no dates can be generated.
+    /// </summary>
+    /// <value>The error.</value>
+    public string Error {
+      get;
+      set;
+    }
+
     public List<Schedule> CreateSchedules() {
       var schedules = new List<Schedule> ();
+      var leftWeekAndDay = GetWeekAndDay (LeftSweep);
+      var rightWeekAndDay = GetWeekAndDay (RightSweep);
+
       if (LeftSweep.Equals (RightSweep)) {
         schedules.Add (new Schedule () {
           Name = Name,
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = leftString + " & " + rightString,
-          Upcoming = new List<DateTime> ()
+          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths)
         });
       } else {
         schedules.Add( new Schedule () { 
           Name = Name, 
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = leftString,
-          Upcoming = new List<DateTime> ()
+          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths)
         });
 
         schedules.Add (new Schedule () { 
           Name = Name, 
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = rightString,
-          Upcoming = new List<DateTime> ()
+          Upcoming = Scheduler.CalculateDatesForRestOfYear(rightWeekAndDay[0], rightWeekAndDay[1], streetSweepingMonths)
         });
       }
       return schedules;
+    }
+
+    private int [] GetWeekAndDay(string sweep) {
+      var weekAndDay = new int [2];
+      var valueIsEmpty = String.IsNullOrEmpty (sweep);
+      var secondValueIsX = sweep.Length > 1 && sweep [1] == 'X';
+      var valueIsN = sweep == "N";
+
+      if (valueIsEmpty)
+        Error = "Incomplete Data";
+      else if (secondValueIsX)
+        Error = String.Format ("Week {0}, day unknown", sweep [0]);
+      else if (valueIsN)
+        Error = "Nightly";
+      else {
+        weekAndDay[0] = int.Parse (sweep [0].ToString ());
+        weekAndDay[1] = int.Parse (sweep [1].ToString ()) - 1; // Day of Week index is 0 - 6
+      }
+
+      return weekAndDay;
     }
   }
 }
