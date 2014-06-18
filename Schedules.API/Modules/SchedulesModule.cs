@@ -1,71 +1,20 @@
 ﻿using Nancy;
+using Schedules.API.Repositories;
+using Schedules.API.Extensions;
+using Schedules.API.Models;
+using System.Collections.Generic;
 
 public class SchedulesModule : NancyModule
 {
-    public SchedulesModule()
-    {
-        Get ["/schedules"] = _ => {
-            var holidays = new {
-                Title = "City Holidays",
-                Events = new [] {
-                new
-                    {
-                        Desc = "New Years Day",
-                        Day = "Wednesday",
-                        StartDate = "01.01.2014"
-                    },
-                new
-                    {
-                        Desc = "Martin Luther King Day",
-                        Day = "Monday",
-                        StartDate = "01.20.2014"
-                    },
-                new
-                    {
-                        Desc = "President's Day",
-                        Day = "Monday",
-                        StartDate = "02.27.2014"
-                    },
-                new
-                    {
-                        Desc = "Cesar Chavez Day",
-                        Day = "Monday",
-                        StartDate = "03.31.2014"
-                    },
-                new
-                    {
-                        Desc = "Memorial Day",
-                        Day = "Monday",
-                        StartDate = "05.26.2014"
-                    },
-                new
-                    {
-                        Desc = "Independence Day",
-                        Day = "Friday",
-                        StartDate = "07.04.2014"
-                    },
-                new
-                    {
-                        Desc = "Labor Day",
-                        Day = "Monday",
-                        StartDate = "11.01.2014"
-                    },
-                new
-                    {
-                        Desc = "Thanksgiving Day",
-                        Day = "Thursday",
-                        StartDate = "11.27.2014"
-                    },
-                new
-                    {
-                        Desc = "Christmas Day",
-                        Day = "Monday",
-                        StartDate = "12.25.2014"
-                    }
-            }
-            };
+  public SchedulesModule()
+  {
+    Get ["/schedules/{category}"] = _ => {
+      string c = _.category.ToString();
+      var category = c.ToEnum<SchedulesRepository.Categories>();
+      var repository = new SchedulesRepository();
+      List<Schedule> schedules = repository.Get(category, Request.Query);
 
-            return Response.AsJson (holidays);
-        };
-    }
+      return Response.AsJson (schedules);
+    };
+  }
 }
