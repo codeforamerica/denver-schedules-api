@@ -220,21 +220,24 @@ namespace Schedules.API.Models
           Name = Name,
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = leftString + " & " + rightString,
-          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths)
+          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
+          Error = Error
         });
       } else {
         schedules.Add( new Schedule () { 
           Name = Name, 
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = leftString,
-          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths)
+          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
+          Error = Error
         });
 
         schedules.Add (new Schedule () { 
           Name = Name, 
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = rightString,
-          Upcoming = Scheduler.CalculateDatesForRestOfYear(rightWeekAndDay[0], rightWeekAndDay[1], streetSweepingMonths)
+          Upcoming = Scheduler.CalculateDatesForRestOfYear(rightWeekAndDay[0], rightWeekAndDay[1], streetSweepingMonths),
+          Error = Error
         });
       }
       return schedules;
@@ -247,7 +250,7 @@ namespace Schedules.API.Models
       var valueIsN = sweep == "N";
 
       if (valueIsEmpty)
-        Error = "Incomplete Data";
+        Error = "Unknown";
       else if (secondValueIsX)
         Error = String.Format ("Week {0}, day unknown", sweep [0]);
       else if (valueIsN)

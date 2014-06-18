@@ -20,11 +20,12 @@ namespace Schedules.API.Helpers
     public static List<DateTime> CalculateDatesForRestOfYear (int week, int day, bool [] months) {
       var dates = new List<DateTime> ();
       var today = DateTime.UtcNow;
-
-      for (int i = today.Month; i <= months.Length && months [i - 1]; i++) {
-        var date = UTCDateFromYearMonthWeekDay (today.Year, i, week, day);
-        if (date >= today)
-          dates.Add (date);
+      if (week != 0 && day != 0) {
+        for (int i = today.Month; i <= months.Length && months [i - 1]; i++) {
+          var date = UTCDateFromYearMonthWeekDay (today.Year, i, week, day);
+          if (date >= today)
+            dates.Add (date);
+        }
       }
 
       return dates;

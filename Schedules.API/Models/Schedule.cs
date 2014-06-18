@@ -47,6 +47,10 @@ namespace Schedules.API.Models
       set;
     }
 
+    public String Error {
+      get;
+      set;
+    }
     public class ScheduleComparer : IEqualityComparer<Schedule>
     {
       public bool Equals(Schedule x, Schedule y)
