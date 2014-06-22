@@ -82,6 +82,12 @@
     <Reference Include="FluentDateTime">
       <HintPath>..\packages\FluentDateTime.1.10.1.0\Lib\NET35\FluentDateTime.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Twilio.Api">
+      <HintPath>..\packages\Twilio.3.6.16\lib\3.5\Twilio.Api.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -136,6 +142,8 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\StreetSweeping.cs" />
     <Compile Include="Helpers\Scheduler.cs" />
+    <Compile Include="Helpers\Notifier.cs" />
+    <Compile Include="Repositories\ReminderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
