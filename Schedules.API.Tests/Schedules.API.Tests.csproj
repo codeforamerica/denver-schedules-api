@@ -71,7 +71,4 @@
     <Folder Include="Modules\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="App.config" />
-  </ItemGroup>
 </Project>

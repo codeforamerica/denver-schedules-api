@@ -16,9 +16,9 @@ namespace Schedules.API.Helpers
   public static class Notifier
   {
     public static Results DoIt() {
-      var sid = ConfigurationManager.AppSettings ["twilio-sid"];
-      var token = ConfigurationManager.AppSettings ["twilio-token"];
-      var number = ConfigurationManager.AppSettings ["twilio-number"];
+      var sid = System.Environment.GetEnvironmentVariable ("TWILIO-SID");
+      var token = System.Environment.GetEnvironmentVariable ("TWILIO-TOKEN");
+      var number = System.Environment.GetEnvironmentVariable ("TWILIO-NUMBER");
       var client = new TwilioRestClient (sid, token);
       var results = new Results ();
 
