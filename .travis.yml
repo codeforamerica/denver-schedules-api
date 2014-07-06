@@ -1,14 +1,14 @@
 language: c
 install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
+- sudo apt-get install mono-devel mono-gmcs nunit-console
 before_script:
-  - psql -f Database/1_create_psql_database.sql -U postgres
-  - psql -d denver_schedules_development -f Database/2_add_street_sweeping_routes.sql -U denver_schedules
+- psql -f Database/1_create_psql_database.sql -U postgres
+- psql -d denver_schedules_development -f Database/2_add_street_sweeping_routes.sql -U denver_schedules
 script:
-  - xbuild denver-schedules-api.sln
-  - nunit-console Schedules.API.Tests/bin/Debug/Schedules.API.Tests.dll
+- xbuild denver-schedules-api.sln
+- nunit-console Schedules.API.Tests/bin/Debug/Schedules.API.Tests.dll
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 deploy:
   provider: heroku
   api_key:
@@ -19,3 +19,8 @@ deploy:
     repo: codeforamerica/denver-schedules-api
 notifications:
   webhooks: http://project-monitor.codeforamerica.org/projects/5410eca6-0a90-4bf0-b9c0-39f679940ba4/status
+env:
+  matrix:
+  - secure: BCwM8DmxC1822F3cP37+9uVLNmeo2IcF26+Gs41WG+kK9ovrxStEaz9V6Hxr9TTRvr+TSZoYfU+PbRyois7Iu5iPPo2CclGf7AgsdfXwbvtsu8qA04WvqwJzLENObjy3gcxlFn0WJnS3SOqp+X18PdPqgercoBULhzsgIgH6nv4=
+  - secure: kz9TmGgfkswtRvIl03nKyfINldnU1NTQvfc6+LIPFoswWJ3+x2DwIQFAX8H8bt+5gPEHdlu9S245iYKklrC4rPQanx07+GgI0z1gXsKyjPrHYU7T8wCUTaxGheyhd1eiW9DRynXlyOXwzVEJH5cWLk56hhMeTSoM62PobXvG5gs=
+  - secure: ySaSNRfrP/kUEzfjpq3Y4nej80TcUbLW08W/Q/8rZWg9xkjfNJetEk/kQmAZub85gSb4ndHkNZ+TVL4vyLTpONVmwouQ7KEfxGY5MnySkIlbfg3kO8+sD5Bjs7eSIKzaQaCcrZVZ/LpqEnHzWq8L730MxEhRl11q4cpfWODGTQ8=

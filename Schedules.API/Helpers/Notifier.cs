@@ -1,35 +1,45 @@
 ﻿using System;
-using Twilio;
 using Schedules.API.Repositories;
 using System.Configuration;
+using Schedules.API.Models;
+using System.Collections.Generic;
 
 namespace Schedules.API.Helpers
 {
   public class Results
   {
+    public Results() {
+      Sent = 0;
+      Errors = new List<String>();
+    }
     public int Sent {
       get;
       set;
     }
-  }
 
+    public List<String> Errors {
+      get;
+      set;
+    }
+  }
+    
   public static class Notifier
   {
-    public static Results DoIt() {
-      var sid = System.Environment.GetEnvironmentVariable ("TWILIO-SID");
-      var token = System.Environment.GetEnvironmentVariable ("TWILIO-TOKEN");
-      var number = System.Environment.GetEnvironmentVariable ("TWILIO-NUMBER");
-      var client = new TwilioRestClient (sid, token);
+    public static Results TextDoIt(){
+      return DoIt (ReminderRepository.Get ());
+    }
+
+    public static Results DoIt(IEnumerable<Reminder> reminders) {
       var results = new Results ();
-
-      foreach (var reminder in ReminderRepository.Get()) {
-        var sent = client.SendSmsMessage (number, reminder.Cell, reminder.Message);
-        if (sent.RestException != null)
-          Console.WriteLine (sent.RestException);
-        else
+      foreach (var reminder in reminders) {
+        var error = reminder.Send();
+        if (string.IsNullOrEmpty (error))
           results.Sent++;
+        else {
+          Console.WriteLine (error);
+          results.Errors.Add (error);
+        }
       }
-
       return results;
     }
   }

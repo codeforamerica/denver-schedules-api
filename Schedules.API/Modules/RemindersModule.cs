@@ -14,7 +14,7 @@ public class RemindersModule : NancyModule
     };
 
     Post ["/reminders/notify"] = _ => {
-      return Response.AsJson(Notifier.DoIt (), HttpStatusCode.Created);
+      return Response.AsJson(Notifier.TextDoIt (), HttpStatusCode.Created);
     };
   }
 }

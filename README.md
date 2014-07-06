@@ -12,32 +12,16 @@ A light-weight api for city events &amp; schedules.
 [staging]: http://staging-denver-now-api.herokuapp.com/schedules
 
 ## 3rd Party Dependencies
-* Register for a [twilio account][twilio].
+* If using text notifications, egister for a [twilio account][twilio].
 
 [twilio]: https://www.twilio.com/try-twilio
 
-## Development Environment
-
-This project is cross-platform. To avoid noisy commits from changes to line-endings, set autocrlf to true. 
-```
-git config core.autocrlf true
-```
-
-When adding files, you may see the following: **warning: LF will be replaced by CRLF in .travis.yml. The file will have its original line endings in your working directory.** It's throwing out your line endings in favor of the standard CRLF ones. It can be ignored.
-
-### Windows
-* Use [Visual Studio Express] [express]
-
-### OSX
-* Use [Xamarin Studio] [xamarin]
-
-[express]: http://www.microsoft.com/en-us/download/details.aspx?id=34673
-[xamarin]: http://xamarin.com/download
-
 ## Installation, Usage
+* [Development Environment][dev]
 * [Database Set Up][db]
 * [Environment Variables][env]
 
+[dev]: https://github.com/codeforamerica/denver-schedules-api/wiki/Enviroment-Setup
 [db]: https://github.com/codeforamerica/denver-schedules-api/wiki/Database-Setup
 [env]: https://github.com/codeforamerica/denver-schedules-api/wiki/Environment-Variables
 
