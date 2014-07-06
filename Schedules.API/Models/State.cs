@@ -2,6 +2,8 @@
 using Schedules.API.Extensions;
 using System.Collections.Generic;
 using Schedules.API.Repositories;
+using Twilio;
+using Schedules.API.Helpers;
 
 namespace Schedules.API.Models
 {
@@ -14,6 +16,7 @@ namespace Schedules.API.Models
     {
       Status = CheckAppForErrors ();
       Updated = DateTime.Now.ToUnixTimestamp ();
+      Dependencies = new string[] {"Postgres", "PostGIS", "Twilio"};
     }
 
     /// <summary>
@@ -70,6 +73,26 @@ namespace Schedules.API.Models
       }
     }
 
+    private bool CanConnectToTwilio() {
+      try {
+        var sid = System.Environment.GetEnvironmentVariable ("TWILIO-SID");
+        var token = System.Environment.GetEnvironmentVariable ("TWILIO-TOKEN");
+        var number = System.Environment.GetEnvironmentVariable ("TWILIO-NUMBER");
+        var client = new TwilioRestClient (sid, token);
+        Reminder reminder = new Reminder {
+          Cell="15005550006", 
+          Message="Please do a thing"
+        };
+        var reminders = new System.Collections.Generic.List<Reminder> () { reminder };
+        var sent = Notifier.DoIt (reminders);
+        return sent.Errors.Count == 0;
+      }
+      catch (Exception ex) {
+        Console.WriteLine (ex.ToString ());
+        return false;
+      }
+    }
+
     /// <summary>
     /// Is everything working?
     /// </summary>
@@ -77,10 +100,17 @@ namespace Schedules.API.Models
     private String CheckAppForErrors() {
       // Check error log, nancy has a catch all error
       // TODO: Nancy sends html on errors! But all is not lost, you can override
-      if (CanConnectToDatabase())
-        return "ok";
-      else
-        return "Unable to connect to database.";
+      var status = string.Empty;
+      if (CanConnectToDatabase() && CanConnectToTwilio())
+        status = "ok";
+      else{
+        if (!CanConnectToDatabase ())
+          status += "Unable to connect to database.";
+
+        if (!CanConnectToTwilio ())
+          status += "Unable to connect to twilio.";
+        }
+      return status;
     }
   }
 }
