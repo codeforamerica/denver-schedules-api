@@ -50,6 +50,15 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Mandrill">
+      <HintPath>..\packages\Mandrill.1.0.85\lib\net40\Mandrill.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\UnixTimeStampTest.cs" />
@@ -64,6 +73,9 @@
     <Compile Include="Tasks\ReminderTypes\FetchReminderTypeTest.cs" />
     <Compile Include="Tasks\Reminders\CreateRemindersTests.cs" />
     <Compile Include="Modules\ReminderEmailTests.cs" />
+    <Compile Include="Tasks\Sending\SendEmailsTests.cs" />
+    <Compile Include="Tasks\Sending\PostRemindersEmailSendTests.cs" />
+    <Compile Include="Modules\Sending\RemindersEmailSendTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -82,5 +94,7 @@
     <Folder Include="Tasks\ReminderTypes\" />
     <Folder Include="Tasks\Schedules\" />
     <Folder Include="Tasks\Reminders\" />
+    <Folder Include="Tasks\Sending\" />
+    <Folder Include="Modules\Sending\" />
   </ItemGroup>
 </Project>
