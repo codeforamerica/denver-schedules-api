@@ -88,6 +88,12 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mandrill">
+      <HintPath>..\packages\Mandrill.1.0.85\lib\net40\Mandrill.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -150,6 +156,15 @@
     <Compile Include="Modules\HolidaysModule.cs" />
     <Compile Include="Tasks\ReminderTypes\FetchReminderType.cs" />
     <Compile Include="Tasks\Reminders\CreateReminder.cs" />
+    <Compile Include="Modules\TriggersModule.cs" />
+    <Compile Include="Models\Trigger.cs" />
+    <Compile Include="Tasks\Triggers\CreateTrigger.cs" />
+    <Compile Include="Tasks\Triggers\SendEmails.cs" />
+    <Compile Include="Tasks\Reminders\FetchDueReminders.cs" />
+    <Compile Include="Modules\SendModule.cs" />
+    <Compile Include="Models\Send.cs" />
+    <Compile Include="Tasks\Sending\SendEmails.cs" />
+    <Compile Include="Tasks\Sending\PostRemindersEmailSend.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -160,5 +175,6 @@
     <Folder Include="Tasks\ReminderTypes\" />
     <Folder Include="Tasks\Schedules\" />
     <Folder Include="Tasks\Reminders\" />
+    <Folder Include="Tasks\Sending\" />
   </ItemGroup>
 </Project>
