@@ -11,34 +11,19 @@ A light-weight api for city events &amp; schedules.
 [travis]: https://travis-ci.org/codeforamerica/denver-schedules-api
 [staging]: http://staging-denver-now-api.herokuapp.com/schedules
 
-## Development Environment
+## 3rd Party Dependencies
+* If using text notifications, egister for a [twilio account][twilio].
 
-This project is cross-platform. To avoid noisy commits from changes to line-endings, set autocrlf to true. 
-```
-git config core.autocrlf true
-```
-
-When adding files, you may see the following: **warning: LF will be replaced by CRLF in .travis.yml. The file will have its original line endings in your working directory.** It's throwing out your line endings in favor of the standard CRLF ones. It can be ignored.
-
-### Windows
-* Use [Visual Studio Express] [express]
-
-### OSX
-* Use [Xamarin Studio] [xamarin]
-
-[express]: http://www.microsoft.com/en-us/download/details.aspx?id=34673
-[xamarin]: http://xamarin.com/download
+[twilio]: https://www.twilio.com/try-twilio
 
 ## Installation, Usage
+* [Development Environment][dev]
+* [Database Set Up][db]
+* [Environment Variables][env]
 
-Prerequisites: Postgres + Postgis
-
-### Create User/Database [command line]
-* Create Database: `psql -f Database/1_create_psql_database.sql`
-* Add Data: `psql -d denver_schedules_development -f Database/2_street_sweeping_routes.sql -U denver_schedules`
-
-### If you have your own shape file
-`shp2pgsql -I -s 4326 [your shape file].shp > 2_street_sweeping_routes.sql`
+[dev]: https://github.com/codeforamerica/denver-schedules-api/wiki/Enviroment-Setup
+[db]: https://github.com/codeforamerica/denver-schedules-api/wiki/Database-Setup
+[env]: https://github.com/codeforamerica/denver-schedules-api/wiki/Environment-Variables
 
 ## Submitting an Issue
 We use the GitHub issue tracker to track bugs and features. Before submitting a bug report or feature request, check to make sure it hasn't already been submitted. When submitting a bug report, please include a [Gist][] that includes a stack trace and any details that may be necessary to reproduce the bug.
