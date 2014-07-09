@@ -136,6 +136,8 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\StreetSweeping.cs" />
     <Compile Include="Helpers\Scheduler.cs" />
+    <Compile Include="Modules\ReminderTypesModule.cs" />
+    <Compile Include="Models\ReminderType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
