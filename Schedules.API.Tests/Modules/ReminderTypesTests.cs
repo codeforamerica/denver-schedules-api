@@ -38,13 +38,13 @@ namespace Schedules.API.Tests.Modules
       Assert.AreEqual ("application/json; charset=utf-8", response.ContentType);
     }
 
-//    [Test()]
-//    public void GetShouldReturnAllTypes()
-//    {// If adding a new reminder type breaks the API, we should have a test that reminds us of that
-//      var response = browser.Get("/reminderTypes", with => with.HttpRequest());
-//      var reminderTypes = response.Context.JsonBody<List<ReminderType>>();
-//      Assert.That (reminderTypes.Count, Is.EqualTo(3));
-//    }
+    [Test()]
+    public void GetShouldReturnAllTypes()
+    {// If adding a new reminder type breaks the API, we should have a test that reminds us of that
+      var response = browser.Get("/reminderTypes", with => with.HttpRequest());
+      var reminderTypes = response.Context.JsonBody<List<ReminderType>>();
+      Assert.That (reminderTypes.Count, Is.EqualTo(3));
+    }
   }
 }
 

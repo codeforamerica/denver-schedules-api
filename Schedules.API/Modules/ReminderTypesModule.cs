@@ -2,6 +2,8 @@
 using Schedules.API.Models;
 using System;
 using System.Collections.Generic;
+using Simpler;
+using Schedules.API.Tasks.ReminderTypes;
 
 namespace Schedules.API.Modules
 {
@@ -10,7 +12,9 @@ namespace Schedules.API.Modules
     public ReminderTypesModule ()
     {
       Get ["/reminderTypes"] = _ => {
-        var reminderTypes = new List<string>();
+        var fetchReminderTypes = Task.New<FetchReminderTypes>();
+        fetchReminderTypes.Execute();
+        var reminderTypes = fetchReminderTypes.Out.ReminderTypes;
         return Response.AsJson (reminderTypes);
       };
     }
