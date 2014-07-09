@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Nancy.Testing;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Modules
 {
     [TestFixture ()]
     public class SchedulesTest
