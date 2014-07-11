@@ -86,7 +86,7 @@
       <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Simpler">
-      <HintPath>..\packages\Simpler.3.0.0\lib\Simpler.dll</HintPath>
+      <HintPath>..\packages\simpler.3.0.0\lib\Simpler.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup>
