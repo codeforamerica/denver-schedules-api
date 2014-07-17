@@ -31,7 +31,7 @@ When adding files, you may see the following: **warning: LF will be replaced by 
 
 ## Installation, Usage
 
-Prerequisite: Postgres + Postgis
+Prerequisites: Postgres + Postgis
 
 ### Create User/Database [command line]
 * Create Database: `psql -f Database/1_create_psql_database.sql`
