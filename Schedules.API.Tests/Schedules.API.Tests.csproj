@@ -44,6 +44,12 @@
     <Reference Include="Nancy.Authentication.Forms">
       <HintPath>..\packages\Nancy.Authentication.Forms.0.22.2\lib\net40\Nancy.Authentication.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Simpler">
+      <HintPath>..\packages\simpler.3.0.0\lib\Simpler.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\RemindersTests.cs" />
@@ -51,6 +57,7 @@
     <Compile Include="Extensions\UnixTimeStampTest.cs" />
     <Compile Include="Modules\StatusTests.cs" />
     <Compile Include="Modules\ReminderTypesTests.cs" />
+    <Compile Include="Tasks\ReminderTypes\FetchReminderTypesTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -65,5 +72,7 @@
   <ItemGroup>
     <Folder Include="Modules\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Tasks\" />
+    <Folder Include="Tasks\ReminderTypes\" />
   </ItemGroup>
 </Project>

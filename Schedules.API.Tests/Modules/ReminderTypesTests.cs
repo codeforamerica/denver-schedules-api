@@ -11,7 +11,7 @@ namespace Schedules.API.Tests.Modules
   {
     Browser browser;
 
-    [SetUp]
+    [TestFixtureSetUp]
     public void SetUp()
     {
       browser = new Browser(new CustomBootstrapper());
