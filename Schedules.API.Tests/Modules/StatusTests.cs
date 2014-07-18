@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Nancy.Testing;
 using Schedules.API.Models;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Modules
 {
   [TestFixture ()]
   public class StatusTest

@@ -82,6 +82,12 @@
     <Reference Include="FluentDateTime">
       <HintPath>..\packages\FluentDateTime.1.10.1.0\Lib\NET35\FluentDateTime.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Simpler">
+      <HintPath>..\packages\simpler.3.0.0\lib\Simpler.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -136,6 +142,10 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\StreetSweeping.cs" />
     <Compile Include="Helpers\Scheduler.cs" />
+    <Compile Include="Modules\ReminderTypesModule.cs" />
+    <Compile Include="Models\ReminderType.cs" />
+    <Compile Include="Tasks\ReminderTypes\FetchReminderTypes.cs" />
+    <Compile Include="Tasks\Db.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -143,5 +153,7 @@
     <Folder Include="Modules\" />
     <Folder Include="Repositories\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Tasks\" />
+    <Folder Include="Tasks\ReminderTypes\" />
   </ItemGroup>
 </Project>

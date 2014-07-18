@@ -2,8 +2,7 @@ language: c
 install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console
 before_script:
-  - psql -f Database/1_create_psql_database.sql -U postgres
-  - psql -d denver_schedules_development -f Database/2_add_street_sweeping_routes.sql -U denver_schedules
+  - psql -f Database/run_all.sql -U postgres
 script:
   - xbuild denver-schedules-api.sln
   - nunit-console Schedules.API.Tests/bin/Debug/Schedules.API.Tests.dll
