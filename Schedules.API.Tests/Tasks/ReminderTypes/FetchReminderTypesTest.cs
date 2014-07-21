@@ -21,23 +21,23 @@ namespace Schedules.API.Tests.Tasks.ReminderTypes
       reminderTypes = fetchReminderTypes.Out.ReminderTypes;
     }
 
-//    [Test]
-//    public void ShouldFetchSMSReminderType() {
-//      var email = reminderTypes.Find (r => r.Name == "email");
-//      Assert.That (email, Is.Not.Null);
-//    }
-//
-//    [Test]
-//    public void ShouldFetchEmailReminderType() {
-//      var sms = reminderTypes.Find (r => r.Name == "sms");
-//      Assert.That (sms, Is.Not.Null);
-//    }
-//
-//    [Test]
-//    public void ShouldFetchYoReminderType() {
-//      var yo = reminderTypes.Find (r => r.Name == "yo");
-//      Assert.That (yo, Is.Not.Null);
-//    }
+    [Test]
+    public void ShouldFetchSMSReminderType() {
+      var email = reminderTypes.Find (r => r.Name == "email");
+      Assert.That (email, Is.Not.Null);
+    }
+
+    [Test]
+    public void ShouldFetchEmailReminderType() {
+      var sms = reminderTypes.Find (r => r.Name == "sms");
+      Assert.That (sms, Is.Not.Null);
+    }
+
+    [Test]
+    public void ShouldFetchYoReminderType() {
+      var yo = reminderTypes.Find (r => r.Name == "yo");
+      Assert.That (yo, Is.Not.Null);
+    }
   }
 }
 
