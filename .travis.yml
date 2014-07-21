@@ -1,13 +1,13 @@
 language: c
 install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
+- sudo apt-get install mono-devel mono-gmcs nunit-console
 before_script:
-  - psql -f Database/run_all.sql -U postgres
+- psql -f Database/run_all.sql -U postgres
 script:
-  - xbuild denver-schedules-api.sln
-  - nunit-console Schedules.API.Tests/bin/Debug/Schedules.API.Tests.dll
+- xbuild denver-schedules-api.sln
+- nunit-console Schedules.API.Tests/bin/Debug/Schedules.API.Tests.dll
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 deploy:
   provider: heroku
   api_key:
@@ -18,3 +18,5 @@ deploy:
     repo: codeforamerica/denver-schedules-api
 notifications:
   webhooks: http://project-monitor.codeforamerica.org/projects/5410eca6-0a90-4bf0-b9c0-39f679940ba4/status
+env:
+- GEOSPATIAL-PROVIDER-NAME=Npgsql GEOSPATIAL-CONNECTION-STRING="Server=127.0.0.1;Port=5432;User Id=denver_schedules;Password=denver_schedules;Database=denver_schedules_development;"
