@@ -10,25 +10,25 @@ namespace Schedules.API.Tests
   [TestFixture()]
   public class FetchHolidaysTests
   {
-    FetchHolidays fetchHolidays;
-    List<Schedule> holidays;
-
-    [TestFixtureSetUp]
-    public void SetUp(){
-      fetchHolidays = Task.New<FetchHolidays>();
-      fetchHolidays.Execute();
-      holidays = fetchHolidays.Out.Holidays;
-    }
-
-    [Test]
-    public void HolidaysShouldNotBeNull() {
-      Assert.That(holidays, Is.Not.Null);
-    }
-
-    [Test]
-    public void ShouldHaveSomeHolidays() {
-      Assert.That(holidays, Is.Not.Empty);
-    }
+//    FetchHolidays fetchHolidays;
+//    List<Schedule> holidays;
+//
+//    [TestFixtureSetUp]
+//    public void SetUp(){
+//      fetchHolidays = Task.New<FetchHolidays>();
+//      fetchHolidays.Execute();
+//      holidays = fetchHolidays.Out.Holidays;
+//    }
+//
+//    [Test]
+//    public void HolidaysShouldNotBeNull() {
+//      Assert.That(holidays, Is.Not.Null);
+//    }
+//
+//    [Test]
+//    public void ShouldHaveSomeHolidays() {
+//      Assert.That(holidays, Is.Not.Empty);
+//    }
   }
 }
 
