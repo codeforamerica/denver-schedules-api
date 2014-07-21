@@ -20,11 +20,15 @@ GEM
       net-http-persistent (>= 2.7)
       net-http-pipeline
     highline (1.6.21)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     json (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
     method_source (0.8.2)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
     net-http-pipeline (1.0.1)
@@ -36,7 +40,7 @@ GEM
       json
       websocket (~> 1.0)
     slop (3.6.0)
-    travis (1.7.0)
+    travis (1.7.1)
       addressable (~> 2.3)
       backports
       faraday (~> 0.9)
@@ -56,4 +60,5 @@ PLATFORMS
 
 DEPENDENCIES
   centroid (~> 1.1.0.pre.alpha3)
+  httparty
   travis

@@ -1,4 +1,6 @@
 require "centroid"
+require "httparty"
+require "json"
 
 Config = Centroid::Config.from_file "config.json"
 
@@ -9,4 +11,35 @@ task :ok? do
     raise message unless ENV.has_key? variable
   end
   puts "ok"
+
+desc "Send reminder emails"
+task :send do
+  token = authenticate
+  options = {
+    headers: {
+      "User-Agent" => "test",
+      "Accept" => "application/json",
+      "Authorization" => "Token " + token
+    },
+    body: {
+      remindOn: "2014-07-01",
+    }
+  }
+  response = HTTParty.post("http://localhost:8080/reminders/email/send", options)
+  puts response.code, response.body
+end
+
+def authenticate
+  options = {
+    headers: {
+      "User-Agent" => "test"
+    },
+    body: {
+      username: "admin",
+      password: "admin"
+    }
+  }
+  response = HTTParty.post("http://localhost:8080/authenticate", options)
+  data = JSON.parse(response.body)
+  return data["token"]
 end
