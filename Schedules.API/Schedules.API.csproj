@@ -148,6 +148,7 @@
     <Compile Include="Tasks\Db.cs" />
     <Compile Include="Tasks\Schedules\Categories.cs" />
     <Compile Include="Tasks\Schedules\FetchHolidays.cs" />
+    <Compile Include="Tasks\Schedules\FetchStreetSweepings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

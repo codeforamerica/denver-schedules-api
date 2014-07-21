@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Schedules.API.Extensions;
 using Schedules.API.Repositories;
 using Schedules.API.Helpers;
+using Schedules.API.Tasks.Schedules;
 
 namespace Schedules.API.Models
 {
@@ -218,15 +219,15 @@ namespace Schedules.API.Models
       if (LeftSweep.Equals (RightSweep)) {
         schedules.Add (new Schedule () {
           Name = FullName,
-          Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
+          Category = Categories.StreetSweeping.ToString (),
           Description = leftString + " & " + rightString,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
           Error = Error
         });
       } else {
         schedules.Add( new Schedule () { 
-          Name =  FullName, 
-          Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
+          Name = FullName, 
+          Category = Categories.StreetSweeping.ToString (),
           Description = leftString,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
           Error = Error
@@ -234,7 +235,7 @@ namespace Schedules.API.Models
 
         schedules.Add (new Schedule () { 
           Name = FullName, 
-          Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
+          Category = Categories.StreetSweeping.ToString (),
           Description = rightString,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(rightWeekAndDay[0], rightWeekAndDay[1], streetSweepingMonths),
           Error = Error

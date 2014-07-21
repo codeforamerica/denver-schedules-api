@@ -13,8 +13,8 @@ namespace Schedules.API.Repositories
   {
     private const string longitude = "longitude";
     private const string latitude = "latitude";
-    private string point = @"POINT({0} {1})";
-    private string altSelect = @"SELECT gid,
+    private const string point = @"POINT({0} {1})";
+    private const string altSelect = @"SELECT gid,
                                         streetid,
                                         prefix,
                                         name,
@@ -38,27 +38,23 @@ namespace Schedules.API.Repositories
                                  WHERE
                                         ST_Intersects(ST_Buffer(ST_GeometryFromText(@Point, 4326), .001), ss.geom)";
 
-    public enum Categories
-    {
-      Holidays,
-      StreetSweeping
-    }
-
     public SchedulesRepository ()
     {
     }
 
-    public List<Schedule> Get (SchedulesRepository.Categories category, Nancy.DynamicDictionary dictionary)
+    public List<Schedule> Get (Categories category, DynamicDictionary dictionary)
     {
       var schedules = new List<Schedule> ();
       switch (category) {
         case Categories.StreetSweeping:
           if (dictionary.ContainsKey (longitude) && dictionary.ContainsKey (latitude)) {
             var address = new Address { Longitude = dictionary [longitude], Latitude = dictionary [latitude] };
-            schedules = GetSchedules (address);
+            var fetchStreetSweeping = Task.New<FetchStreetSweepings>();
+            fetchStreetSweeping.In.Address = address;
+            fetchStreetSweeping.Execute();
+            schedules = fetchStreetSweeping.Out.StreetSweepings;
           }
           break;
-        case Categories.Holidays:
         default:
           var fetchHolidays = Task.New<FetchHolidays>();
           fetchHolidays.Execute();
