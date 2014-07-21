@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Schedules.API.Extensions;
-using Schedules.API.Repositories;
 using Schedules.API.Helpers;
 using Schedules.API.Tasks.Schedules;
 

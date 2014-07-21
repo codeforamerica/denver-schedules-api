@@ -135,8 +135,6 @@
     <Compile Include="Extensions\DateTimeUnixTimeStamp.cs" />
     <Compile Include="Modules\StatusModule.cs" />
     <Compile Include="Models\State.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\SchedulesRepository.cs" />
     <Compile Include="Extensions\StringToEnum.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Address.cs" />
@@ -149,12 +147,12 @@
     <Compile Include="Tasks\Schedules\Categories.cs" />
     <Compile Include="Tasks\Schedules\FetchHolidays.cs" />
     <Compile Include="Tasks\Schedules\FetchStreetSweepings.cs" />
+    <Compile Include="Tasks\Schedules\FetchSchedules.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Extensions\" />
     <Folder Include="Modules\" />
-    <Folder Include="Repositories\" />
     <Folder Include="Helpers\" />
     <Folder Include="Tasks\" />
     <Folder Include="Tasks\ReminderTypes\" />

@@ -10,8 +10,6 @@ namespace Schedules.API
 {
   public class FetchStreetSweepings : InOutTask<FetchStreetSweepings.Input, FetchStreetSweepings.Output>
   {
-
-
     public class Input
     {// Assuming validation happens elsewhere
       public Address Address { get; set; }
