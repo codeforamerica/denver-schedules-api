@@ -58,6 +58,7 @@
     <Compile Include="Modules\StatusTests.cs" />
     <Compile Include="Modules\ReminderTypesTests.cs" />
     <Compile Include="Tasks\ReminderTypes\FetchReminderTypesTest.cs" />
+    <Compile Include="Tasks\Schedules\FetchHolidaysTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -74,5 +75,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="Tasks\" />
     <Folder Include="Tasks\ReminderTypes\" />
+    <Folder Include="Tasks\Schedules\" />
   </ItemGroup>
 </Project>
