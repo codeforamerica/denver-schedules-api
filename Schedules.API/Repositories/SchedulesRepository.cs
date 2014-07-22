@@ -117,7 +117,6 @@ namespace Schedules.API.Repositories
     public List<Schedule> GetSchedules (Address address)
     {
       List<Schedule> schedules = new List<Schedule> ();
-      connection.Open ();
       try{
         // TODO: Make this more generic to pull account for different back ends
         // Tightly coupled to postgis
