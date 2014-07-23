@@ -209,7 +209,7 @@ namespace Schedules.API.Models
       get;
       set;
     }
-
+    // TODO: NO! This should be a dumb object
     public List<Schedule> CreateSchedules() {
       var schedules = new List<Schedule> ();
       var leftWeekAndDay = GetWeekAndDay (LeftSweep);
@@ -217,7 +217,7 @@ namespace Schedules.API.Models
 
       if (LeftSweep.Equals (RightSweep)) {
         schedules.Add (new Schedule () {
-          Name = Name,
+          Name = FullName,
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = leftString + " & " + rightString,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
@@ -225,7 +225,7 @@ namespace Schedules.API.Models
         });
       } else {
         schedules.Add( new Schedule () { 
-          Name = Name, 
+          Name =  FullName, 
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = leftString,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
@@ -233,7 +233,7 @@ namespace Schedules.API.Models
         });
 
         schedules.Add (new Schedule () { 
-          Name = Name, 
+          Name = FullName, 
           Category = SchedulesRepository.Categories.StreetSweeping.ToString (),
           Description = rightString,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(rightWeekAndDay[0], rightWeekAndDay[1], streetSweepingMonths),
