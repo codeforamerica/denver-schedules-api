@@ -60,7 +60,7 @@ namespace Schedules.API.Models
     {
       try
       {
-        Db.Connect();
+        using(var connection = Db.Connect()){};
         return true;
       }
       catch (Exception ex){
