@@ -19,4 +19,4 @@ deploy:
 notifications:
   webhooks: http://project-monitor.codeforamerica.org/projects/5410eca6-0a90-4bf0-b9c0-39f679940ba4/status
 env:
-- GEOSPATIAL-PROVIDER-NAME=Npgsql GEOSPATIAL-CONNECTION-STRING="Server=127.0.0.1;Port=5432;User Id=denver_schedules;Password=denver_schedules;Database=denver_schedules_development;"
+- GEOSPATIAL_PROVIDER_NAME=Npgsql GEOSPATIAL_CONNECTION_STRING="Server=127.0.0.1;Port=5432;User Id=denver_schedules;Password=denver_schedules;Database=denver_schedules_development;"
