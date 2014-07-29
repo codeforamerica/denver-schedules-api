@@ -27,10 +27,10 @@ namespace Schedules.API.Tests
       Assert.That(streetSweepings, Is.Not.Null);
     }
 
-    [Test]
-    public void ShouldHaveSomeStreetSweepings() {
-      Assert.That(streetSweepings, Is.Not.Empty);
-    }
+//    [Test]
+//    public void ShouldHaveSomeStreetSweepings() {
+//      Assert.That(streetSweepings, Is.Not.Empty);
+//    }
   }
 }
 

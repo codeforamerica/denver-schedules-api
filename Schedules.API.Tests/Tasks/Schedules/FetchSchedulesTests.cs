@@ -31,12 +31,12 @@ namespace Schedules.API.Tests
       Assert.That(fetchSchedules.Out.Schedules, Is.Not.Empty);
     }
 
-    [Test]
-    public void ShouldFetchStreetSweepings(){
-      fetchSchedules.In.Category = Categories.StreetSweeping;
-      fetchSchedules.Execute();
-      Assert.That(fetchSchedules.Out.Schedules, Is.Not.Empty);
-    }
+//    [Test]
+//    public void ShouldFetchStreetSweepings(){
+//      fetchSchedules.In.Category = Categories.StreetSweeping;
+//      fetchSchedules.Execute();
+//      Assert.That(fetchSchedules.Out.Schedules, Is.Not.Empty);
+//    }
   }
 }
 
