@@ -6,8 +6,8 @@ namespace Schedules.API.Tasks
 {
   public static class Db
   {
-    private const string providerKey = "GEOSPATIAL-PROVIDER-NAME";
-    private const string connectionKey = "GEOSPATIAL-CONNECTION-STRING";
+    private const string providerKey = "GEOSPATIAL_PROVIDER_NAME";
+    private const string connectionKey = "GEOSPATIAL_CONNECTION_STRING";
 
 
     public static DbConnection Connect() {
