@@ -14,7 +14,13 @@ namespace Schedules.API.Tasks
       // Reference: github.com/gregoryjscott/chic/TaskExtensions
       var providerName = System.Environment.GetEnvironmentVariable (providerKey);
       var connectionString = System.Environment.GetEnvironmentVariable (connectionKey);
-      var factory = DbProviderFactories.GetFactory (providerName);
+      DbProviderFactory factory;
+      try{
+        factory = DbProviderFactories.GetFactory (providerName);
+      }
+      catch(Exception) { // TODO: Figure out how to load config for tests (Shim for db tests)
+        factory = Npgsql.NpgsqlFactory.Instance;
+      }
 
       if(factory == null)
         throw new Exception("Could not obtain factory for provider \""+providerName+"\""); 

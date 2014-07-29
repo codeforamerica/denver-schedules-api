@@ -1,7 +1,7 @@
 ﻿using System;
 using Schedules.API.Extensions;
 using System.Collections.Generic;
-using Schedules.API.Repositories;
+using Schedules.API.Tasks;
 
 namespace Schedules.API.Models
 {
@@ -60,8 +60,7 @@ namespace Schedules.API.Models
     {
       try
       {
-        var repository = new SchedulesRepository ();
-        repository.connection.Open();
+        using(var connection = Db.Connect()){};
         return true;
       }
       catch (Exception ex){

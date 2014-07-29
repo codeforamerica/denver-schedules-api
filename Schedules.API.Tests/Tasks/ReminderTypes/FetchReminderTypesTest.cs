@@ -11,16 +11,16 @@ namespace Schedules.API.Tests.Tasks.ReminderTypes
   [TestFixture()]
   public class FetchReminderTypesTest
   {
-    FetchReminderTypes fetchReminderTypes;
-    List<ReminderType> reminderTypes;
-
-    [TestFixtureSetUp]
-    public void SetUp(){
-      fetchReminderTypes = Task.New<FetchReminderTypes>();
-      fetchReminderTypes.Execute();
-      reminderTypes = fetchReminderTypes.Out.ReminderTypes;
-    }
-
+//    FetchReminderTypes fetchReminderTypes;
+//    List<ReminderType> reminderTypes;
+//
+//    [TestFixtureSetUp]
+//    public void SetUp(){
+//      fetchReminderTypes = Task.New<FetchReminderTypes>();
+//      fetchReminderTypes.Execute();
+//      reminderTypes = fetchReminderTypes.Out.ReminderTypes;
+//    }
+//
 //    [Test]
 //    public void ShouldFetchSMSReminderType() {
 //      var email = reminderTypes.Find (r => r.Name == "email");

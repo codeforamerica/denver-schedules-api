@@ -1,20 +1,56 @@
 ﻿using Nancy;
-using Schedules.API.Repositories;
+using Schedules.API;
 using Schedules.API.Extensions;
 using Schedules.API.Models;
-using System.Collections.Generic;
+using Schedules.API.Tasks.Schedules;
+using Simpler;
+using System;
 
-public class SchedulesModule : NancyModule
+namespace Schedules.API.Modules
 {
-  public SchedulesModule()
+  public class SchedulesModule : NancyModule
   {
-    Get ["/schedules/{category}"] = _ => {
-      string c = _.category.ToString();
-      var category = c.ToEnum<SchedulesRepository.Categories>();
-      var repository = new SchedulesRepository();
-      List<Schedule> schedules = repository.Get(category, Request.Query);
+    string latitudeParameter = "latitude";
+    string longitudeParameter = "longitude";
 
-      return Response.AsJson (schedules);
-    };
+    public SchedulesModule()
+    {
+      Get ["/schedules/{category}"] = _ => {
+        try{
+          string c = _.category.ToString();
+          var category = c.ToEnum<Categories>();
+          FetchSchedules fetchSchedules = Task.New<FetchSchedules>();
+          fetchSchedules.In.Category = category;
+
+          if(category == Categories.StreetSweeping){
+            // TODO: Where's the best place to do error checking
+            ValidateStreetSweepingParameters(category, fetchSchedules);
+
+            fetchSchedules.In.Address = new Address {
+              Longitude = Request.Query[longitudeParameter],
+              Latitude = Request.Query[latitudeParameter]
+            };
+          }
+          fetchSchedules.Execute();
+
+          return Response.AsJson (fetchSchedules.Out.Schedules);
+        }
+        catch(ArgumentNullException ex){
+          return Response.AsJson(ex, HttpStatusCode.BadRequest);
+        }
+      };
+    }
+
+    void ValidateStreetSweepingParameters (Categories category, FetchSchedules fetchSchedules)
+    {
+      // Make sure we have a lat and long or throw an error
+      var hasLat = Request.Query.ContainsKey(latitudeParameter);
+      var hasLong = Request.Query.ContainsKey(longitudeParameter);
+
+      if(!hasLat)
+        throw new ArgumentNullException(latitudeParameter);
+      else if (!hasLong)
+        throw new ArgumentNullException(longitudeParameter);
+    }
   }
 }
