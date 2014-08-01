@@ -127,7 +127,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="Modules\SchedulesModule.cs" />
     <Compile Include="CustomBootstrapper.cs" />
     <Compile Include="CustomJsonSerializer.cs" />
     <Compile Include="Modules\RemindersModule.cs" />
@@ -149,6 +148,7 @@
     <Compile Include="Tasks\Schedules\FetchStreetSweepings.cs" />
     <Compile Include="Tasks\Schedules\FetchSchedules.cs" />
     <Compile Include="Modules\StreetSweepingsModule.cs" />
+    <Compile Include="Modules\HolidaysModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

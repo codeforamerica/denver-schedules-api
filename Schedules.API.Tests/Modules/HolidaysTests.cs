@@ -1,12 +1,13 @@
 ﻿using NUnit.Framework;
 using Nancy.Testing;
+using System;
 
 namespace Schedules.API.Tests.Modules
 {
   [TestFixture]
-  public class StreetSweepingTests
+  public class HolidaysTest
   {
-    const string url = "/schedules/streetsweeping";
+    const string url = "/schedules/holidays";
     Browser browser;
     BrowserResponse response;
 
@@ -17,21 +18,11 @@ namespace Schedules.API.Tests.Modules
     }
 
     public void SetUpOptions() {
-      response = browser.Options(url, (with) => {
-        with.HttpRequest();
-        with.Query("longitude", "-104.95474457244");
-        with.Query("latitude", "39.7659901751922");
-        with.Query("accuracy", "0.631");
-      });
+      response = browser.Options(url, with => with.HttpRequest());
     }
 
     public void SetUpGet() {
-      response = browser.Get(url, (with) => {
-        with.HttpRequest();
-        with.Query("longitude", "-104.95474457244");
-        with.Query("latitude", "39.7659901751922");
-        with.Query("accuracy", "0.631");
-      });
+      response = browser.Get(url, with => with.HttpRequest());
     }
 
     [Test]
@@ -75,15 +66,5 @@ namespace Schedules.API.Tests.Modules
       SetUpGet();
       Assert.AreEqual ("application/json; charset=utf-8", response.ContentType);
     }
-
-    [Test]
-    public void ShouldThrowAnErrorWithoutLatAndLong()
-    {
-      SetUpGet();
-      browser = new Browser(new CustomBootstrapper());
-      response = browser.Get(url, (with) => with.HttpRequest());
-      Assert.AreEqual(Nancy.HttpStatusCode.BadRequest, response.StatusCode);
-    }
   }
 }
-
