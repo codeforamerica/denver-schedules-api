@@ -8,6 +8,7 @@ namespace Schedules.API.Tests.Modules
   [TestFixture]
   public class RemindersTest
   {
+    const string url = "/reminders/sms";
     Browser browser;
 
     [TestFixtureSetUp]
@@ -19,65 +20,67 @@ namespace Schedules.API.Tests.Modules
     [Test]
     public void OptionsShouldAllowAllOrigins ()
     {
-      var response = browser.Options("/reminders", with => with.HttpRequest());
+      var response = browser.Options(url, with => with.HttpRequest());
       Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
     }
 
     [Test]
     public void OptionsShouldAllowPost ()
     {
-      var response = browser.Options("/reminders", with => with.HttpRequest());
+      var response = browser.Options(url, with => with.HttpRequest());
       Assert.That(response.Headers["Access-Control-Allow-Methods"], Contains.Substring("POST"));
     }
 
     [Test]
     public void OptionsShouldAllowContentType ()
     {
-      var response = browser.Options("/reminders", with => with.HttpRequest());
+      var response = browser.Options(url, with => with.HttpRequest());
       Assert.That(response.Headers["Access-Control-Allow-Headers"], Contains.Substring("Content-Type"));
     }
 
     [Test]
     public void PostShouldAllowAllOrigins ()
     {
-      var response = browser.Post("/reminders", with => with.HttpRequest());
+      var response = browser.Post(url, with => with.HttpRequest());
       Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
     }
 
     [Test()]
     public void PostShouldReturnOK ()
     {
-      var response = browser.Post("/reminders", with => with.HttpRequest());
+      var response = browser.Post(url, with => with.HttpRequest());
       Assert.AreEqual(Nancy.HttpStatusCode.Created, response.StatusCode);
     }
 
     [Test]
     public void PostShouldReturnJson ()
     {
-      var response = browser.Post("/reminders", with => with.HttpRequest());
+      var response = browser.Post(url, with => with.HttpRequest());
       Assert.AreEqual("application/json; charset=utf-8", response.ContentType);
     }
 
     [Test]
-    public void PostShouldCreateAReminder ()
+    public void PostShouldCreateTextReminder ()
     {
+      var reminderType = new ReminderType { Name = "sms" };
       var reminder = new Reminder {
-        Cell = "2514320909",
-        CellVerified = true,
-        Email = "test@gmail.com",
-        EmailVerified = true,
+        ReminderType = reminderType,
+        Contact = "5555555555",
         Message = "hello peoples",
-        RemindOn = DateTime.Now
+        RemindOn = DateTime.Now,
+        Verified = false,
+        Address = "1234 address ave",
+        CreatedAt = DateTime.Now
       };
 
-      var response = browser.Post("/reminders", with => {
+      var response = browser.Post(url, with => {
         with.HttpRequest();
-        with.FormValue("cell", reminder.Cell);
-        with.FormValue("cellVerified", reminder.CellVerified.ToString());
-        with.FormValue("email", reminder.Email);
-        with.FormValue("emailVerified", reminder.EmailVerified.ToString());
+        with.FormValue("contact", reminder.Contact);
         with.FormValue("message", reminder.Message);
         with.FormValue("remindOn", reminder.RemindOn.ToString());
+        with.FormValue("verified", reminder.Verified.ToString());
+        with.FormValue("address", reminder.Address);
+        with.FormValue("createdAt", reminder.CreatedAt.ToString());
       });
 
       Assert.AreEqual(Nancy.HttpStatusCode.Created, response.StatusCode);
