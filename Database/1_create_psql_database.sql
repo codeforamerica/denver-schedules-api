@@ -1,10 +1,6 @@
---drop database denver_schedules_development;
---drop user denver_schedules
-
--- Create User
-create user denver_schedules with password 'denver_schedules';
 
 -- Database: denver_schedules_development
+drop database if exists denver_schedules_development;
 create database denver_schedules_development
        ENCODING = 'UTF8'
        TABLESPACE = pg_default
@@ -12,6 +8,10 @@ create database denver_schedules_development
        LC_CTYPE = 'en_US.UTF-8'
        CONNECTION LIMIT = -1;
 grant connect, temporary on database denver_schedules_development to public;
+
+-- Create User
+drop user if exists denver_schedules;
+create user denver_schedules with password 'denver_schedules';
 
 -- Grant Permissions
 grant all on database denver_schedules_development to denver_schedules;
