@@ -150,6 +150,7 @@
     <Compile Include="Modules\StreetSweepingsModule.cs" />
     <Compile Include="Modules\HolidaysModule.cs" />
     <Compile Include="Tasks\ReminderTypes\FetchReminderType.cs" />
+    <Compile Include="Tasks\Reminders\CreateReminder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -159,5 +160,6 @@
     <Folder Include="Tasks\" />
     <Folder Include="Tasks\ReminderTypes\" />
     <Folder Include="Tasks\Schedules\" />
+    <Folder Include="Tasks\Reminders\" />
   </ItemGroup>
 </Project>

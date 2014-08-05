@@ -6,7 +6,7 @@ using Schedules.API.Models;
 namespace Schedules.API.Tests.Modules
 {
   [TestFixture]
-  public class RemindersTest
+  public class RemindersSMSTest
   {
     const string url = "/reminders/sms";
     Browser browser;

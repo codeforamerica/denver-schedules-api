@@ -9,12 +9,21 @@ namespace Schedules.API.Models
   {
     public Reminder ()
     {
+      Contact = string.Empty;
+      Message = string.Empty;
+      Address = string.Empty;
+      ReminderType = new ReminderType ();
     }
 
     public int Id { get; set; }
 
     public ReminderType ReminderType { get; set; }
 
+    public int ReminderTypeId {
+      get {
+        return ReminderType.Id;
+      }
+    }
     public String Contact { get; set; }
 
     public String Message { get; set; }

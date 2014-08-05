@@ -6,6 +6,8 @@ namespace Schedules.API.Models
   {
     public ReminderType ()
     {
+      Name = string.Empty;
+      Description = string.Empty;
     }
 
     public int Id {
