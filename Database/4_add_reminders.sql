@@ -9,5 +9,3 @@ create table "reminders" (
   address text,
   created_at timestamp with time zone default localtimestamp
 );
-
-grant all on table reminders to denver_schedules;

@@ -8,5 +8,3 @@ create table "reminder_types" (
 insert into "reminder_types" ("name", "description") values ('sms', 'Send a text message reminder. Phone number is required.');
 insert into "reminder_types" ("name", "description") values ('email', 'Send an email reminder. Email address is required.');
 insert into "reminder_types" ("name", "description") values ('yo', 'Send a yo. Yo username is required.');
-
-grant all on table reminder_types to denver_schedules;

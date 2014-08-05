@@ -1,5 +1,9 @@
 
 -- Database: denver_schedules_development
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'denver_schedules_development'
+  AND pid <> pg_backend_pid();
 drop database if exists denver_schedules_development;
 create database denver_schedules_development
        ENCODING = 'UTF8'
