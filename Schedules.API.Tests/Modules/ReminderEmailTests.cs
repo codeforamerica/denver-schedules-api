@@ -62,7 +62,7 @@ namespace Schedules.API.Tests.Modules
     }
 
     [Test]
-    public void PostShouldCreateTextReminder ()
+    public void PostShouldCreateEmailReminder ()
     {
       FetchReminderType fetchReminderType = Task.New<FetchReminderType>();
       fetchReminderType.In.ReminderTypeName = "email";
