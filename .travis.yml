@@ -19,4 +19,9 @@ deploy:
 notifications:
   webhooks: http://project-monitor.codeforamerica.org/projects/5410eca6-0a90-4bf0-b9c0-39f679940ba4/status
 env:
-- GEOSPATIAL_PROVIDER_NAME=Npgsql GEOSPATIAL_CONNECTION_STRING="Server=127.0.0.1;Port=5432;User Id=denver_schedules;Password=denver_schedules;Database=denver_schedules_development;"
+  matrix:
+  - GEOSPATIAL_PROVIDER_NAME=Npgsql GEOSPATIAL_CONNECTION_STRING="Server=127.0.0.1;Port=5432;User
+    Id=denver_schedules;Password=denver_schedules;Database=denver_schedules_development;"
+  global:
+  - secure: a3dtDKYv4LFulCxrPIKtRqgABi8pGJ1xsb2H9He8hZu/iSwlnDdLtOxbGv8klVzdgbiZAWXoWS9bhXTvNc0J9CEWou/zUJO36axQMx48PCGnW2n/j33pv79QuqNPwWOCgiQIByVFLeldyCSefPtsUjOjpnu4fwuCWL0knJNaII0=
+  - secure: bCtk7U4P2dHOXYFRHyryIec/O2ZTwkM08O8L5UxDcuPMQA90JZLw+p+RahUHPD9WAUqHu8dJmmRIuylZ7db8LIJXJie/1uONkg+/4Q9ZeC6G4xVq4Z+eeQhV+mPcuSGnfXL5pa1I4ivXmru4wa19jA0GVQCsWgtCMx+IOsVvMzE=
