@@ -146,7 +146,6 @@
     <Compile Include="Tasks\Schedules\Categories.cs" />
     <Compile Include="Tasks\Schedules\FetchHolidays.cs" />
     <Compile Include="Tasks\Schedules\FetchStreetSweepings.cs" />
-    <Compile Include="Tasks\Schedules\FetchSchedules.cs" />
     <Compile Include="Modules\StreetSweepingsModule.cs" />
     <Compile Include="Modules\HolidaysModule.cs" />
   </ItemGroup>
