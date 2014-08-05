@@ -149,6 +149,7 @@
     <Compile Include="Tasks\Schedules\FetchSchedules.cs" />
     <Compile Include="Modules\StreetSweepingsModule.cs" />
     <Compile Include="Modules\HolidaysModule.cs" />
+    <Compile Include="Tasks\ReminderTypes\FetchReminderType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
