@@ -10,6 +10,7 @@ namespace Schedules.API.Tests
   public class CreateRemindersTests
   {
     CreateReminder createSMSReminder;
+    CreateReminder createEmailReminder;
 
     [TestFixtureSetUp]
     public void SetUp()
@@ -26,6 +27,19 @@ namespace Schedules.API.Tests
       };
 
       createSMSReminder.Execute();
+
+      createEmailReminder = Task.New<CreateReminder>();
+      createEmailReminder.In.ReminderTypeName = "email";
+      createEmailReminder.In.Reminder = new Reminder {
+        Contact = "example@email.com",
+        Message = "hello peoples",
+        RemindOn = DateTime.Now,
+        Verified = false,
+        Address = "1234 address ave",
+        CreatedAt = DateTime.Now
+      };
+
+      createEmailReminder.Execute();
     }
 
     [Test]
@@ -38,6 +52,18 @@ namespace Schedules.API.Tests
     public void SMSReminderShouldHaveAnId()
     {
       Assert.That(createSMSReminder.Out.Reminder.Id, Is.Not.EqualTo(0));
+    }
+
+    [Test]
+    public void EmailReminderShouldNotBeNull()
+    {
+      Assert.That(createEmailReminder.Out.Reminder, Is.Not.Null);
+    }
+
+    [Test]
+    public void EmailReminderShouldHaveAnId()
+    {
+      Assert.That(createEmailReminder.Out.Reminder.Id, Is.Not.EqualTo(0));
     }
   }
 }

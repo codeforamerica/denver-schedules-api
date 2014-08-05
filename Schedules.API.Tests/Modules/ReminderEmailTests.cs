@@ -8,9 +8,9 @@ using Simpler;
 namespace Schedules.API.Tests.Modules
 {
   [TestFixture]
-  public class RemindersSMSTest
+  public class RemindersEmailTest
   {
-    const string url = "/reminders/sms";
+    const string url = "/reminders/email";
     Browser browser;
 
     [TestFixtureSetUp]
@@ -62,15 +62,15 @@ namespace Schedules.API.Tests.Modules
     }
 
     [Test]
-    public void PostShouldCreateSMSReminder ()
+    public void PostShouldCreateTextReminder ()
     {
       FetchReminderType fetchReminderType = Task.New<FetchReminderType>();
-      fetchReminderType.In.ReminderTypeName = "sms";
+      fetchReminderType.In.ReminderTypeName = "email";
       fetchReminderType.Execute();
 
       var reminder = new Reminder {
         ReminderType = fetchReminderType.Out.ReminderType,
-        Contact = "5555555555",
+        Contact = "example@email.com",
         Message = "hello peoples",
         RemindOn = DateTime.Now,
         Verified = false,

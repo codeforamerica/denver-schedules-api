@@ -2,6 +2,7 @@
 using Simpler;
 using Schedules.API.Models;
 using Dapper;
+using System.Linq;
 
 namespace Schedules.API.Tasks
 {
@@ -26,11 +27,14 @@ namespace Schedules.API.Tasks
       FetchReminderType.Execute();
       In.Reminder.ReminderType = FetchReminderType.Out.ReminderType;
 
-      Out.Reminder = In.Reminder;
+      Out.Reminder = new Reminder ();
 
       using (var connection = Db.Connect ()) {
         try{
-          Out.Reminder.Id = connection.Execute(sql, In.Reminder);
+          Out.Reminder = connection.Query<Reminder, ReminderType, Reminder>(
+            sql,
+            (reminder, reminderType) => {reminder.ReminderType = reminderType; return reminder;},
+            In.Reminder).SingleOrDefault();
         }
         catch(Exception ex){
           Console.WriteLine (ex);
@@ -39,8 +43,15 @@ namespace Schedules.API.Tasks
     }
 
     const string sql = @"
-      insert into Reminders(contact, message, verified, address, reminder_type_id) 
-      values(@Contact, @Message, @Verified, @Address, @ReminderTypeId)
+      with insertReminder as (
+        insert into Reminders(contact, message, verified, address, reminder_type_id) 
+        values(@Contact, @Message, @Verified, @Address, @ReminderTypeId) returning *
+      )
+      select * 
+      from insertReminder r
+      left join reminder_types t
+        on t.id = r.reminder_type_id
+      ;
     ";
   }
 }
