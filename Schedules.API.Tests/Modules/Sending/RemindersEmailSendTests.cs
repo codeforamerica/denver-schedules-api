@@ -2,7 +2,7 @@
 using Nancy.Testing;
 using Schedules.API.Models;
 
-namespace Schedules.API.Tests.Modules
+namespace Schedules.API.Tests.Modules.Sending
 {
   [TestFixture()]
   public class RemindersEmailSendTests
