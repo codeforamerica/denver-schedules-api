@@ -73,12 +73,6 @@
     <Compile Include="Tasks\ReminderTypes\FetchReminderTypeTest.cs" />
     <Compile Include="Tasks\Reminders\CreateRemindersTests.cs" />
     <Compile Include="Modules\ReminderEmailTests.cs" />
-    <Compile Include="Modules\TriggersTests.cs" />
-    <Compile Include="Tasks\Triggers\CreateTriggerTests.cs" />
-    <Compile Include="Tasks\Triggers\SendEmailsTests.cs" />
-    <Compile Include="Modules\EmailSendTests.cs" />
-    <Compile Include="Tasks\Send\SendEmailsTests.cs" />
-    <Compile Include="Tasks\Send\PostEmailSendTests.cs" />
     <Compile Include="Tasks\Sending\SendEmailsTests.cs" />
     <Compile Include="Tasks\Sending\PostRemindersEmailSendTests.cs" />
     <Compile Include="Modules\RemindersEmailSendTests.cs" />
@@ -100,8 +94,6 @@
     <Folder Include="Tasks\ReminderTypes\" />
     <Folder Include="Tasks\Schedules\" />
     <Folder Include="Tasks\Reminders\" />
-    <Folder Include="Tasks\Triggers\" />
-    <Folder Include="Tasks\Send\" />
     <Folder Include="Tasks\Sending\" />
   </ItemGroup>
 </Project>

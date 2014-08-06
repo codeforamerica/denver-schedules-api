@@ -156,10 +156,6 @@
     <Compile Include="Modules\HolidaysModule.cs" />
     <Compile Include="Tasks\ReminderTypes\FetchReminderType.cs" />
     <Compile Include="Tasks\Reminders\CreateReminder.cs" />
-    <Compile Include="Modules\TriggersModule.cs" />
-    <Compile Include="Models\Trigger.cs" />
-    <Compile Include="Tasks\Triggers\CreateTrigger.cs" />
-    <Compile Include="Tasks\Triggers\SendEmails.cs" />
     <Compile Include="Tasks\Reminders\FetchDueReminders.cs" />
     <Compile Include="Modules\SendModule.cs" />
     <Compile Include="Models\Send.cs" />

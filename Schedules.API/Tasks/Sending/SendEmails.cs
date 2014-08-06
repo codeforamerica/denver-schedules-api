@@ -32,7 +32,7 @@ namespace Schedules.API.Tasks.Sending
       foreach (var reminder in In.DueReminders) {
         var results = api.SendMessage(
           new EmailMessage {
-            to = new List<EmailAddress> { new EmailAddress { email = reminder.Email } },
+            to = new List<EmailAddress> { new EmailAddress { email = reminder.Contact } },
             from_email = fromEmail,
             subject = "Reminder!",
             text = reminder.Message

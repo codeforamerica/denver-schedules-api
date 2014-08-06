@@ -12,7 +12,7 @@ namespace Schedules.API.Tasks.Reminders
 
     public override void Execute ()
     {
-      Out.DueReminders = new[] { new Reminder { Email = "denver@example.com" } };
+      Out.DueReminders = new[] { new Reminder { Contact = "denver@example.com" } };
     }
   }
 }
