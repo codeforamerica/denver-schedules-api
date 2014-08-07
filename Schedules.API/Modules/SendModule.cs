@@ -8,10 +8,12 @@ public class SendModule : NancyModule
   {
     Post["/reminders/email/send"] = parameters => {
       var postRemindersEmailSend = Task.New<PostRemindersEmailSend>();
-      postRemindersEmailSend.In.Module = this;
-      postRemindersEmailSend.In.Parameters = parameters;
       postRemindersEmailSend.Execute();
-      return postRemindersEmailSend.Out.Response;
+
+      return Response.AsJson(
+        postRemindersEmailSend.Out.Send,
+        HttpStatusCode.Created
+      );
     };
   }
 }

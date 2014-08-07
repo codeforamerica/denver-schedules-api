@@ -9,13 +9,11 @@ namespace Schedules.API.Tasks.Sending
   {
     public class Input
     {
-      public NancyModule Module { get; set; }
-      public dynamic Parameters { get; set; }
     }
 
     public class Output
     {
-      public dynamic Response { get; set; }
+      public Send Send { get; set; }
     }
 
     public FetchDueReminders FetchDueReminders { get; set; }
@@ -28,10 +26,7 @@ namespace Schedules.API.Tasks.Sending
       SendEmails.In.DueReminders = FetchDueReminders.Out.DueReminders;
       SendEmails.Execute();
 
-      Out.Response = In.Module.Response.AsJson(
-        new Send { Sent = SendEmails.Out.Sent },
-        HttpStatusCode.Created
-      );
+      Out.Send = new Send { Sent = SendEmails.Out.Sent };
     }
   }
 }
