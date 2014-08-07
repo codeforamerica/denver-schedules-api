@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Nancy.Testing;
 using Schedules.API.Models;
+using System;
 
 namespace Schedules.API.Tests.Modules.Sending
 {
@@ -40,21 +41,30 @@ namespace Schedules.API.Tests.Modules.Sending
     [Test, Category("Email")]
     public void PostShouldAllowAllOrigins ()
     {
-      var response = browser.Post(url, with => with.HttpRequest());
+      var response = browser.Post(url, with => {
+        with.HttpRequest();
+        with.JsonBody<Send>(new Send { RemindOn = DateTime.Now });
+      });
       Assert.That(response.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
     }
 
     [Test, Category("Email")]
     public void PostShouldReturnCreated ()
     {
-      var response = browser.Post(url, with => with.HttpRequest());
+      var response = browser.Post(url, with => {
+        with.HttpRequest();
+        with.JsonBody<Send>(new Send { RemindOn = DateTime.Now });
+      });
       Assert.AreEqual(Nancy.HttpStatusCode.Created, response.StatusCode);
     }
 
     [Test, Category("Email")]
     public void PostShouldReturnCreatedDataAsJson ()
     {
-      var response = browser.Post(url, with => with.HttpRequest());
+      var response = browser.Post(url, with => {
+        with.HttpRequest();
+        with.JsonBody<Send>(new Send { RemindOn = DateTime.Now });
+      });
       Assert.AreEqual("application/json; charset=utf-8", response.ContentType);
       Assert.That(response.Context.JsonBody<Send>(), Is.InstanceOf<Send>());
     }

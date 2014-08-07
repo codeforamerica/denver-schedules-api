@@ -9,6 +9,7 @@ namespace Schedules.API.Tasks.Sending
   {
     public class Input
     {
+      public Send Send { get; set; }
     }
 
     public class Output
@@ -21,12 +22,16 @@ namespace Schedules.API.Tasks.Sending
 
     public override void Execute ()
     {
+      FetchDueReminders.In.RemindOn = In.Send.RemindOn;
       FetchDueReminders.Execute();
 
       SendEmails.In.DueReminders = FetchDueReminders.Out.DueReminders;
       SendEmails.Execute();
 
-      Out.Send = new Send { Sent = SendEmails.Out.Sent };
+      Out.Send = new Send {
+        Sent = SendEmails.Out.Sent,
+        Errors = SendEmails.Out.Errors
+      };
     }
   }
 }
