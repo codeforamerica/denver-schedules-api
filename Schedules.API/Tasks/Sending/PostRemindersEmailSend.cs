@@ -1,5 +1,6 @@
 ﻿using Simpler;
 using Nancy;
+using System;
 using Schedules.API.Models;
 using Schedules.API.Tasks.Reminders;
 
@@ -22,6 +23,8 @@ namespace Schedules.API.Tasks.Sending
 
     public override void Execute ()
     {
+      if (In.Send.RemindOn < DateTime.Now.AddDays(-1)) throw new ArgumentException("You can't be reminded on a date in the past.");
+
       FetchDueReminders.In.RemindOn = In.Send.RemindOn;
       FetchDueReminders.Execute();
 

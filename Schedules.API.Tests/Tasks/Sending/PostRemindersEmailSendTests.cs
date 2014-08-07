@@ -12,7 +12,7 @@ namespace Schedules.API.Tests.Tasks.Sending
   {
     PostRemindersEmailSend postRemindersEmailSend;
 
-    readonly DateTime julyOne = DateTime.Parse("2014-07-01");
+    readonly DateTime julyOne = DateTime.Now.AddDays(1);
 
     [TestFixtureSetUp]
     public void SetUp ()
@@ -23,17 +23,26 @@ namespace Schedules.API.Tests.Tasks.Sending
     [Test]
     public void ShouldSendEmailsForDueReminders()
     {
-      var fakeFetchReminders = Fake.Task<FetchDueReminders>(
+      var count = 0;
+      postRemindersEmailSend.FetchDueReminders = Fake.Task<FetchDueReminders>(
         fdr => fdr.Out.DueReminders = new[] {
           new Reminder { RemindOn = julyOne },
           new Reminder { RemindOn = julyOne }
         }
       );
-      var fakeSendEmails = Fake.Task<SendEmails>(
-        se => Assert.That(se.In.DueReminders.Length, Is.EqualTo(2))
+      postRemindersEmailSend.SendEmails = Fake.Task<SendEmails>(
+        se => count = se.In.DueReminders.Length
       );
       postRemindersEmailSend.In.Send = new Send { RemindOn = julyOne };
       postRemindersEmailSend.Execute();
+      Assert.That(count, Is.EqualTo(2));
+    }
+
+    [Test]
+    public void ShouldNotAllowPastRemindOnDates()
+    {
+      postRemindersEmailSend.In.Send = new Send { RemindOn = DateTime.Now.AddDays(-1) };
+      Assert.Throws<ArgumentException>(postRemindersEmailSend.Execute);
     }
   }
 }
