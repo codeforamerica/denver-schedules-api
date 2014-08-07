@@ -1,6 +1,4 @@
-﻿using System;
-using NUnit.Framework;
-using Schedules.API.Tasks.Schedules;
+﻿using NUnit.Framework;
 using Schedules.API.Models;
 using System.Collections.Generic;
 using Simpler;
@@ -16,7 +14,7 @@ namespace Schedules.API.Tests
     [TestFixtureSetUp]
     public void SetUp(){
       fetchStreetSweeping = Task.New<FetchStreetSweepings>();
-      var address = new Address { Latitude = 39.7659901751922, Longitude = -104.95474457244 };
+      var address = new Address { Latitude = 39.7211511226435, Longitude = -104.952312 };
       fetchStreetSweeping.In.Address = address;
       fetchStreetSweeping.Execute();
       streetSweepings = fetchStreetSweeping.Out.StreetSweepings;
@@ -27,10 +25,10 @@ namespace Schedules.API.Tests
       Assert.That(streetSweepings, Is.Not.Null);
     }
 
-//    [Test]
-//    public void ShouldHaveSomeStreetSweepings() {
-//      Assert.That(streetSweepings, Is.Not.Empty);
-//    }
+    [Test]
+    public void ShouldHaveSomeStreetSweepings() {
+      Assert.That(streetSweepings, Is.Not.Empty);
+    }
   }
 }
 
