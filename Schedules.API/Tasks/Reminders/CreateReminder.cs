@@ -44,8 +44,8 @@ namespace Schedules.API.Tasks
 
     const string sql = @"
       with insertReminder as (
-        insert into Reminders(contact, message, verified, address, reminder_type_id) 
-        values(@Contact, @Message, @Verified, @Address, @ReminderTypeId) returning *
+        insert into Reminders(contact, message, remind_on, verified, address, reminder_type_id)
+        values(@Contact, @Message, @RemindOn, @Verified, @Address, @ReminderTypeId) returning *
       )
       select * 
       from insertReminder r
