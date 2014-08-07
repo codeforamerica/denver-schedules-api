@@ -64,7 +64,7 @@ namespace Schedules.API
                                  FROM
                                         streetsweeping ss
                                  WHERE
-                                        ST_Intersects(ST_Buffer(ST_GeometryFromText(@Point, 4326), .001), ss.geom)";
+                                        ST_Intersects(ST_Buffer(ST_GeometryFromText(@Point, 4326), .0002), ss.geom)";
   }
 }
 
