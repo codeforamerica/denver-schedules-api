@@ -12,6 +12,8 @@ namespace Schedules.API.Tests
     CreateReminder createSMSReminder;
     CreateReminder createEmailReminder;
 
+    readonly DateTime julyOne = DateTime.Parse("07-01-2014");
+
     [TestFixtureSetUp]
     public void SetUp()
     {
@@ -20,7 +22,7 @@ namespace Schedules.API.Tests
       createSMSReminder.In.Reminder = new Reminder {
         Contact = "5555555555",
         Message = "hello peoples",
-        RemindOn = DateTime.Now,
+        RemindOn = julyOne,
         Verified = false,
         Address = "1234 address ave",
         CreatedAt = DateTime.Now
@@ -33,7 +35,7 @@ namespace Schedules.API.Tests
       createEmailReminder.In.Reminder = new Reminder {
         Contact = "example@email.com",
         Message = "hello peoples",
-        RemindOn = DateTime.Now,
+        RemindOn = julyOne,
         Verified = false,
         Address = "1234 address ave",
         CreatedAt = DateTime.Now
@@ -55,6 +57,12 @@ namespace Schedules.API.Tests
     }
 
     [Test]
+    public void SMSReminderShouldHaveARemindOnDate()
+    {
+      Assert.That(createSMSReminder.Out.Reminder.RemindOn, Is.EqualTo(julyOne));
+    }
+
+    [Test]
     public void EmailReminderShouldNotBeNull()
     {
       Assert.That(createEmailReminder.Out.Reminder, Is.Not.Null);
@@ -64,6 +72,12 @@ namespace Schedules.API.Tests
     public void EmailReminderShouldHaveAnId()
     {
       Assert.That(createEmailReminder.Out.Reminder.Id, Is.Not.EqualTo(0));
+    }
+
+    [Test]
+    public void EmailReminderShouldHaveARemindOnDate()
+    {
+      Assert.That(createEmailReminder.Out.Reminder.RemindOn, Is.EqualTo(julyOne));
     }
   }
 }
