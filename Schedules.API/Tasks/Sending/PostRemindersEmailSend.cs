@@ -1,5 +1,4 @@
 ﻿using Simpler;
-using Nancy;
 using System;
 using Schedules.API.Models;
 using Schedules.API.Tasks.Reminders;

@@ -12,7 +12,7 @@ namespace Schedules.API.Tests.Tasks.Sending
   {
     PostRemindersEmailSend postRemindersEmailSend;
 
-    readonly DateTime julyOne = DateTime.Now.AddDays(1);
+    readonly DateTime tomorrow = DateTime.Now.AddDays(1);
 
     [TestFixtureSetUp]
     public void SetUp ()
@@ -26,14 +26,14 @@ namespace Schedules.API.Tests.Tasks.Sending
       var count = 0;
       postRemindersEmailSend.FetchDueReminders = Fake.Task<FetchDueReminders>(
         fdr => fdr.Out.DueReminders = new[] {
-          new Reminder { RemindOn = julyOne },
-          new Reminder { RemindOn = julyOne }
+          new Reminder { RemindOn = tomorrow },
+          new Reminder { RemindOn = tomorrow }
         }
       );
       postRemindersEmailSend.SendEmails = Fake.Task<SendEmails>(
         se => count = se.In.DueReminders.Length
       );
-      postRemindersEmailSend.In.Send = new Send { RemindOn = julyOne };
+      postRemindersEmailSend.In.Send = new Send { RemindOn = tomorrow };
       postRemindersEmailSend.Execute();
       Assert.That(count, Is.EqualTo(2));
     }
