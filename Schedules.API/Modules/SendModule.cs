@@ -4,19 +4,22 @@ using Simpler;
 using Nancy.ModelBinding;
 using Schedules.API.Models;
 
-public class SendModule : NancyModule
+namespace Schedules.API.Modules
 {
-  public SendModule ()
+  public class SendModule : NancyModule
   {
-    Post["/reminders/email/send"] = parameters => {
-      var postRemindersEmailSend = Task.New<PostRemindersEmailSend>();
-      postRemindersEmailSend.In.Send = this.Bind<Send>();
-      postRemindersEmailSend.Execute();
+    public SendModule ()
+    {
+        Post["/reminders/email/send"] = parameters => {
+          var postRemindersEmailSend = Task.New<PostRemindersEmailSend>();
+          postRemindersEmailSend.In.Send = this.Bind<Send>();
+          postRemindersEmailSend.Execute();
 
-      return Response.AsJson(
-        postRemindersEmailSend.Out.Send,
-        HttpStatusCode.Created
-      );
-    };
+          return Response.AsJson(
+            postRemindersEmailSend.Out.Send,
+            HttpStatusCode.Created
+          );
+        };
+    }
   }
 }
