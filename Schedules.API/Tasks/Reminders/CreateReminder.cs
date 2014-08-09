@@ -38,20 +38,29 @@ namespace Schedules.API.Tasks
         }
         catch(Exception ex){
           Console.WriteLine (ex);
+          throw;
         }
       }
     }
 
     const string sql = @"
       with insertReminder as (
-        insert into Reminders(contact, message, verified, address, reminder_type_id) 
-        values(@Contact, @Message, @Verified, @Address, @ReminderTypeId) returning *
+        insert into Reminders(contact, message, remind_on, verified, address, reminder_type_id)
+        values(@Contact, @Message, @RemindOn, @Verified, @Address, @ReminderTypeId)
+        returning *
       )
-      select * 
+      select
+        r.id,
+        r.contact,
+        r.message,
+        r.remind_on as RemindOn,
+        r.verified,
+        r.address,
+        r.reminder_type_id,
+        t.*
       from insertReminder r
       left join reminder_types t
         on t.id = r.reminder_type_id
-      ;
     ";
   }
 }
