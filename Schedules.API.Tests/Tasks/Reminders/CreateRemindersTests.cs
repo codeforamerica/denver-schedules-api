@@ -14,8 +14,64 @@ namespace Schedules.API.Tests
 
     readonly DateTime julyOne = DateTime.Parse("07-01-2014");
 
-    [TestFixtureSetUp]
-    public void SetUp()
+
+    [Test]
+    public void SMSReminderShouldNotBeNull()
+    {
+      SetUpSms();
+      Assert.That(createSMSReminder.Out.Reminder, Is.Not.Null);
+    }
+
+    [Test]
+    public void SMSReminderShouldHaveAnId()
+    {
+      SetUpSms();
+      Assert.That(createSMSReminder.Out.Reminder.Id, Is.Not.EqualTo(0));
+    }
+
+    [Test]
+    public void SMSReminderShouldBeOfTypeSMS()
+    {
+      SetUpSms();
+      Assert.That(createSMSReminder.Out.Reminder.ReminderType.Name, Is.EqualTo("sms"));
+    }
+
+    [Test]
+    public void SMSReminderShouldHaveARemindOnDate()
+    {
+      SetUpSms();
+      Assert.That(createSMSReminder.Out.Reminder.RemindOn, Is.EqualTo(julyOne));
+    }
+
+        [Test]
+    public void EmailReminderShouldNotBeNull()
+    {
+      SetUpEmail();
+      Assert.That(createEmailReminder.Out.Reminder, Is.Not.Null);
+    }
+
+    [Test]
+    public void EmailReminderShouldHaveAnId()
+    {
+      SetUpEmail();
+      Assert.That(createEmailReminder.Out.Reminder.Id, Is.Not.EqualTo(0));
+    }
+
+    [Test]
+    public void EmailReminderShouldBeOfTypeEmail()
+    {
+      SetUpEmail();
+      Assert.That(createEmailReminder.Out.Reminder.ReminderType.Name, Is.EqualTo("email"));
+    }
+
+    [Test]
+    public void EmailReminderShouldHaveARemindOnDate()
+    {
+      SetUpEmail();
+      Assert.That(createEmailReminder.Out.Reminder.RemindOn, Is.EqualTo(julyOne));
+    }
+
+    void SetUpSms()
     {
       createSMSReminder = Task.New<CreateReminder>();
       createSMSReminder.In.ReminderTypeName = "sms";
@@ -27,9 +83,11 @@ namespace Schedules.API.Tests
         Address = "1234 address ave",
         CreatedAt = DateTime.Now
       };
-
       createSMSReminder.Execute();
+    }
 
+    void SetUpEmail()
+    {
       createEmailReminder = Task.New<CreateReminder>();
       createEmailReminder.In.ReminderTypeName = "email";
       createEmailReminder.In.Reminder = new Reminder {
@@ -40,44 +98,7 @@ namespace Schedules.API.Tests
         Address = "1234 address ave",
         CreatedAt = DateTime.Now
       };
-
       createEmailReminder.Execute();
-    }
-
-    [Test]
-    public void SMSReminderShouldNotBeNull()
-    {
-      Assert.That(createSMSReminder.Out.Reminder, Is.Not.Null);
-    }
-
-    [Test]
-    public void SMSReminderShouldHaveAnId()
-    {
-      Assert.That(createSMSReminder.Out.Reminder.Id, Is.Not.EqualTo(0));
-    }
-
-    [Test]
-    public void SMSReminderShouldHaveARemindOnDate()
-    {
-      Assert.That(createSMSReminder.Out.Reminder.RemindOn, Is.EqualTo(julyOne));
-    }
-
-    [Test]
-    public void EmailReminderShouldNotBeNull()
-    {
-      Assert.That(createEmailReminder.Out.Reminder, Is.Not.Null);
-    }
-
-    [Test]
-    public void EmailReminderShouldHaveAnId()
-    {
-      Assert.That(createEmailReminder.Out.Reminder.Id, Is.Not.EqualTo(0));
-    }
-
-    [Test]
-    public void EmailReminderShouldHaveARemindOnDate()
-    {
-      Assert.That(createEmailReminder.Out.Reminder.RemindOn, Is.EqualTo(julyOne));
     }
   }
 }
