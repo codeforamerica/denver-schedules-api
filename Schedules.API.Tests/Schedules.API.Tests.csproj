@@ -61,6 +61,9 @@
     <Reference Include="Nancy.Testing">
       <HintPath>..\packages\Nancy.Testing.0.23.2\lib\net40\Nancy.Testing.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Authentication.Forms">
+      <HintPath>..\packages\Nancy.Authentication.Forms.0.23.2\lib\net40\Nancy.Authentication.Forms.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\UnixTimeStampTest.cs" />
