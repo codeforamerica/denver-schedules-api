@@ -28,6 +28,7 @@ namespace Schedules.API.Tasks
       }
       catch(Exception ex) {
         Console.WriteLine(ex);
+        throw;
       }
     }
 
