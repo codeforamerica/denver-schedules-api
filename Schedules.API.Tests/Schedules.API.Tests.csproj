@@ -56,10 +56,11 @@
     <Reference Include="Mandrill">
       <HintPath>..\packages\Mandrill.1.0.85\lib\net40\Mandrill.dll</HintPath>
     </Reference>
-    <Reference Include="Dapper">
-      <HintPath>..\packages\Dapper.1.27\lib\net40\Dapper.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.29\lib\net40\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\UnixTimeStampTest.cs" />

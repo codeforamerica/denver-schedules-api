@@ -82,9 +82,6 @@
     <Reference Include="Nancy.Hosting.Aspnet">
       <HintPath>..\packages\Nancy.Hosting.Aspnet.0.23.1\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
-    <Reference Include="Dapper">
-      <HintPath>..\packages\Dapper.1.27\lib\net40\Dapper.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
@@ -93,6 +90,9 @@
     </Reference>
     <Reference Include="Mandrill">
       <HintPath>..\packages\Mandrill.1.0.85\lib\net40\Mandrill.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.29\lib\net40\Dapper.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup>
