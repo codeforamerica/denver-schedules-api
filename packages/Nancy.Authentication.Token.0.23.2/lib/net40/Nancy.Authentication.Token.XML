@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nancy.Authentication.Token</name>
+    </assembly>
+    <members>
+        <member name="T:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore">
+            <summary>
+            Stores encryption keys in the file system
+            </summary>
+        </member>
+        <member name="T:Nancy.Authentication.Token.Storage.ITokenKeyStore">
+            <summary>
+            Stores and retrieves encryption keys
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.ITokenKeyStore.Retrieve">
+            <summary>
+            Retrieves encryption keys
+            </summary>
+            <returns>Keys</returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.ITokenKeyStore.Store(System.Collections.Generic.IDictionary{System.DateTime,System.Byte[]})">
+            <summary>
+            Stores encryption keys
+            </summary>
+            <param name="keys">Keys</param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.ITokenKeyStore.Purge">
+            <summary>
+            Purges encryption keys
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore.#ctor">
+            <summary>
+            Creates a new <see cref="T:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore"/>
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore.#ctor(Nancy.IRootPathProvider)">
+            <summary>
+            Creates a new <see cref="T:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore"/>
+            </summary>
+            <param name="rootPathProvider"></param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore.Retrieve">
+            <summary>
+            Retrieves encryption keys.
+            </summary>
+            <returns>Keys</returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore.Store(System.Collections.Generic.IDictionary{System.DateTime,System.Byte[]})">
+            <summary>
+            Stores encyrption keys.
+            </summary>
+            <param name="keys">Keys</param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore.Purge">
+            <summary>
+            Purges encryption keys
+            </summary>
+        </member>
+        <member name="P:Nancy.Authentication.Token.Storage.FileSystemTokenKeyStore.FilePath">
+            <summary>
+            The location where token keys are stored
+            </summary>
+        </member>
+        <member name="T:Nancy.Authentication.Token.Storage.InMemoryTokenKeyStore">
+            <summary>
+            In in memory implementation of <see cref="T:Nancy.Authentication.Token.Storage.ITokenKeyStore"/>. Useful for testing or scenarios
+            where encryption keys do not need to persist across application restarts (due to updates, app pool 
+            expiration, etc.)
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.InMemoryTokenKeyStore.Retrieve">
+            <summary>
+            Retrieves encryption keys
+            </summary>
+            <returns>Keys</returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.InMemoryTokenKeyStore.Store(System.Collections.Generic.IDictionary{System.DateTime,System.Byte[]})">
+            <summary>
+            Stores encryption keys
+            </summary>
+            <param name="keys">Keys</param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Storage.InMemoryTokenKeyStore.Purge">
+            <summary>
+            Purges encryption keys
+            </summary>
+        </member>
+        <member name="T:Nancy.Authentication.Token.ITokenizer">
+            <summary>
+            Encodes and decodes authorization tokens. 
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.ITokenizer.Tokenize(Nancy.Security.IUserIdentity,Nancy.NancyContext)">
+            <summary>
+            Create a token from a <see cref="T:Nancy.Security.IUserIdentity"/>
+            </summary>
+            <param name="userIdentity">The user identity from which to create a token.</param>
+            <param name="context">NancyContext</param>
+            <returns>The generated token.</returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.ITokenizer.Detokenize(System.String,Nancy.NancyContext)">
+            <summary>
+            Create a <see cref="T:Nancy.Security.IUserIdentity"/> from a token
+            </summary>
+            <param name="token">The token from which to create a user identity.</param>
+            <param name="context">NancyContext</param>
+            <returns>The detokenized user identity.</returns>
+        </member>
+        <member name="T:Nancy.Authentication.Token.TokenAuthentication">
+            <summary>
+            Nancy Token authentication implementation
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.TokenAuthentication.Enable(Nancy.Bootstrapper.IPipelines,Nancy.Authentication.Token.TokenAuthenticationConfiguration)">
+            <summary>
+            Enables Token authentication for the application
+            </summary>
+            <param name="pipelines">Pipelines to add handlers to (usually "this")</param>
+            <param name="configuration">Forms authentication configuration</param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.TokenAuthentication.Enable(Nancy.INancyModule,Nancy.Authentication.Token.TokenAuthenticationConfiguration)">
+            <summary>
+            Enables Token authentication for a module
+            </summary>
+            <param name="module">Module to add handlers to (usually "this")</param>
+            <param name="configuration">Forms authentication configuration</param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.TokenAuthentication.GetCredentialRetrievalHook(Nancy.Authentication.Token.TokenAuthenticationConfiguration)">
+            <summary>
+            Gets the pre request hook for loading the authenticated user's details
+            from the auth header.
+            </summary>
+            <param name="configuration">Token authentication configuration to use</param>
+            <returns>Pre request hook delegate</returns>
+        </member>
+        <member name="T:Nancy.Authentication.Token.TokenAuthenticationConfiguration">
+            <summary>
+            Configuration options for token authentication
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.TokenAuthenticationConfiguration.#ctor(Nancy.Authentication.Token.ITokenizer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nancy.Authentication.Token.TokenAuthenticationConfiguration"/> class.
+            </summary>
+            <param name="tokenizer">A valid instance of <see cref="T:Nancy.Authentication.Token.ITokenizer"/> class</param>
+        </member>
+        <member name="P:Nancy.Authentication.Token.TokenAuthenticationConfiguration.Tokenizer">
+            <summary>
+            Gets the token validator
+            </summary>
+        </member>
+        <member name="T:Nancy.Authentication.Token.Tokenizer">
+            <summary>
+            Default implementation of <see cref="T:Nancy.Authentication.Token.ITokenizer"/>
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nancy.Authentication.Token.Tokenizer"/> class.
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.#ctor(System.Action{Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nancy.Authentication.Token.Tokenizer"/> class.
+            </summary>
+            <param name="configuration">The configuration that should be used by the tokenizer.</param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.Tokenize(Nancy.Security.IUserIdentity,Nancy.NancyContext)">
+            <summary>
+            Creates a token from a <see cref="T:Nancy.Security.IUserIdentity"/>.
+            </summary>
+            <param name="userIdentity">The user identity from which to create a token.</param>
+            <param name="context">NancyContext</param>
+            <returns>The generated token.</returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.Detokenize(System.String,Nancy.NancyContext)">
+            <summary>
+            Creates a <see cref="T:Nancy.Security.IUserIdentity"/> from a token.
+            </summary>
+            <param name="token">The token from which to create a user identity.</param>
+            <param name="context">NancyContext</param>
+            <returns>The detokenized user identity.</returns>
+        </member>
+        <member name="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator">
+            <summary>
+            Provides an API for configuring a <see cref="T:Nancy.Authentication.Token.Tokenizer"/> instance.
+            </summary>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.#ctor(Nancy.Authentication.Token.Tokenizer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/> class.
+            </summary>
+            <param name="tokenizer"></param>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.WithKeyCache(Nancy.Authentication.Token.Storage.ITokenKeyStore)">
+            <summary>
+            Sets the token key store ued by the tokenizer
+            </summary>
+            <param name="store"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.Encoding(System.Text.Encoding)">
+            <summary>
+            Sets the encoding used by the tokenizer
+            </summary>
+            <param name="encoding"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.HashDelimiter(System.String)">
+            <summary>
+            Sets the delimiter between document and its hash
+            </summary>
+            <param name="hashDelimiter"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.ItemDelimiter(System.String)">
+            <summary>
+            Sets the delimiter between each item to be tokenized
+            </summary>
+            <param name="itemDelimiter"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.ClaimsDelimiter(System.String)">
+            <summary>
+            Sets the delimiter between each claim
+            </summary>
+            <param name="claimsDelimiter"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.TokenExpiration(System.Func{System.TimeSpan})">
+            <summary>
+            Sets the token expiration interval. An expired token will cause a user to become unauthorized (logged out). 
+            Suggested value is 1 day (which is also the default).
+            </summary>
+            <param name="expiration"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.KeyExpiration(System.Func{System.TimeSpan})">
+            <summary>
+            Sets the key expiration interval. Must be longer than the <see cref="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.TokenExpiration(System.Func{System.TimeSpan})"/> value. 
+            When keys expire, they are scheduled to purge once any tokens they have been used to generate have expired.
+            Suggested range is 2 to 14 days. The default is 7 days.
+            </summary>
+            <param name="expiration"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.TokenStamp(System.Func{System.DateTime})">
+            <summary>
+            Sets the token-generated-at timestamp
+            </summary>
+            <param name="tokenStamp"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.Now(System.Func{System.DateTime})">
+            <summary>
+            Sets the current date/time.
+            </summary>
+            <param name="now"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+        <member name="M:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator.AdditionalItems(System.Func{Nancy.NancyContext,System.String}[])">
+            <summary>
+            Sets any additional items to be included when tokenizing. The default includes Request.Headers.UserAgent.
+            </summary>
+            <param name="additionalItems"></param>
+            <returns>A reference to the current <see cref="T:Nancy.Authentication.Token.Tokenizer.TokenizerConfigurator"/></returns>
+        </member>
+    </members>
+</doc>

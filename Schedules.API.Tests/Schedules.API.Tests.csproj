@@ -64,6 +64,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Authentication.Token">
+      <HintPath>..\packages\Nancy.Authentication.Token.0.23.2\lib\net40\Nancy.Authentication.Token.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\UnixTimeStampTest.cs" />
@@ -84,6 +87,7 @@
     <Compile Include="Tasks\Reminders\FetchDueRemindersTests.cs" />
     <Compile Include="Models\StreetSweepingTest.cs" />
     <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="Modules\AuthenticateTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

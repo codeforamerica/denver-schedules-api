@@ -3,6 +3,8 @@ using Nancy.TinyIoc;
 using Nancy.Bootstrapper;
 using Newtonsoft.Json;
 using Schedules.API;
+using Nancy.Authentication.Token;
+using System.Linq;
 
 namespace Schedules.API
 {
@@ -11,11 +13,22 @@ namespace Schedules.API
     protected override void ConfigureApplicationContainer(TinyIoCContainer container)
     {
       base.ConfigureApplicationContainer(container);
-      container.Register(typeof (JsonSerializer), typeof (CustomJsonSerializer));
+      container.Register(typeof(JsonSerializer), typeof(CustomJsonSerializer));
+
+      // TODO - Add something custom to the Tokenizer (commented example below shows passing cfg to constructor).
+      container.Register<ITokenizer>(new Tokenizer()
+//        (
+//        cfg => cfg.AdditionalItems(
+//          ctx => ctx.Request.Headers["X-Custom-Header"].FirstOrDefault(),
+//          ctx => ctx.Request.Query.extraValue)
+//        )
+      );
     }
 
-    protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+    protected override void RequestStartup (TinyIoCContainer container, IPipelines pipelines, NancyContext context)
     {
+      TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration (container.Resolve<ITokenizer>()));
+
       pipelines.BeforeRequest.AddItemToStartOfPipeline(c => {
         if (c.Request.Method != "OPTIONS") return null;
 
@@ -29,9 +42,9 @@ namespace Schedules.API
       );
     }
 
-    protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines) 
+    protected override void ApplicationStartup (TinyIoCContainer container, IPipelines pipelines)
     {
-      pipelines.OnError.AddItemToEndOfPipeline((context, exception)=> {
+      pipelines.OnError.AddItemToEndOfPipeline((context, exception) => {
         System.Console.Error.WriteLine(exception.ToString());
         return null;
       });
