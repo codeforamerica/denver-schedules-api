@@ -6,6 +6,8 @@ namespace Schedules.API.Tests.Modules
   [TestFixture]
   public class StreetSweepingTests
   {
+    const string longitude = "-104.952312";
+    const string latitude = "39.7211511226435";
     const string url = "/schedules/streetsweeping";
     Browser browser;
     BrowserResponse response;
@@ -19,8 +21,8 @@ namespace Schedules.API.Tests.Modules
     public void SetUpOptions() {
       response = browser.Options(url, (with) => {
         with.HttpRequest();
-        with.Query("longitude", "-104.95474457244");
-        with.Query("latitude", "39.7659901751922");
+        with.Query("longitude", longitude);
+        with.Query("latitude", latitude);
         with.Query("accuracy", "0.631");
       });
     }
@@ -28,8 +30,8 @@ namespace Schedules.API.Tests.Modules
     public void SetUpGet() {
       response = browser.Get(url, (with) => {
         with.HttpRequest();
-        with.Query("longitude", "-104.95474457244");
-        with.Query("latitude", "39.7659901751922");
+        with.Query("longitude", longitude);
+        with.Query("latitude", latitude);
         with.Query("accuracy", "0.631");
       });
     }
