@@ -15,16 +15,12 @@ namespace Schedules.API
       base.ConfigureApplicationContainer(container);
       container.Register(typeof(JsonSerializer), typeof(CustomJsonSerializer));
 
-      // TODO - Add something custom to the Tokenizer (commented example below shows passing cfg to constructor).
-      container.Register<ITokenizer>(new Tokenizer(
-        cfg => cfg.WithKeyCache(new InMemoryTokenKeyStore())
-//        cfg => cfg.AdditionalItems(
-//          ctx => ctx.Request.Headers["X-Custom-Header"].FirstOrDefault(),
-//          ctx => ctx.Request.Query.extraValue)
-      ));
+      container.Register<ITokenizer>(
+        new Tokenizer(cfg => cfg.WithKeyCache(new InMemoryTokenKeyStore()))
+      );
     }
 
-    protected override void RequestStartup (TinyIoCContainer container, IPipelines pipelines, NancyContext context)
+    protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
     {
       TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration (container.Resolve<ITokenizer>()));
 
@@ -41,7 +37,7 @@ namespace Schedules.API
       );
     }
 
-    protected override void ApplicationStartup (TinyIoCContainer container, IPipelines pipelines)
+    protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
     {
       pipelines.OnError.AddItemToEndOfPipeline((context, exception) => {
         System.Console.Error.WriteLine(exception.ToString());
