@@ -29,6 +29,7 @@ namespace Schedules.API.Tasks.Sending
       SendEmails.Execute();
 
       Out.Send = new Send {
+        RemindOn = In.Send.RemindOn,
         Sent = SendEmails.Out.Sent,
         Errors = SendEmails.Out.Errors
       };
