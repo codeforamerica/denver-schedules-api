@@ -82,6 +82,7 @@
     <Compile Include="Tasks\Sending\PostRemindersEmailSendTests.cs" />
     <Compile Include="Modules\Sending\RemindersEmailSendTests.cs" />
     <Compile Include="Tasks\Reminders\FetchDueRemindersTests.cs" />
+    <Compile Include="Models\StreetSweepingTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -102,5 +103,6 @@
     <Folder Include="Tasks\Reminders\" />
     <Folder Include="Tasks\Sending\" />
     <Folder Include="Modules\Sending\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>
