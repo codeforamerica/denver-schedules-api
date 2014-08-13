@@ -16,6 +16,8 @@ namespace Schedules.API.Models
 
     public StreetSweeping ()
     {
+      LeftSweep = string.Empty;
+      RightSweep = string.Empty;
     }
 
     /// <summary>
