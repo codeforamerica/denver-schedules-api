@@ -4,7 +4,7 @@ using Nancy.Bootstrapper;
 using Newtonsoft.Json;
 using Schedules.API;
 using Nancy.Authentication.Token;
-using System.Linq;
+using Nancy.Authentication.Token.Storage;
 
 namespace Schedules.API
 {
@@ -16,13 +16,12 @@ namespace Schedules.API
       container.Register(typeof(JsonSerializer), typeof(CustomJsonSerializer));
 
       // TODO - Add something custom to the Tokenizer (commented example below shows passing cfg to constructor).
-      container.Register<ITokenizer>(new Tokenizer()
-//        (
+      container.Register<ITokenizer>(new Tokenizer(
+        cfg => cfg.WithKeyCache(new InMemoryTokenKeyStore())
 //        cfg => cfg.AdditionalItems(
 //          ctx => ctx.Request.Headers["X-Custom-Header"].FirstOrDefault(),
 //          ctx => ctx.Request.Query.extraValue)
-//        )
-      );
+      ));
     }
 
     protected override void RequestStartup (TinyIoCContainer container, IPipelines pipelines, NancyContext context)
