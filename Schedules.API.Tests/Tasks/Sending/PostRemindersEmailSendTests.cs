@@ -37,12 +37,5 @@ namespace Schedules.API.Tests.Tasks.Sending
       postRemindersEmailSend.Execute();
       Assert.That(count, Is.EqualTo(2));
     }
-
-    [Test]
-    public void ShouldNotAllowPastRemindOnDates()
-    {
-      postRemindersEmailSend.In.Send = new Send { RemindOn = DateTime.Now.AddDays(-1) };
-      Assert.Throws<ArgumentException>(postRemindersEmailSend.Execute);
-    }
   }
 }
