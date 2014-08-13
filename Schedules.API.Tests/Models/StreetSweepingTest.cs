@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Schedules.API.Models;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Models
 {
   [TestFixture]
   public class StreetSweepingTest
