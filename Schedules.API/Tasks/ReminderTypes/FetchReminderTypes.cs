@@ -22,6 +22,7 @@ namespace Schedules.API.Tasks.ReminderTypes
         }
         catch(Exception ex){
           Console.WriteLine (ex);
+          throw;
         }
       }
     }

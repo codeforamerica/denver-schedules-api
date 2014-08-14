@@ -33,6 +33,7 @@ namespace Schedules.API
         }
         catch(Exception ex){
           Console.WriteLine (ex.ToString ());
+          throw;
         }
       }
     }
