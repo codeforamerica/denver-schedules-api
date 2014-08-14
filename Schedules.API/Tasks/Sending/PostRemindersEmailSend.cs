@@ -23,6 +23,7 @@ namespace Schedules.API.Tasks.Sending
     public override void Execute ()
     {
       FetchDueReminders.In.RemindOn = In.Send.RemindOn;
+      FetchDueReminders.In.ReminderTypeName = "email";
       FetchDueReminders.Execute();
 
       SendEmails.In.DueReminders = FetchDueReminders.Out.DueReminders;

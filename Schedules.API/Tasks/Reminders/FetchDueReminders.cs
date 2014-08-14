@@ -10,6 +10,7 @@ namespace Schedules.API.Tasks.Reminders
   {
     public class Input
     {
+      public String ReminderTypeName { get; set; }
       public DateTime RemindOn { get; set; }
     }
 
@@ -18,26 +19,47 @@ namespace Schedules.API.Tasks.Reminders
       public Reminder[] DueReminders { get; set; }
     }
 
+    public FetchReminderType FetchReminderType { get; set; }
+
     public override void Execute ()
     {
+      FetchReminderType.In.ReminderTypeName = In.ReminderTypeName;
+      FetchReminderType.Execute();
+
       using (var connection = Db.Connect()) {
-        Out.DueReminders = connection.Query<Reminder>(sql, In).ToArray();
+        Out.DueReminders = connection.Query<Reminder, ReminderType, Reminder>(
+          sql,
+          (reminder, reminderType) => {
+            reminder.ReminderType = reminderType;
+            return reminder;
+          },
+          new {
+            ReminderTypeId = FetchReminderType.Out.ReminderType.Id,
+            In.RemindOn
+          }
+        ).ToArray();
       }
     }
 
     const string sql = @"
       select
-        id as Id,
-        reminder_type_id as ReminderTypeId,
-        contact as Contact,
-        message as Message,
-        remind_on as RemindOn,
-        verified as Verified,
-        address as Address,
-        created_at as CreatedAt
+        r.id as Id,
+        r.reminder_type_id as ReminderTypeId,
+        r.contact as Contact,
+        r.message as Message,
+        r.remind_on as RemindOn,
+        r.verified as Verified,
+        r.address as Address,
+        r.created_at as CreatedAt,
+        t.*
       from
-        reminders
+        reminders r
+        left join
+        reminder_types t
+          on t.id = r.reminder_type_id
       where
+        reminder_type_id = @ReminderTypeId
+        and
         date_trunc('day', remind_on) = date_trunc('day', @RemindOn);
     ";
   }
