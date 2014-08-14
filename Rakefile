@@ -15,6 +15,7 @@ task :ok? do
 desc "Send reminder emails"
 task :send do
   token = authenticate
+  oneMinute = 60
   options = {
     headers: {
       "User-Agent" => "test",
@@ -23,7 +24,8 @@ task :send do
     },
     body: {
       remindOn: "2014-07-01",
-    }
+    },
+    timeout: oneMinute
   }
   response = HTTParty.post("http://localhost:8080/reminders/email/send", options)
   puts response.code, response.body
