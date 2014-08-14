@@ -32,13 +32,15 @@ task :send do
 end
 
 def authenticate
+  username = ENV["ADMIN_USERNAME"]
+  password = ENV["ADMIN_PASSWORD"]
   options = {
     headers: {
       "User-Agent" => "test"
     },
     body: {
-      username: "admin",
-      password: "admin"
+      username: username,
+      password: password
     }
   }
   response = HTTParty.post("http://localhost:8080/authenticate", options)

@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Nancy.Testing;
 using Schedules.API.Models;
+using System;
 
 namespace Schedules.API.Tests.Modules
 {
@@ -37,11 +38,15 @@ namespace Schedules.API.Tests.Modules
     [Test]
     public void PostAdminUserShouldReturnToken()
     {
+      var username = Environment.GetEnvironmentVariable("ADMIN_USERNAME");
+      var password = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+
       var response = browser.Post(url, with => {
         with.HttpRequest();
         with.Header("User-Agent", "test");
-        with.JsonBody<User>(new User { Username = "admin", Password = "admin" });
+        with.JsonBody<User>(new User { Username = username, Password = password });
       });
+
       Assert.That(response.StatusCode, Is.EqualTo(Nancy.HttpStatusCode.OK));
       Assert.That(response.Context.JsonBody<Authenticate>().Token, Is.Not.Empty);
     }

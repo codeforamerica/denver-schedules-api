@@ -85,10 +85,13 @@ namespace Schedules.API.Tests.Modules.Sending
 
     string Authenticate()
     {
+      var username = Environment.GetEnvironmentVariable("ADMIN_USERNAME");
+      var password = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+
       var response = browser.Post("/authenticate", with => {
         with.HttpRequest();
         with.Header("User-Agent", "test");
-        with.JsonBody<User>(new User { Username = "admin", Password = "admin" });
+        with.JsonBody<User>(new User { Username = username, Password = password });
       });
       return response.Context.JsonBody<Authenticate>().Token;
     }

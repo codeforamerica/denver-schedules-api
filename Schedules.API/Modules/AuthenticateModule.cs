@@ -15,14 +15,14 @@ namespace Schedules.API.Modules
       {
         var user = this.Bind<User>();
 
-        // TODO - Look below.
-        IUserIdentity identity;
-        if (user.Username == "admin" && user.Password == "admin") {
-          identity =  new UserIdentity { UserName = "admin", Claims = new[] { "admin" } };
-        } else {
-          return HttpStatusCode.Unauthorized;
-        }
+        var username = Environment.GetEnvironmentVariable("ADMIN_USERNAME");
+        var password = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+        if (user.Username != username || user.Password != password) return HttpStatusCode.Unauthorized;
 
+        var identity = new UserIdentity {
+          UserName = user.Username,
+          Claims = new[] { "admin" }
+        };
         var token = tokenizer.Tokenize(identity, Context);
         return Response.AsJson(new Authenticate { Token = token });
       };
