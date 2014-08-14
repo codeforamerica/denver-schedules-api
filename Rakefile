@@ -23,7 +23,7 @@ task :send do
       "Authorization" => "Token " + token
     },
     body: {
-      remindOn: "2014-07-01",
+      remindOn: Date.today,
     },
     timeout: oneMinute
   }
