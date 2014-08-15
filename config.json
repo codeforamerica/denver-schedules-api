@@ -1,0 +1,12 @@
+{
+  "all": {
+    "variables": [
+      "ADMIN_USERNAME",
+      "ADMIN_PASSWORD",
+      "MANDRILL_API_KEY",
+      "MANDRILL_FROM_EMAIL",
+      "GEOSPATIAL_PROVIDER_NAME",
+      "GEOSPATIAL_CONNECTION_STRING"
+    ]
+  }
+}
