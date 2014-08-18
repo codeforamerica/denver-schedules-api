@@ -83,6 +83,7 @@
     <Compile Include="Modules\Sending\RemindersEmailSendTests.cs" />
     <Compile Include="Tasks\Reminders\FetchDueRemindersTests.cs" />
     <Compile Include="Models\StreetSweepingTest.cs" />
+    <Compile Include="ConsoleHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
