@@ -2,7 +2,6 @@
 using Simpler;
 using Schedules.API.Models;
 using System;
-using System.IO;
 using Schedules.API.Tasks.Sending;
 
 namespace Schedules.API.Tests.Tasks.Sending
@@ -41,22 +40,11 @@ namespace Schedules.API.Tests.Tasks.Sending
 
       var sendEmails = Task.New<SendEmails>();
       sendEmails.In.DueReminders = reminders;
-      var logOutput = CaptureOutput(sendEmails.Execute);
+      var logOutput = ConsoleHelper.CaptureOutput(sendEmails.Execute);
 
       Assert.That(sendEmails.Out.Sent, Is.EqualTo(0));
       Assert.That(sendEmails.Out.Errors, Is.EqualTo(reminders.Length));
       Assert.That(logOutput, Contains.Substring(String.Format("Email {0} failed", mandrillRejectEmail)));
-    }
-
-    static string CaptureOutput (Action execute)
-    {
-      using (var sw = new StringWriter ()) {
-        var previousOut = Console.Out;
-        Console.SetOut(sw);
-        execute();
-        Console.SetOut(previousOut);
-        return sw.ToString();
-      }
     }
   }
 }
