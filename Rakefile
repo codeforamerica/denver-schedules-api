@@ -11,6 +11,7 @@ task :ok? do
     raise message unless ENV.has_key? variable
   end
   puts "ok"
+end
 
 desc "Send reminder emails"
 task :send do
