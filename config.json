@@ -1,4 +1,8 @@
 {
+  "urls": {
+    "authenticate": "http://localhost:8080/authenticate",
+    "sendEmailReminders": "http://localhost:8080/reminders/email/send"
+  },
   "all": {
     "variables": [
       "ADMIN_USERNAME",

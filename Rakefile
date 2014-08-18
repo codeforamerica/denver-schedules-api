@@ -28,7 +28,7 @@ task :send do
     },
     timeout: oneMinute
   }
-  response = HTTParty.post("http://localhost:8080/reminders/email/send", options)
+  response = HTTParty.post(Config.urls.sendEmailReminders, options)
   puts response.code, response.body
 end
 
@@ -44,7 +44,7 @@ def authenticate
       password: password
     }
   }
-  response = HTTParty.post("http://localhost:8080/authenticate", options)
+  response = HTTParty.post(Config.urls.authenticate, options)
   data = JSON.parse(response.body)
   return data["token"]
 end
