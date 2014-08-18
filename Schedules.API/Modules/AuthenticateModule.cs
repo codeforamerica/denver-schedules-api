@@ -11,12 +11,12 @@ namespace Schedules.API.Modules
   {
     public AuthenticateModule(ITokenizer tokenizer)
     {
-      Post["/authenticate"] = x =>
-      {
+      Post["/authenticate"] = x => {
         var user = this.Bind<User>();
 
         var username = Environment.GetEnvironmentVariable("ADMIN_USERNAME");
         var password = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+        if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password)) return HttpStatusCode.Unauthorized;
         if (user.Username != username || user.Password != password) return HttpStatusCode.Unauthorized;
 
         var identity = new UserIdentity {

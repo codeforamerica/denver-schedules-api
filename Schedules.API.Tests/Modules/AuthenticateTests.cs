@@ -20,7 +20,10 @@ namespace Schedules.API.Tests.Modules
     [Test]
     public void PostWithoutUserDataShouldReturnUnauthorized()
     {
-      var response = browser.Post(url, with => with.HttpRequest());
+      var response = browser.Post(url, with => {
+        with.HttpRequest();
+        with.Header("User-Agent", "test");
+      });
       Assert.That(response.StatusCode, Is.EqualTo(Nancy.HttpStatusCode.Unauthorized));
     }
 
@@ -36,7 +39,7 @@ namespace Schedules.API.Tests.Modules
     }
 
     [Test]
-    public void PostAdminUserShouldReturnToken()
+    public void PostAdminUserDataShouldReturnToken()
     {
       var username = Environment.GetEnvironmentVariable("ADMIN_USERNAME");
       var password = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
