@@ -4,7 +4,7 @@ using Centroid;
 
 namespace Schedules.API.Tests
 {
-  [TestFixture]
+  [TestFixture, Category("System")]
   public class SystemTests
   {
     [Test]
