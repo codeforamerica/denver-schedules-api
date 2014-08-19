@@ -19,9 +19,11 @@ deploy:
 notifications:
   webhooks: http://project-monitor.codeforamerica.org/projects/5410eca6-0a90-4bf0-b9c0-39f679940ba4/status
 env:
-  matrix:
   - GEOSPATIAL_PROVIDER_NAME=Npgsql GEOSPATIAL_CONNECTION_STRING="Server=127.0.0.1;Port=5432;User
     Id=denver_schedules;Password=denver_schedules;Database=denver_schedules_development;"
+  - secure: w6gpnpMUA7qHFJgfYX5aQT26mTuwzAFiAf7myE8s75hvgZNME7fomnERfuoj/3qzSjauF4Sr2w4iaAdWS8RYa12/AurM+adl3rIk8J1BHS8DYI+ARlT8dKgcwo4ruIEJsanUVMleSgcjOLwnCkK6lwM0+5//0htNPHS4I51snKU=
+  - secure: uCpxMPnDNdUaLo2B1Llp7EhQxARVX8iDIDLsuOXhz4LcX3O5HHCpyb2uhyIBdnxDzHN9pb84uX7LX7MLUKVQiYBuPtIUQ6/DowoR88MZCCNHKwELjYI3isLKAHscTO1jaTIef4h2D9S1FzhzYgss5/GKlaq8/SB5QCyFQJVyquY=
+  - secure: EsNthBMwTDkhQeFhL4VhoBuYsZ96T2I9DQ4lBUUnTcP3lvg3SDK7erjJuMedgsHeB85dTqsA9O9uQ5msaNNRB4TN6nZDx1l5ksc3W9KlyQUFijocqPImtHdh7dk9+oX0qYHvrGCt+2EzIccnTN6tsS+8h1lXuvIYj7L7g53cZSU=
   global:
   - secure: a3dtDKYv4LFulCxrPIKtRqgABi8pGJ1xsb2H9He8hZu/iSwlnDdLtOxbGv8klVzdgbiZAWXoWS9bhXTvNc0J9CEWou/zUJO36axQMx48PCGnW2n/j33pv79QuqNPwWOCgiQIByVFLeldyCSefPtsUjOjpnu4fwuCWL0knJNaII0=
   - secure: bCtk7U4P2dHOXYFRHyryIec/O2ZTwkM08O8L5UxDcuPMQA90JZLw+p+RahUHPD9WAUqHu8dJmmRIuylZ7db8LIJXJie/1uONkg+/4Q9ZeC6G4xVq4Z+eeQhV+mPcuSGnfXL5pa1I4ivXmru4wa19jA0GVQCsWgtCMx+IOsVvMzE=
