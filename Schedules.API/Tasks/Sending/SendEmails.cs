@@ -6,19 +6,8 @@ using System;
 
 namespace Schedules.API.Tasks.Sending
 {
-  public class SendEmails : InOutTask<SendEmails.Input, SendEmails.Output>
+  public class SendEmails : SendReminderBase
   {
-    public class Input
-    {
-      public Reminder[] DueReminders { get; set; }
-    }
-
-    public class Output
-    {
-      public int Sent { get; set; }
-      public int Errors { get; set; }
-    }
-
     public override void Execute ()
     {
       var apiKey = Environment.GetEnvironmentVariable("MANDRILL_API_KEY");

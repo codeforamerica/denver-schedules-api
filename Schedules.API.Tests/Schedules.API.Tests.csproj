@@ -92,6 +92,7 @@
     <Compile Include="ConsoleHelper.cs" />
     <Compile Include="Modules\AuthenticateTests.cs" />
     <Compile Include="SystemTests.cs" />
+    <Compile Include="Tasks\Sending\SendSMSTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

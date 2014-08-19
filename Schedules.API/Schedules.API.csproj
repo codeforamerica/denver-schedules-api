@@ -97,6 +97,9 @@
     <Reference Include="Nancy.Authentication.Token">
       <HintPath>..\packages\Nancy.Authentication.Token.0.23.2\lib\net40\Nancy.Authentication.Token.dll</HintPath>
     </Reference>
+    <Reference Include="Twilio.Api">
+      <HintPath>..\packages\Twilio.3.6.16\lib\3.5\Twilio.Api.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -168,6 +171,9 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Authenticate.cs" />
     <Compile Include="Modules\AuthenticateModule.cs" />
+    <Compile Include="Tasks\Sending\SendSMS.cs" />
+    <Compile Include="Tasks\Sending\PostRemindersSMSSend.cs" />
+    <Compile Include="Tasks\Sending\SendReminderBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
