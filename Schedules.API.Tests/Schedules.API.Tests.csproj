@@ -64,6 +64,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Authentication.Token">
+      <HintPath>..\packages\Nancy.Authentication.Token.0.23.2\lib\net40\Nancy.Authentication.Token.dll</HintPath>
+    </Reference>
+    <Reference Include="Centroid">
+      <HintPath>..\packages\Centroid.1.1.0-alpha3\lib\net40\Centroid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\UnixTimeStampTest.cs" />
@@ -84,10 +90,16 @@
     <Compile Include="Tasks\Reminders\FetchDueRemindersTests.cs" />
     <Compile Include="Models\StreetSweepingTest.cs" />
     <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="Modules\AuthenticateTests.cs" />
+    <Compile Include="SystemTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\config.json">
+      <Link>config.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Schedules.API\Schedules.API.csproj">

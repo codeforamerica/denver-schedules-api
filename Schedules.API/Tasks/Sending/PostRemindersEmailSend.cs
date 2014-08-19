@@ -22,15 +22,15 @@ namespace Schedules.API.Tasks.Sending
 
     public override void Execute ()
     {
-      if (In.Send.RemindOn < DateTime.Now.AddDays(-1)) throw new ArgumentException("You can't be reminded on a date in the past.");
-
       FetchDueReminders.In.RemindOn = In.Send.RemindOn;
+      FetchDueReminders.In.ReminderTypeName = "email";
       FetchDueReminders.Execute();
 
       SendEmails.In.DueReminders = FetchDueReminders.Out.DueReminders;
       SendEmails.Execute();
 
       Out.Send = new Send {
+        RemindOn = In.Send.RemindOn,
         Sent = SendEmails.Out.Sent,
         Errors = SendEmails.Out.Errors
       };

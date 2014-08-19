@@ -29,6 +29,7 @@ namespace Schedules.API.Tasks.Sending
 
       var api = new MandrillApi (apiKey);
 
+      Console.WriteLine("Sending {0} emails.", In.DueReminders.Length);
       foreach (var reminder in In.DueReminders) {
         var results = api.SendMessage(
           new EmailMessage {

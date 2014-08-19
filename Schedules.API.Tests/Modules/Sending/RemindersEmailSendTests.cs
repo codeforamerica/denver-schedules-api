@@ -2,6 +2,7 @@
 using Nancy.Testing;
 using Schedules.API.Models;
 using System;
+using Nancy;
 
 namespace Schedules.API.Tests.Modules.Sending
 {
@@ -38,6 +39,13 @@ namespace Schedules.API.Tests.Modules.Sending
       Assert.That(response.Headers["Access-Control-Allow-Headers"], Contains.Substring("Content-Type"));
     }
 
+    [Test]
+    public void ShouldReturnUnauthorizedIfHeaderIsMissingToken()
+    {
+      var response = browser.Post(url, with => with.HttpRequest());
+      Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+    }
+
     [Test, Category("Email")]
     public void PostShouldAllowAllOrigins ()
     {
@@ -51,8 +59,11 @@ namespace Schedules.API.Tests.Modules.Sending
     [Test, Category("Email")]
     public void PostShouldReturnCreated ()
     {
+      var token = Authenticate();
       var response = browser.Post(url, with => {
         with.HttpRequest();
+        with.Header("User-Agent", "test");
+        with.Header("Authorization", "Token " + token);
         with.JsonBody<Send>(new Send { RemindOn = DateTime.Now });
       });
       Assert.AreEqual(Nancy.HttpStatusCode.Created, response.StatusCode);
@@ -61,12 +72,28 @@ namespace Schedules.API.Tests.Modules.Sending
     [Test, Category("Email")]
     public void PostShouldReturnCreatedDataAsJson ()
     {
+      var token = Authenticate();
       var response = browser.Post(url, with => {
         with.HttpRequest();
+        with.Header("User-Agent", "test");
+        with.Header("Authorization", "Token " + token);
         with.JsonBody<Send>(new Send { RemindOn = DateTime.Now });
       });
       Assert.AreEqual("application/json; charset=utf-8", response.ContentType);
       Assert.That(response.Context.JsonBody<Send>(), Is.InstanceOf<Send>());
+    }
+
+    string Authenticate()
+    {
+      var username = Environment.GetEnvironmentVariable("ADMIN_USERNAME");
+      var password = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+
+      var response = browser.Post("/authenticate", with => {
+        with.HttpRequest();
+        with.Header("User-Agent", "test");
+        with.JsonBody<User>(new User { Username = username, Password = password });
+      });
+      return response.Context.JsonBody<Authenticate>().Token;
     }
   }
 }

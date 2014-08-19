@@ -94,6 +94,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Authentication.Token">
+      <HintPath>..\packages\Nancy.Authentication.Token.0.23.2\lib\net40\Nancy.Authentication.Token.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -161,6 +164,10 @@
     <Compile Include="Models\Send.cs" />
     <Compile Include="Tasks\Sending\SendEmails.cs" />
     <Compile Include="Tasks\Sending\PostRemindersEmailSend.cs" />
+    <Compile Include="Models\UserIdentity.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Authenticate.cs" />
+    <Compile Include="Modules\AuthenticateModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
