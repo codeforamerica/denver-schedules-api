@@ -1,15 +1,33 @@
 {
-  "urls": {
-    "authenticate": "http://localhost:8080/authenticate",
-    "createReminders": "http://localhost:8080/reminders/email",
-    "sendEmailReminders": "http://localhost:8080/reminders/email/send"
+  "local": {
+    "urls": {
+      "authenticate": "http://localhost:8080/authenticate",
+      "createReminder": "http://localhost:8080/reminders/email",
+      "sendEmailReminders": "http://localhost:8080/reminders/email/send"
+    }
   },
-  "variables": [
-    "ADMIN_USERNAME",
-    "ADMIN_PASSWORD",
-    "MANDRILL_API_KEY",
-    "MANDRILL_FROM_EMAIL",
-    "GEOSPATIAL_PROVIDER_NAME",
-    "GEOSPATIAL_CONNECTION_STRING"
-  ]
+  "staging": {
+    "urls": {
+      "authenticate": "http://staging-denver-now-api.herokuapp.com/authenticate",
+      "createReminder": "http://staging-denver-now-api.herokuapp.com/reminders/email",
+      "sendEmailReminders": "http://staging-denver-now-api.herokuapp.com/reminders/email/send"
+    }
+  },
+  "prod": {
+    "urls": {
+      "authenticate": "http://production-denver-now-api.herokuapp.com/authenticate",
+      "createReminder": "http://production-denver-now-api.herokuapp.com/reminders/email",
+      "sendEmailReminders": "http://production-denver-now-api.herokuapp.com/reminders/email/send"
+    }
+  },
+  "all": {
+    "variables": [
+      "ADMIN_USERNAME",
+      "ADMIN_PASSWORD",
+      "MANDRILL_API_KEY",
+      "MANDRILL_FROM_EMAIL",
+      "GEOSPATIAL_PROVIDER_NAME",
+      "GEOSPATIAL_CONNECTION_STRING"
+    ]
+  }
 }
