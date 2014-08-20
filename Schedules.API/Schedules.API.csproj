@@ -166,14 +166,13 @@
     <Compile Include="Modules\SendModule.cs" />
     <Compile Include="Models\Send.cs" />
     <Compile Include="Tasks\Sending\SendEmails.cs" />
-    <Compile Include="Tasks\Sending\PostRemindersEmailSend.cs" />
     <Compile Include="Models\UserIdentity.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Authenticate.cs" />
     <Compile Include="Modules\AuthenticateModule.cs" />
     <Compile Include="Tasks\Sending\SendSMS.cs" />
-    <Compile Include="Tasks\Sending\PostRemindersSMSSend.cs" />
     <Compile Include="Tasks\Sending\SendReminderBase.cs" />
+    <Compile Include="Tasks\Sending\PostRemindersSend.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

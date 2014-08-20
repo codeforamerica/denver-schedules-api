@@ -17,9 +17,11 @@ namespace Schedules.API.Tasks.Sending
       public int Errors { get; set; }
     }
 
+    /// <summary>
+    /// Inheriting class must implement this, not sure how to enforce it
+    /// </summary>
     public override void Execute ()
     {
-      throw new NotImplementedException();
     }
   }
 }
