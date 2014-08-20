@@ -69,27 +69,38 @@ end
 def send_email_reminders_task(auth_url, url)
   desc "Send email reminders (#{url})"
   task :send_email_reminders do
-    puts url
-
-    response = authenticate auth_url
-    data = JSON.parse(response.body)
-    token = data["token"]
-
-    oneMinute = 60
-    options = {
-      headers: {
-        "User-Agent" => "test",
-        "Accept" => "application/json",
-        "Authorization" => "Token " + token
-      },
-      body: {
-        remindOn: Date.today,
-      },
-      timeout: oneMinute
-    }
-    response = HTTParty.post(url, options)
-    puts response.code, response.body
+    send_reminders(auth_url, url)
   end
+end
+
+def send_sms_reminders_task(auth_url, url)
+  desc "Send sms reminders (#{url})"
+  task :send_sms_reminders do
+    send_reminders(auth_url, url)
+  end
+end
+
+def send_reminders(auth_url, url)
+  puts url
+
+  response = authenticate auth_url
+  data = JSON.parse(response.body)
+  token = data["token"]
+
+  oneMinute = 60
+  options = {
+    headers: {
+      "User-Agent" => "test",
+      "Accept" => "application/json",
+      "Authorization" => "Token " + token
+    },
+    body: {
+      remindOn: Date.today,
+    },
+    timeout: oneMinute
+  }
+  response = HTTParty.post(url, options)
+  puts response.code, response.body
 end
 
 Config.each do |environment|
@@ -100,5 +111,6 @@ Config.each do |environment|
     authenticate_task env_config.urls.authenticate
     create_reminder_task env_config.urls.createReminder
     send_email_reminders_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
+    send_sms_reminders_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
   end
 end
