@@ -9,7 +9,7 @@ namespace Schedules.API.Tests.Tasks.Sending
   [TestFixture]
   public class SendEmailsTests
   {
-    [Test, Category("Email")]
+    [Test, Category("Reminder")]
     public void ShouldSendEmailsForDueReminders ()
     {
       var reminders = new[] {
@@ -27,7 +27,7 @@ namespace Schedules.API.Tests.Tasks.Sending
       Assert.That(sendEmails.Out.Errors, Is.EqualTo(0));
     }
 
-    [Test, Category("Email")]
+    [Test, Category("Reminder")]
     public void ShouldLogErrorsForRejectedEmails ()
     {
       var mandrillRejectEmail = "reject@test.mandrillapp.com";

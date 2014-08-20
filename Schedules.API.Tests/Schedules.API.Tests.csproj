@@ -85,16 +85,15 @@
     <Compile Include="Tasks\Reminders\CreateRemindersTests.cs" />
     <Compile Include="Modules\ReminderEmailTests.cs" />
     <Compile Include="Tasks\Sending\SendEmailsTests.cs" />
-    <Compile Include="Modules\Sending\RemindersEmailSendTests.cs" />
     <Compile Include="Tasks\Reminders\FetchDueRemindersTests.cs" />
     <Compile Include="Models\StreetSweepingTest.cs" />
     <Compile Include="ConsoleHelper.cs" />
     <Compile Include="Modules\AuthenticateTests.cs" />
     <Compile Include="SystemTests.cs" />
     <Compile Include="Tasks\Sending\SendSMSTests.cs" />
-    <Compile Include="Modules\Sending\RemindersSMSSendTests.cs" />
     <Compile Include="AuthenticationHelper.cs" />
     <Compile Include="Tasks\Sending\PostRemindersSendTests.cs" />
+    <Compile Include="Modules\Sending\RemindersSendTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

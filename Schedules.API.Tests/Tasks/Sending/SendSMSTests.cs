@@ -10,7 +10,7 @@ namespace Schedules.API.Tests.Tasks.Sending
   public class SendSMSTests
   {// https://www.twilio.com/docs/api/rest/test-credentials
 
-    [Test, Category("SMS")]
+    [Test, Category("Reminder")]
     public void ShouldSendSMSForDueReminders()
     {
       var reminders = new [] {
@@ -28,21 +28,21 @@ namespace Schedules.API.Tests.Tasks.Sending
       Assert.That(sendSMS.Out.Errors, Is.EqualTo(0));
     }
 
-    [Test, Category("SMS")]
+    [Test, Category("Reminder")]
     public void ShouldLogErrorWhenInternationalNumber()
     {
       var internationalNumber = "15005550003";
       ShouldLogErrorWhenFails(internationalNumber);
     }
 
-    [Test, Category("SMS")]
+    [Test, Category("Reminder")]
     public void ShouldLogErrorWhenBlacklistedNumber()
     {
       var blackListedNumber = "15005550004";
       ShouldLogErrorWhenFails(blackListedNumber);
     }
 
-    [Test, Category("SMS")]
+    [Test, Category("Reminder")]
     public void ShouldLogErrorWhenUnableToRoute()
     {
       var invalidNumber = "15005550002";
