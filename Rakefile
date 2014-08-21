@@ -32,9 +32,33 @@ task :send do
   puts response.code, response.body
 end
 
+desc "Create reminder"
+task :create_reminder do
+  puts "contact:"
+  contact = STDIN.gets.chomp
+
+  options = {
+    headers: {
+      "User-Agent" => "test"
+    },
+    body: {
+      contact: contact,
+      message: "This is a test message. Cross your fingers...",
+      remindOn: Date.today
+    }
+  }
+
+  response = HTTParty.post(Config.urls.createReminders, options)
+  puts response.code, response.body
+end
+
 def authenticate
-  username = ENV["ADMIN_USERNAME"]
-  password = ENV["ADMIN_PASSWORD"]
+  puts "username:"
+  username = STDIN.gets.chomp
+
+  puts "password:"
+  password = STDIN.gets.chomp
+
   options = {
     headers: {
       "User-Agent" => "test"
@@ -44,6 +68,7 @@ def authenticate
       password: password
     }
   }
+
   response = HTTParty.post(Config.urls.authenticate, options)
   data = JSON.parse(response.body)
   return data["token"]
