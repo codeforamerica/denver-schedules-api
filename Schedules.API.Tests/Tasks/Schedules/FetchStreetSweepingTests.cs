@@ -2,8 +2,9 @@
 using Schedules.API.Models;
 using System.Collections.Generic;
 using Simpler;
+using Schedules.API.Tasks.Schedules;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Tasks.Schedules
 {
   [TestFixture()]
   public class FetchStreetSweepingTests

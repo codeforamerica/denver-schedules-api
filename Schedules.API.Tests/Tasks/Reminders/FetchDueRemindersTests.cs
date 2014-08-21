@@ -6,7 +6,7 @@ using System.Linq;
 using Schedules.API.Tasks;
 using Dapper;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Tasks.Reminders
 {
   [TestFixture]
   public class FetchDueRemindersTests

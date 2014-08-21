@@ -2,9 +2,9 @@
 using NUnit.Framework;
 using Schedules.API.Models;
 using Simpler;
-using Schedules.API.Tasks;
+using Schedules.API.Tasks.Reminders;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Tasks.Reminders
 {
   [TestFixture]
   public class CreateRemindersTests

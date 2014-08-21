@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using Simpler;
 using Schedules.API.Tasks;
+using Schedules.API.Tasks.ReminderTypes;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Tasks.ReminderTypes
 {
   [TestFixture]
   public class FetchReminderTypeTest

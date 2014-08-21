@@ -3,6 +3,7 @@ using Schedules.API.Models;
 using System;
 using Dapper;
 using System.Linq;
+using Schedules.API.Tasks.ReminderTypes;
 
 namespace Schedules.API.Tasks.Reminders
 {
