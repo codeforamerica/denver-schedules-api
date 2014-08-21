@@ -41,7 +41,7 @@ namespace Schedules.API.Tests.Tasks.Sending
           new Reminder { RemindOn = tomorrow }
         }
       );
-      postRemindersSend.SendReminders = Fake.Task<T>(
+      postRemindersSend.In.SendReminders = Fake.Task<T>(
         se => count = se.In.DueReminders.Length
       );
       postRemindersSend.In.Send = new Send { RemindOn = tomorrow };

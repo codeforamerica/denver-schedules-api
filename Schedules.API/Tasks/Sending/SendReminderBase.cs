@@ -4,7 +4,7 @@ using System;
 
 namespace Schedules.API.Tasks.Sending
 {
-  public class SendReminderBase:InOutTask<SendReminderBase.Input, SendReminderBase.Output>
+  public abstract class SendReminderBase:InOutTask<SendReminderBase.Input, SendReminderBase.Output>
   {
     public class Input
     {
@@ -15,13 +15,6 @@ namespace Schedules.API.Tasks.Sending
     {
       public int Sent { get; set; }
       public int Errors { get; set; }
-    }
-
-    /// <summary>
-    /// Inheriting class must implement this, not sure how to enforce it
-    /// </summary>
-    public override void Execute ()
-    {
     }
   }
 }

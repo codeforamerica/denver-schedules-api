@@ -10,6 +10,7 @@ namespace Schedules.API.Tasks.Sending
     {
       public string ReminderTypeName { get; set; }
       public Send Send { get; set; }
+      public SendReminderBase SendReminders { get; set; }
     }
 
     public class Output
@@ -18,7 +19,6 @@ namespace Schedules.API.Tasks.Sending
     }
 
     public FetchDueReminders FetchDueReminders { get; set; }
-    public SendReminderBase SendReminders { get; set; }
 
     public override void Execute ()
     {
@@ -26,13 +26,13 @@ namespace Schedules.API.Tasks.Sending
       FetchDueReminders.In.ReminderTypeName = In.ReminderTypeName;
       FetchDueReminders.Execute();
 
-      SendReminders.In.DueReminders = FetchDueReminders.Out.DueReminders;
-      SendReminders.Execute();
+      In.SendReminders.In.DueReminders = FetchDueReminders.Out.DueReminders;
+      In.SendReminders.Execute();
 
       Out.Send = new Send {
         RemindOn = In.Send.RemindOn,
-        Sent = SendReminders.Out.Sent,
-        Errors = SendReminders.Out.Errors
+        Sent = In.SendReminders.Out.Sent,
+        Errors = In.SendReminders.Out.Errors
       };
     }
   }
