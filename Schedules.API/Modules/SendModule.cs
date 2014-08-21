@@ -11,19 +11,37 @@ namespace Schedules.API.Modules
   {
     public SendModule ()
     {
-        Post["/reminders/email/send"] = parameters => {
-          this.RequiresAuthentication();
-          this.RequiresClaims(new[] { "admin" });
+      Post["/reminders/email/send"] = parameters => {
+        var sendEmailReminders = Task.New<SendEmails>();
+        var send = SendReminders("email", sendEmailReminders);
+        return Response.AsJson(
+          send,
+          HttpStatusCode.Created
+        );
+      };
 
-          var postRemindersEmailSend = Task.New<PostRemindersEmailSend>();
-          postRemindersEmailSend.In.Send = this.Bind<Send>();
-          postRemindersEmailSend.Execute();
+      Post["/reminders/sms/send"] = parameters => {
+        var sendSMSReminders = Task.New<SendSMS>();
+        var send = SendReminders("sms", sendSMSReminders);
+        return Response.AsJson(
+          send,
+          HttpStatusCode.Created
+        );
+      };
+    }
 
-          return Response.AsJson(
-            postRemindersEmailSend.Out.Send,
-            HttpStatusCode.Created
-          );
-        };
+    private Send SendReminders(string type, SendReminderBase sendReminders)
+    {
+      this.RequiresAuthentication();
+      this.RequiresClaims(new[] { "admin" });
+
+      var postRemindersSend = Task.New<PostRemindersSend>();
+      postRemindersSend.In.ReminderTypeName = type;
+      postRemindersSend.In.Send = this.Bind<Send>();
+      postRemindersSend.In.SendReminders = sendReminders;
+      postRemindersSend.Execute();
+
+      return postRemindersSend.Out.Send;
     }
   }
 }
