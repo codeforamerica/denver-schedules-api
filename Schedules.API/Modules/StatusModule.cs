@@ -3,14 +3,16 @@ using Nancy;
 using Schedules.API.Extensions;
 using Schedules.API.Models;
 
-public class StatusModule : NancyModule
+namespace Schedules.API.Modules
 {
-  public StatusModule ()
+  public class StatusModule : NancyModule
   {
-    // Engine Light App Monitoring - http://engine-light.codeforamerica.org/
-    Get ["/status"] = _ => {
-      return Response.AsJson (new State());
-    };
+    public StatusModule ()
+    {
+      // Engine Light App Monitoring - http://engine-light.codeforamerica.org/
+      Get ["/status"] = _ => {
+        return Response.AsJson (new State());
+      };
+    }
   }
 }
-

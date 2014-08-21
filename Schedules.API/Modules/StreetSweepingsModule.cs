@@ -2,9 +2,9 @@
 using Nancy;
 using Simpler;
 using Schedules.API.Models;
+using Schedules.API.Tasks.Schedules;
 
-
-namespace Schedules.API
+namespace Schedules.API.Modules
 {
   public class StreetSweepingsModule: NancyModule
   {

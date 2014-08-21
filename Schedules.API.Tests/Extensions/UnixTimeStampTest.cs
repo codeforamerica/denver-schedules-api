@@ -2,7 +2,7 @@
 using Schedules.API.Extensions;
 using NUnit.Framework;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Extensions
 {
   public class UnixTimeStampTest
   {

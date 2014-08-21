@@ -4,7 +4,7 @@ using Schedules.API.Models;
 using Dapper;
 using System.Linq;
 
-namespace Schedules.API.Tasks
+namespace Schedules.API.Tasks.ReminderTypes
 {
   public class FetchReminderType: InOutTask<FetchReminderType.Input, FetchReminderType.Output>
   {
