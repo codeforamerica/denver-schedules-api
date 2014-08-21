@@ -11,7 +11,7 @@ namespace Schedules.API.Tests
     public void CheckThatEnvironmentVariablesExist()
     {
       dynamic config = Config.FromFile("config.json");
-      foreach (var variable in config.variables) {
+      foreach (var variable in config.all.variables) {
         var value = Environment.GetEnvironmentVariable(variable);
         Assert.That(!String.IsNullOrEmpty(value), String.Format("{0} does not have a value.", variable));
       }
