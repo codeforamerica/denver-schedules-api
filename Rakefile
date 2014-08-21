@@ -42,28 +42,39 @@ def authenticate_task(url)
   end
 end
 
-def create_reminder_task(url)
-  desc "Create reminder (#{url})"
-  task :create_reminder do
-    puts url
-
-    puts "contact:"
-    contact = STDIN.gets.chomp
-
-    options = {
-      headers: {
-        "User-Agent" => "test"
-      },
-      body: {
-        contact: contact,
-        message: "This is a test message. Cross your fingers...",
-        remindOn: Date.today
-      }
-    }
-
-    response = HTTParty.post(url, options)
-    puts response.code, response.body
+def create_email_reminder_task(url)
+  desc "Create email reminder (#{url})"
+  task :create_email_reminder do
+    create_reminder(url)
   end
+end
+
+def create_sms_reminder_task(url)
+  desc "Create sms reminder (#{url})"
+  task :create_sms_reminder do
+    create_reminder(url)
+  end
+end
+
+def create_reminder(url)
+  puts url
+
+  puts "contact:"
+  contact = STDIN.gets.chomp
+
+  options = {
+    headers: {
+      "User-Agent" => "test"
+    },
+    body: {
+      contact: contact,
+      message: "This is a test message. Cross your fingers...",
+      remindOn: Date.today
+    }
+  }
+
+  response = HTTParty.post(url, options)
+  puts response.code, response.body
 end
 
 def send_email_reminders_task(auth_url, url)
@@ -109,8 +120,9 @@ Config.each do |environment|
 
   namespace environment do
     authenticate_task env_config.urls.authenticate
-    create_reminder_task env_config.urls.createReminder
+    create_email_reminder_task env_config.urls.createEmailReminder
+    create_sms_reminder_task env_config.urls.createSMSReminder
     send_email_reminders_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
-    send_sms_reminders_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
+    send_sms_reminders_task env_config.urls.authenticate, env_config.urls.sendSMSReminders
   end
 end

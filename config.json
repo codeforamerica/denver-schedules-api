@@ -2,7 +2,8 @@
   "local": {
     "urls": {
       "authenticate": "http://localhost:8080/authenticate",
-      "createReminder": "http://localhost:8080/reminders/email",
+      "createEmailReminder": "http://localhost:8080/reminders/email",
+      "createSMSReminder": "http://localhost:8080/reminders/sms",
       "sendEmailReminders": "http://localhost:8080/reminders/email/send",
       "sendSMSReminders": "http://localhost:8080/reminders/sms/send"
     }
@@ -10,7 +11,8 @@
   "staging": {
     "urls": {
       "authenticate": "http://staging-denver-now-api.herokuapp.com/authenticate",
-      "createReminder": "http://staging-denver-now-api.herokuapp.com/reminders/email",
+      "createEmailReminder": "http://staging-denver-now-api.herokuapp.com/reminders/email",
+      "createSMSReminder": "http://staging-denver-now-api.herokuapp.com/reminders/sms",
       "sendEmailReminders": "http://staging-denver-now-api.herokuapp.com/reminders/email/send",
       "sendSMSReminders": "http://staging-denver-now-api.herokuapp.com/reminders/sms/send"
     }
@@ -18,9 +20,10 @@
   "prod": {
     "urls": {
       "authenticate": "http://production-denver-now-api.herokuapp.com/authenticate",
-      "createReminder": "http://production-denver-now-api.herokuapp.com/reminders/email",
+      "createEmailReminder": "http://production-denver-now-api.herokuapp.com/reminders/email",
+      "createSMSReminder": "http://production-denver-now-api.herokuapp.com/reminders/sms",
       "sendEmailReminders": "http://production-denver-now-api.herokuapp.com/reminders/email/send",
-      "sendSMSReminders": "http://staging-denver-now-api.herokuapp.com/reminders/sms/send"
+      "sendSMSReminders": "http://production-denver-now-api.herokuapp.com/reminders/sms/send"
     }
   },
   "all": {
