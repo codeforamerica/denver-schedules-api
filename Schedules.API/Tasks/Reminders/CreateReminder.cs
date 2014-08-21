@@ -3,8 +3,9 @@ using Simpler;
 using Schedules.API.Models;
 using Dapper;
 using System.Linq;
+using Schedules.API.Tasks.ReminderTypes;
 
-namespace Schedules.API.Tasks
+namespace Schedules.API.Tasks.Reminders
 {
   public class CreateReminder: InOutTask<CreateReminder.Input, CreateReminder.Output>
   {

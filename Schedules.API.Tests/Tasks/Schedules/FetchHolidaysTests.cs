@@ -5,7 +5,7 @@ using Schedules.API.Models;
 using System.Collections.Generic;
 using Simpler;
 
-namespace Schedules.API.Tests
+namespace Schedules.API.Tests.Tasks.Schedules
 {
   [TestFixture()]
   public class FetchHolidaysTests

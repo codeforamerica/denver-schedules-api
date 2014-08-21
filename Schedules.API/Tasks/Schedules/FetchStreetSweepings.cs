@@ -6,7 +6,7 @@ using Schedules.API.Tasks;
 using Dapper;
 using Nancy;
 
-namespace Schedules.API
+namespace Schedules.API.Tasks.Schedules
 {
   public class FetchStreetSweepings : InOutTask<FetchStreetSweepings.Input, FetchStreetSweepings.Output>
   {

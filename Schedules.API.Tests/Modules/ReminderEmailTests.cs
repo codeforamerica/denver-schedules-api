@@ -4,6 +4,7 @@ using Nancy.Testing;
 using Schedules.API.Models;
 using Schedules.API.Tasks;
 using Simpler;
+using Schedules.API.Tasks.ReminderTypes;
 
 namespace Schedules.API.Tests.Modules
 {
