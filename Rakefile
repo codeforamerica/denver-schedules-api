@@ -5,6 +5,8 @@ require "albacore"
 
 Config = Centroid::Config.from_file "config.json"
 
+ROOT = File.expand_path "."
+
 namespace :build do
   desc "Build for debugging"
   build :debug do |b|
@@ -30,7 +32,20 @@ namespace :test do
     end
     puts "All environment variables were found."
   end
+
+  desc "Run unit tests"
+  test_runner :unit => ["build:debug"] do |tr|
+    clean(Config.all.test.output)
+    tr.exe = Config.all.tools.nunit
+    tr.files = [Config.all.test.dll]
+    tr.add_parameter "-xml=#{File.join(ROOT, Config.all.test.results)}"
+  end
 end
+
+desc "Run all tests"
+task :test => ["test:system", "test:unit"]
+
+task :default => :test
 
 def authenticate(url)
   puts "username:"
@@ -144,4 +159,9 @@ Config.each do |environment|
     send_email_reminders_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
     send_sms_reminders_task env_config.urls.authenticate, env_config.urls.sendSMSReminders
   end
+end
+
+def clean(dir)
+  FileUtils.rm_rf dir
+  FileUtils.mkdir_p dir
 end
