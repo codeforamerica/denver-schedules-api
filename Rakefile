@@ -1,8 +1,25 @@
 require "centroid"
 require "httparty"
 require "json"
+require "albacore"
 
 Config = Centroid::Config.from_file "config.json"
+
+namespace :build do
+  desc "Build for debugging"
+  build :debug do |b|
+    b.sln = Config.all.build.solution
+    b.prop "Configuration", "Debug"
+    b.logging = "minimal"
+  end
+
+  desc "Build for release"
+  build :release do |b|
+    b.sln = Config.all.build.solution
+    b.prop "Configuration", "Release"
+    b.logging = "minimal"
+  end
+end
 
 namespace :test do
   desc "Run system tests"

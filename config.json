@@ -37,6 +37,9 @@
       "TWILIO_SID",
       "TWILIO_TOKEN",
       "TWILIO_NUMBER"
-    ]
+    ],
+    "build": {
+      "solution": "denver-schedules-api.sln"
+    }
   }
 }
