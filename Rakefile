@@ -25,16 +25,34 @@ end
 
 namespace :test do
   desc "Run system tests"
-  task :system do
-    Config.all.variables.each do |variable|
-      message = "#{variable} environment variable is missing."
-      raise message unless ENV.has_key? variable
-    end
-    puts "All environment variables were found."
+  test_runner :system do |tr|
+    clean(Config.all.test.output)
+    tr.exe = Config.all.tools.nunit
+    tr.files = [Config.all.test.dll]
+    tr.add_parameter "-include=System"
+    tr.add_parameter "-xml=#{File.join(ROOT, Config.all.test.results)}"
+  end
+
+  desc "Run reminder tests"
+  test_runner :reminders => ["build:debug"] do |tr|
+    clean(Config.all.test.output)
+    tr.exe = Config.all.tools.nunit
+    tr.files = [Config.all.test.dll]
+    tr.add_parameter "-include=Reminder"
+    tr.add_parameter "-xml=#{File.join(ROOT, Config.all.test.results)}"
   end
 
   desc "Run unit tests"
-  test_runner :unit => ["build:debug"] do |tr|
+  test_runner :units => ["build:debug"] do |tr|
+    clean(Config.all.test.output)
+    tr.exe = Config.all.tools.nunit
+    tr.files = [Config.all.test.dll]
+    tr.add_parameter "-exclude=System,Reminder"
+    tr.add_parameter "-xml=#{File.join(ROOT, Config.all.test.results)}"
+  end
+
+  desc "Run all tests"
+  test_runner :all => ["build:debug"] do |tr|
     clean(Config.all.test.output)
     tr.exe = Config.all.tools.nunit
     tr.files = [Config.all.test.dll]
@@ -42,10 +60,7 @@ namespace :test do
   end
 end
 
-desc "Run all tests"
-task :test => ["test:system", "test:unit"]
-
-task :default => :test
+task :default => "test:all"
 
 def authenticate(url)
   puts "username:"
