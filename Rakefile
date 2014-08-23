@@ -62,12 +62,17 @@ end
 
 task :default => "test:all"
 
-def authenticate(url)
-  puts "username:"
-  username = STDIN.gets.chomp
+def authenticate(url, prompt=false)
+  if prompt
+    puts "username:"
+    username = STDIN.gets.chomp
 
-  puts "password:"
-  password = STDIN.gets.chomp
+    puts "password:"
+    password = STDIN.gets.chomp
+  else
+    username = ENV['ADMIN_USERNAME']
+    password = ENV['ADMIN_PASSWORD']
+  end
 
   options = {
     headers: {
@@ -126,10 +131,24 @@ def create_reminder(url)
   puts response.code, response.body
 end
 
+def send_email_reminders_with_prompt_task(auth_url, url)
+  desc "Send email reminders and prompt for creds(#{url})"
+  task :send_email_reminders_with_prompt do
+    send_reminders(auth_url, url, true)
+  end
+end
+
 def send_email_reminders_task(auth_url, url)
   desc "Send email reminders (#{url})"
   task :send_email_reminders do
     send_reminders(auth_url, url)
+  end
+end
+
+def send_sms_reminders_with_prompt_task(auth_url, url)
+  desc "Send sms reminders and prompt for creds(#{url})"
+  task :send_sms_reminders_with_prompt do
+    send_reminders(auth_url, url, true)
   end
 end
 
@@ -140,10 +159,10 @@ def send_sms_reminders_task(auth_url, url)
   end
 end
 
-def send_reminders(auth_url, url)
+def send_reminders(auth_url, url, prompt=false)
   puts url
 
-  response = authenticate auth_url
+  response = authenticate auth_url, prompt
   data = JSON.parse(response.body)
   token = data["token"]
 
@@ -172,7 +191,9 @@ Config.each do |environment|
     create_email_reminder_task env_config.urls.createEmailReminder
     create_sms_reminder_task env_config.urls.createSMSReminder
     send_email_reminders_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
+    send_email_reminders_with_prompt_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
     send_sms_reminders_task env_config.urls.authenticate, env_config.urls.sendSMSReminders
+    send_sms_reminders_with_prompt_task env_config.urls.authenticate, env_config.urls.sendSMSReminders
   end
 end
 
