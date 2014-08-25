@@ -55,6 +55,7 @@ namespace Schedules.API.Tasks.Schedules
                                         jurisid as JurisdictionId,
                                         maintnce as Maintenance,
                                         addressqua as AddressQuadrant,
+                                        hundblkdir as StreetDirection,
                                         zipleft,
                                         zipright,
                                         oneway,
