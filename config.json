@@ -37,6 +37,17 @@
       "TWILIO_SID",
       "TWILIO_TOKEN",
       "TWILIO_NUMBER"
-    ]
+    ],
+    "build": {
+      "solution": "denver-schedules-api.sln"
+    },
+    "test": {
+      "dll": "Schedules.API.Tests/bin/Debug/Schedules.API.Tests.dll",
+      "output": "tmp/test",
+      "results": "tmp/test/results.xml"
+    },
+    "tools": {
+      "nunit": "packages/NUnit.Runners.2.6.3/tools/nunit-console.exe"
+    }
   }
 }
