@@ -10,14 +10,16 @@ namespace Schedules.API.Models
   /// </summary>
   public class StreetSweeping
   {
-    private static string leftString = "Left Side";
-    private static string rightString = "Right Side";
     private static bool [] streetSweepingMonths = new bool [] {false, false, false, true, true, true, true, true, true, true, true, false};
 
     public StreetSweeping ()
     {
       LeftSweep = string.Empty;
       RightSweep = string.Empty;
+      LeftSweepDirection = string.Empty;
+      RightSweepDirection = string.Empty;
+      AddressQuadrant = string.Empty;
+      StreetDirection = string.Empty;
     }
 
     /// <summary>
@@ -132,6 +134,12 @@ namespace Schedules.API.Models
     }
 
     /// <summary>
+    /// The direction the street is running
+    /// </summary>
+    /// <value>The street direction.</value>
+    public string StreetDirection { get; set; }
+
+    /// <summary>
     /// Zip on left side
     /// </summary>
     /// <value>The zip left.</value>
@@ -203,6 +211,26 @@ namespace Schedules.API.Models
     }
 
     /// <summary>
+    /// The city of Denver’s street grid is a type of plan in which streets run at right angles to each other, forming a grid.
+    /// The intersection of Broadway and Ellsworth is the 0,0 point for Denver. Broadway is the North-South line and the zero 
+    /// point for the numbers of streets moving East and West.
+    /// Ellsworth is the East-West line and the zero point for the numbering as they go North and South.
+    /// TODO: Once the logic that sets this is proven, will add as column in db
+    /// </summary>
+    /// <value>The direction of the left side.</value>
+    public string LeftSweepDirection { get; set; }
+
+    /// <summary>
+    /// The city of Denver’s street grid is a type of plan in which streets run at right angles to each other, forming a grid.
+    /// The intersection of Broadway and Ellsworth is the 0,0 point for Denver. Broadway is the North-South line and the zero 
+    /// point for the numbers of streets moving East and West.
+    /// Ellsworth is the East-West line and the zero point for the numbering as they go North and South.
+    /// TODO: Once the logic that sets this is proven, will add as column in db
+    /// </summary>
+    /// <value>The direction of the left side.</value>
+    public string RightSweepDirection { get; set; }
+
+    /// <summary>
     /// Gets or sets the error if no dates can be generated.
     /// </summary>
     /// <value>The error.</value>
@@ -212,6 +240,7 @@ namespace Schedules.API.Models
     }
     // TODO: NO! This should be a dumb object
     public List<Schedule> CreateSchedules() {
+      CalculateSweepDirection();
       var schedules = new List<Schedule> ();
       var leftWeekAndDay = GetWeekAndDay (LeftSweep);
       var rightWeekAndDay = GetWeekAndDay (RightSweep);
@@ -220,7 +249,7 @@ namespace Schedules.API.Models
         schedules.Add (new Schedule () {
           Name = FullName,
           Category = Categories.StreetSweeping.ToString (),
-          Description = leftString + " & " + rightString,
+          Description = LeftSweepDirection + " & " + RightSweepDirection,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
           Error = Error
         });
@@ -228,7 +257,7 @@ namespace Schedules.API.Models
         schedules.Add( new Schedule () { 
           Name = FullName, 
           Category = Categories.StreetSweeping.ToString (),
-          Description = leftString,
+          Description = LeftSweepDirection,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
           Error = Error
         });
@@ -236,7 +265,7 @@ namespace Schedules.API.Models
         schedules.Add (new Schedule () { 
           Name = FullName, 
           Category = Categories.StreetSweeping.ToString (),
-          Description = rightString,
+          Description = RightSweepDirection,
           Upcoming = Scheduler.CalculateDatesForRestOfYear(rightWeekAndDay[0], rightWeekAndDay[1], streetSweepingMonths),
           Error = Error
         });
@@ -262,6 +291,55 @@ namespace Schedules.API.Models
       }
 
       return weekAndDay;
+    }
+
+    private void CalculateSweepDirection()
+    {
+      // Result is left: N, right: S if
+      // Quad: SE, Dir: E or W
+      // Quad: NE, Dir: E or W
+      // Quad: E, Dir: E
+      var isNS = (AddressQuadrant.Equals("E") && StreetDirection.Equals("E"))
+                 || ((AddressQuadrant.Equals("SE") || AddressQuadrant.Equals("NE"))
+                    && (StreetDirection.Equals("E") || StreetDirection.Equals("W")));
+
+      // Result is left: E, right: W if
+      // Quad: SE, Dir: N or S
+      // Quad: SW, Dir: N or S
+      // Quad: S, Dir: E
+      var isEW = (AddressQuadrant.Equals("S") && StreetDirection.Equals("E"))
+                 || ((AddressQuadrant.Equals("SE") || AddressQuadrant.Equals("SW")) 
+                     && (StreetDirection.Equals("N") || StreetDirection.Equals("S")));
+
+      // Results is left: W, right: E if
+      // Quad: NE, Dir: N or S
+      // Quad: NW, Dir: N or S
+      // Quad: N, Dir: E
+      var isWE = (AddressQuadrant.Equals("N") && StreetDirection.Equals("E"))
+                 || ((AddressQuadrant.Equals("NE") || AddressQuadrant.Equals("NW")) 
+                     && (StreetDirection.Equals("N") || StreetDirection.Equals("S")));
+
+      // Result is left: S, right: N if
+      // Quad: SW, Dir: E or W
+      // Quad: NW, Dir: E or W
+      // Quad: W, Dir: N
+      var isSN = (AddressQuadrant.Equals("W") && StreetDirection.Equals("N"))
+                 || ((AddressQuadrant.Equals("SW") || AddressQuadrant.Equals("NW")) 
+                     && (StreetDirection.Equals("E") || StreetDirection.Equals("W")));
+
+      if (isNS) {
+        LeftSweepDirection = "North";
+        RightSweepDirection = "South";
+      } else if (isEW) {
+        LeftSweepDirection = "East";
+        RightSweepDirection = "West";
+      } else if (isWE) {
+        LeftSweepDirection = "West";
+        RightSweepDirection = "East";
+      } else if (isSN) {
+        LeftSweepDirection = "South";
+        RightSweepDirection = "North";
+      }
     }
   }
 }
