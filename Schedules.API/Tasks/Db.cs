@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data.Common;
-using System.Configuration;
+using Schedules.API.Helpers;
 
 namespace Schedules.API.Tasks
 {
@@ -12,8 +12,9 @@ namespace Schedules.API.Tasks
 
     public static DbConnection Connect() {
       // Reference: github.com/gregoryjscott/chic/TaskExtensions
-      var providerName = System.Environment.GetEnvironmentVariable (providerKey);
-      var connectionString = System.Environment.GetEnvironmentVariable (connectionKey);
+      var providerName = EnvironmentVariableHelper.GetEnvironmentVariable(providerKey);
+      var connectionString = EnvironmentVariableHelper.GetEnvironmentVariable(connectionKey);
+
       DbProviderFactory factory;
       try{
         factory = DbProviderFactories.GetFactory (providerName);

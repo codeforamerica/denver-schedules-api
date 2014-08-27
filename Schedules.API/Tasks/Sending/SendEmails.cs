@@ -1,20 +1,20 @@
-﻿using Simpler;
-using Schedules.API.Models;
+﻿using Schedules.API.Models;
 using Mandrill;
 using System.Collections.Generic;
 using System;
+using Schedules.API.Helpers;
 
 namespace Schedules.API.Tasks.Sending
 {
   public class SendEmails : SendReminderBase
   {
+    private const string mandrillAPIKey = "MANDRILL_API_KEY";
+    private const string fromEmailKey = "MANDRILL_FROM_EMAIL";
+
     public override void Execute ()
     {
-      var apiKey = Environment.GetEnvironmentVariable("MANDRILL_API_KEY");
-      if (String.IsNullOrEmpty(apiKey)) throw new Exception ("MANDRILL_API_KEY environment variable not found.");
-
-      var fromEmail = Environment.GetEnvironmentVariable("MANDRILL_FROM_EMAIL");
-      if (String.IsNullOrEmpty(fromEmail)) throw new Exception ("MANDRILL_FROM_EMAIL environment variable not found.");
+      var apiKey = EnvironmentVariableHelper.GetEnvironmentVariable(mandrillAPIKey);
+      var fromEmail = EnvironmentVariableHelper.GetEnvironmentVariable(fromEmailKey);
 
       var api = new MandrillApi (apiKey);
 
