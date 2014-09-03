@@ -96,6 +96,16 @@ def authenticate_task(url)
   end
 end
 
+def authenticate_with_prompt_task(url)
+  desc "Authenticate with prompt(#{url})"
+  task :authenticate_with_prompt do
+    puts url
+
+    response = authenticate url, true
+    puts response.code, response.body
+  end
+end
+
 def create_email_reminder_task(url)
   desc "Create email reminder (#{url})"
   task :create_email_reminder do
@@ -188,6 +198,7 @@ Config.each do |environment|
 
   namespace environment do
     authenticate_task env_config.urls.authenticate
+    authenticate_with_prompt_task env_config.urls.authenticate
     create_email_reminder_task env_config.urls.createEmailReminder
     create_sms_reminder_task env_config.urls.createSMSReminder
     send_email_reminders_task env_config.urls.authenticate, env_config.urls.sendEmailReminders
