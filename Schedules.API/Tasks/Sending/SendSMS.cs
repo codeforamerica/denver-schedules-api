@@ -1,17 +1,21 @@
 ﻿using System;
-using Simpler;
 using Schedules.API.Models;
 using Twilio;
+using Schedules.API.Helpers;
 
 namespace Schedules.API.Tasks.Sending
 {
   public class SendSMS: SendReminderBase
   {
+    private const string sidKey = "TWILIO_SID";
+    private const string tokenKey = "TWILIO_TOKEN";
+    private const string numberKey = "TWILIO_NUMBER";
+
     public override void Execute ()
     {
-      var sid = Environment.GetEnvironmentVariable ("TWILIO_SID");
-      var token = Environment.GetEnvironmentVariable ("TWILIO_TOKEN");
-      var number = Environment.GetEnvironmentVariable ("TWILIO_NUMBER");
+      var sid = EnvironmentVariableHelper.GetEnvironmentVariable(sidKey);
+      var token = EnvironmentVariableHelper.GetEnvironmentVariable(tokenKey);
+      var number = EnvironmentVariableHelper.GetEnvironmentVariable(numberKey);
 
       var client = new TwilioRestClient (sid, token);
 

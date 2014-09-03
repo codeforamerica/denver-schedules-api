@@ -173,6 +173,7 @@
     <Compile Include="Tasks\Sending\SendSMS.cs" />
     <Compile Include="Tasks\Sending\SendReminderBase.cs" />
     <Compile Include="Tasks\Sending\PostRemindersSend.cs" />
+    <Compile Include="Helpers\EnvironmentVariableHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
