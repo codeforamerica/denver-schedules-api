@@ -15,6 +15,7 @@ namespace Schedules.API.Tasks.Sending
     {
       public int Sent { get; set; }
       public int Errors { get; set; }
+      public string [] Messages {get; set; }
     }
   }
 }

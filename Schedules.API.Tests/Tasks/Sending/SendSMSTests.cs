@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Simpler;
 using Schedules.API.Models;
 using Schedules.API.Tasks.Sending;
+using System.Linq;
 
 namespace Schedules.API.Tests.Tasks.Sending
 {
@@ -47,6 +48,23 @@ namespace Schedules.API.Tests.Tasks.Sending
     {
       var invalidNumber = "15005550002";
       ShouldLogErrorWhenFails(invalidNumber);
+    }
+
+    [Test, Category("Reminder")]
+    public void ShouldInstructHowToUnsubscribe()
+    {
+      var reminders = new [] {
+        new Reminder {
+          Contact="15005550006",
+          Message="Please do a thing"
+        }
+      };
+
+      var sendSMS = Task.New<SendSMS>();
+      sendSMS.In.DueReminders = reminders;
+      sendSMS.Execute();
+
+      Assert.That(sendSMS.Out.Messages.All(m=> m.Contains("STOP")), "Message didn't contain STOP");
     }
 
     private void ShouldLogErrorWhenFails(string numberThatFails)

@@ -2,6 +2,7 @@
 using Simpler;
 using Schedules.API.Models;
 using Twilio;
+using System.Collections.Generic;
 
 namespace Schedules.API.Tasks.Sending
 {
@@ -14,14 +15,16 @@ namespace Schedules.API.Tasks.Sending
       var number = Environment.GetEnvironmentVariable ("TWILIO_NUMBER");
 
       var client = new TwilioRestClient (sid, token);
-
+      var messages = new List<String> ();
       foreach (var reminder in In.DueReminders) 
       {
         var contact = "+" + reminder.Contact;
-        var result = client.SendSmsMessage(number, contact, reminder.Message);
+        var message = reminder.Message + " Reply STOP to unsubscribe.";
+        var result = client.SendSmsMessage(number, contact, message);
         var error = result.RestException;
         if (error == null) {
           Out.Sent++;
+          messages.Add(message);
         } else {
           Out.Errors++;
           Console.WriteLine(
@@ -32,6 +35,8 @@ namespace Schedules.API.Tasks.Sending
           );
         }
       }
+
+      Out.Messages = messages.ToArray();
     }
   }
 }
