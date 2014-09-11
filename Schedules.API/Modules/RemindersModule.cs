@@ -16,8 +16,8 @@ namespace Schedules.API.Modules
       };
 
       Post["/reminders/email"] = _ => {
-        var createSMSReminder = CreateAReminder("email");
-        return Response.AsJson(createSMSReminder.Out.Reminder, HttpStatusCode.Created);
+        var createEmailReminder = CreateAReminder("email");
+        return Response.AsJson(createEmailReminder.Out.Reminder, HttpStatusCode.Created);
       };
     }
 
