@@ -307,7 +307,7 @@ namespace Schedules.API.Models
       // Quad: SE, Dir: E or W
       // Quad: NE, Dir: E or W
       // Quad: E, Dir: E
-      var isNS = (AddressQuadrant.Equals("E") && StreetDirection.Equals("E"))
+      var isEW = (AddressQuadrant.Equals("E") && StreetDirection.Equals("E"))
                  || ((AddressQuadrant.Equals("SE") || AddressQuadrant.Equals("NE"))
                     && (StreetDirection.Equals("E") || StreetDirection.Equals("W")));
 
@@ -315,7 +315,7 @@ namespace Schedules.API.Models
       // Quad: SE, Dir: N or S
       // Quad: SW, Dir: N or S
       // Quad: S, Dir: E
-      var isEW = (AddressQuadrant.Equals("S") && StreetDirection.Equals("E"))
+      var isSN = (AddressQuadrant.Equals("S") && StreetDirection.Equals("E"))
                  || ((AddressQuadrant.Equals("SE") || AddressQuadrant.Equals("SW")) 
                      && (StreetDirection.Equals("N") || StreetDirection.Equals("S")));
 
@@ -323,7 +323,7 @@ namespace Schedules.API.Models
       // Quad: NE, Dir: N or S
       // Quad: NW, Dir: N or S
       // Quad: N, Dir: E
-      var isWE = (AddressQuadrant.Equals("N") && StreetDirection.Equals("E"))
+      var isNS = (AddressQuadrant.Equals("N") && StreetDirection.Equals("E"))
                  || ((AddressQuadrant.Equals("NE") || AddressQuadrant.Equals("NW")) 
                      && (StreetDirection.Equals("N") || StreetDirection.Equals("S")));
 
@@ -331,22 +331,22 @@ namespace Schedules.API.Models
       // Quad: SW, Dir: E or W
       // Quad: NW, Dir: E or W
       // Quad: W, Dir: N
-      var isSN = (AddressQuadrant.Equals("W") && StreetDirection.Equals("N"))
+      var isWE = (AddressQuadrant.Equals("W") && StreetDirection.Equals("N"))
                  || ((AddressQuadrant.Equals("SW") || AddressQuadrant.Equals("NW")) 
                      && (StreetDirection.Equals("E") || StreetDirection.Equals("W")));
 
-      if (isNS) {
-        LeftSweepDirection = "North";
-        RightSweepDirection = "South";
-      } else if (isEW) {
+      if (isEW) {
         LeftSweepDirection = "East";
         RightSweepDirection = "West";
-      } else if (isWE) {
-        LeftSweepDirection = "West";
-        RightSweepDirection = "East";
       } else if (isSN) {
         LeftSweepDirection = "South";
         RightSweepDirection = "North";
+      } else if (isNS) {
+        LeftSweepDirection = "North";
+        RightSweepDirection = "South";
+      } else if (isWE) {
+        LeftSweepDirection = "West";
+        RightSweepDirection = "East";
       }
     }
   }
