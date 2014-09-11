@@ -11,6 +11,7 @@ namespace Schedules.API.Models
   public class StreetSweeping
   {
     private static bool [] streetSweepingMonths = new bool [] {false, false, false, true, true, true, true, true, true, true, true, false};
+    private const string noSchedules = "No schedules possible";
 
     public StreetSweeping ()
     {
@@ -245,6 +246,9 @@ namespace Schedules.API.Models
       var leftWeekAndDay = GetWeekAndDay (LeftSweep);
       var rightWeekAndDay = GetWeekAndDay (RightSweep);
 
+      if (Error.Contains(noSchedules))
+        return schedules;
+
       if (LeftSweep.Equals (RightSweep)) {
         schedules.Add (new Schedule () {
           Name = FullName,
@@ -270,25 +274,29 @@ namespace Schedules.API.Models
           Error = Error
         });
       }
+
       return schedules;
     }
 
     private int [] GetWeekAndDay(string sweep) {
       var weekAndDay = new int [2];
       var valueIsEmpty = String.IsNullOrEmpty (sweep);
-      var secondValueIsX = sweep.Length > 1 && sweep [1] == 'X';
-      var valueIsN = sweep == "N";
+      var secondValueIsX = sweep.Length > 1 && sweep.ToUpper()[1] == 'X'; // This condition should not occur in the data anymore.
+      var streetNotMaintainedByDenver = sweep.ToUpper() == "NDM";
+      var valueIsN = sweep.ToUpper() == "N";
 
-      if (valueIsEmpty)
-        Error = "Unknown";
-      else if (secondValueIsX)
-        Error = String.Format ("Week {0}, day unknown", sweep [0]);
-      else if (valueIsN)
-        Error = "Nightly";
-      else {
-        weekAndDay[0] = int.Parse (sweep [0].ToString ());
-        weekAndDay[1] = int.Parse (sweep [1].ToString ()) - 1; // Day of Week index is 0 - 6
-      }
+    if (valueIsEmpty)
+      Error = String.Format("{0} Reason: No data Available.", noSchedules);
+    else if (streetNotMaintainedByDenver)
+      Error = String.Format("{0} Reason: Street not maintained by the City and County of Denver.", noSchedules);
+    else if (secondValueIsX)
+        Error = String.Format ("{0} Reason: Week {1}, day unknown", noSchedules, sweep[0]);
+    else if (valueIsN)
+      Error = "Nightly"; // this really isn't an error
+    else {
+      weekAndDay[0] = int.Parse (sweep [0].ToString ());
+      weekAndDay[1] = int.Parse (sweep [1].ToString ()) - 1; // Day of Week index is 0 - 6
+    }
 
       return weekAndDay;
     }
