@@ -10,6 +10,8 @@ namespace Schedules.API.Tasks.Schedules
 {
   public class FetchStreetSweepings : InOutTask<FetchStreetSweepings.Input, FetchStreetSweepings.Output>
   {
+    public CreateSchedulesFromStreetSweeping CreateSchedules { get; set; }
+
     public class Input
     {// Assuming validation happens elsewhere
       public Address Address { get; set; }
@@ -28,7 +30,9 @@ namespace Schedules.API.Tasks.Schedules
           var formatPoint = String.Format(point, In.Address.Longitude, In.Address.Latitude);
           var routes = connection.Query<StreetSweeping>(altSelect, new { Point = formatPoint});
           foreach(var route in routes) {
-            Out.StreetSweepings.AddRange(route.CreateSchedules());
+            CreateSchedules.In.StreetSweeping = route;
+            CreateSchedules.Execute();
+            Out.StreetSweepings.AddRange(CreateSchedules.Out.Schedules);
           }
         }
         catch(Exception ex){

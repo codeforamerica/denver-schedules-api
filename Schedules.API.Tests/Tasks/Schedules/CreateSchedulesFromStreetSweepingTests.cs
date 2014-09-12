@@ -1,19 +1,23 @@
 ﻿using NUnit.Framework;
 using Schedules.API.Models;
+using Schedules.API.Tasks.Schedules;
+using Simpler;
 
-namespace Schedules.API.Tests.Models
+namespace Schedules.API.Tests.Tasks.Schedules
 {
   [TestFixture]
-  public class StreetSweepingTest
+  public class CreateSchedulesFromStreetSweepingTests
   {
+    private readonly CreateSchedulesFromStreetSweeping createSchedulesFromStreetSweeping = Task.New<CreateSchedulesFromStreetSweeping>();
+
     [Test]
     public void ShouldHandleNullSweepingData()
     {
-      var ss = new StreetSweeping () {
+      createSchedulesFromStreetSweeping.In.StreetSweeping = new StreetSweeping () {
         FullName = "hello"
       };
 
-      Assert.DoesNotThrow(() => ss.CreateSchedules());
+      Assert.DoesNotThrow(createSchedulesFromStreetSweeping.Execute);
     }
 
     [Test]
@@ -33,12 +37,13 @@ namespace Schedules.API.Tests.Models
 
     private void ShouldNotCreateSchedules(string leftSweep, string rightSweep)
     {
-      var ss = new StreetSweeping () {
+      createSchedulesFromStreetSweeping.In.StreetSweeping = new StreetSweeping () {
         LeftSweep = leftSweep,
         RightSweep = rightSweep
       };
 
-      Assert.AreEqual(0, ss.CreateSchedules().Count);
+      createSchedulesFromStreetSweeping.Execute();
+      Assert.AreEqual(0, createSchedulesFromStreetSweeping.Out.Schedules.Count);
     }
   }
 }
