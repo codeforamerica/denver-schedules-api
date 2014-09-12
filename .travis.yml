@@ -9,13 +9,22 @@ script:
 addons:
   postgresql: '9.3'
 deploy:
-  provider: heroku
-  api_key:
-    secure: TauFvTIpQb2y2yclPNDnYZx4p4jc3Cx398lirLdU40kMIEz4Pbe7JwGqw8Sq8jzlvxXvIB9QxaEyjZpFT8bsy01wC8ENC9VY2yomBs44kvkvMPDC7STyH4AT1bWjxQKtAshnEAi6DR3XAYlQS1N/JvHmO/NDzkphWv+NdIMPNOU=
-  strategy: git
-  app: staging-denver-now-api
-  on:
-    repo: codeforamerica/denver-schedules-api
+  - provider: heroku
+    api_key:
+      secure: TauFvTIpQb2y2yclPNDnYZx4p4jc3Cx398lirLdU40kMIEz4Pbe7JwGqw8Sq8jzlvxXvIB9QxaEyjZpFT8bsy01wC8ENC9VY2yomBs44kvkvMPDC7STyH4AT1bWjxQKtAshnEAi6DR3XAYlQS1N/JvHmO/NDzkphWv+NdIMPNOU=
+    strategy: git
+    buildpack: http://github.com/friism/heroku-buildpack-mono.git
+    app: staging-denver-now-api
+    on:
+      branch: master
+  - provider: heroku
+    api_key:
+      secure: TauFvTIpQb2y2yclPNDnYZx4p4jc3Cx398lirLdU40kMIEz4Pbe7JwGqw8Sq8jzlvxXvIB9QxaEyjZpFT8bsy01wC8ENC9VY2yomBs44kvkvMPDC7STyH4AT1bWjxQKtAshnEAi6DR3XAYlQS1N/JvHmO/NDzkphWv+NdIMPNOU=
+    strategy: git
+    buildpack: http://github.com/friism/heroku-buildpack-mono.git
+    app: production-denver-now-api
+    on:
+      branch: production
 notifications:
   webhooks: http://project-monitor.codeforamerica.org/projects/5410eca6-0a90-4bf0-b9c0-39f679940ba4/status
 env:
