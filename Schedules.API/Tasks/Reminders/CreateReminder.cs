@@ -58,6 +58,7 @@ namespace Schedules.API.Tasks.Reminders
         r.verified,
         r.address,
         r.reminder_type_id,
+        r.created_at as CreatedAt,
         t.*
       from insertReminder r
       left join reminder_types t
