@@ -2,6 +2,7 @@
 using Schedules.API.Models;
 using Schedules.API.Tasks.Schedules;
 using Simpler;
+using System;
 
 namespace Schedules.API.Tests.Tasks.Schedules
 {
@@ -18,6 +19,21 @@ namespace Schedules.API.Tests.Tasks.Schedules
       };
 
       Assert.DoesNotThrow(createSchedulesFromStreetSweeping.Execute);
+    }
+
+    [Test]
+    /// <summary>
+    /// Not the greatest test, it will fail if it's not street sweeping season
+    /// </summary>
+    public void ShouldCreateSchedules() {
+      createSchedulesFromStreetSweeping.In.StreetSweeping = new StreetSweeping () {
+        LeftSweep = "12",
+        RightSweep = "34",
+        Name = "Some road"
+      };
+
+      createSchedulesFromStreetSweeping.Execute();
+      Assert.That(createSchedulesFromStreetSweeping.Out.Schedules.Count, Is.GreaterThan(0));
     }
 
     [Test]

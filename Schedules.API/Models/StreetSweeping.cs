@@ -13,6 +13,7 @@
       RightSweepDirection = string.Empty;
       AddressQuadrant = string.Empty;
       StreetDirection = string.Empty;
+      Error = string.Empty;
     }
 
     /// <summary>
