@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Schedules.API.Helpers;
-using Schedules.API.Tasks.Schedules;
-
-namespace Schedules.API.Models
+﻿namespace Schedules.API.Models
 {
   /// <summary>
   /// Segment of a street sweeping route
   /// </summary>
   public class StreetSweeping
   {
-    private static bool [] streetSweepingMonths = new bool [] {false, false, false, true, true, true, true, true, true, true, true, false};
-    private const string noSchedules = "No schedules possible";
-
     public StreetSweeping ()
     {
       LeftSweep = string.Empty;
@@ -21,6 +13,7 @@ namespace Schedules.API.Models
       RightSweepDirection = string.Empty;
       AddressQuadrant = string.Empty;
       StreetDirection = string.Empty;
+      Error = string.Empty;
     }
 
     /// <summary>
@@ -238,116 +231,6 @@ namespace Schedules.API.Models
     public string Error {
       get;
       set;
-    }
-    // TODO: NO! This should be a dumb object
-    public List<Schedule> CreateSchedules() {
-      CalculateSweepDirection();
-      var schedules = new List<Schedule> ();
-      var leftWeekAndDay = GetWeekAndDay (LeftSweep);
-      var rightWeekAndDay = GetWeekAndDay (RightSweep);
-
-      if (Error.Contains(noSchedules))
-        return schedules;
-
-      if (LeftSweep.Equals (RightSweep)) {
-        schedules.Add (new Schedule () {
-          Name = FullName,
-          Category = Categories.StreetSweeping.ToString (),
-          Description = LeftSweepDirection + " & " + RightSweepDirection,
-          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
-          Error = Error
-        });
-      } else {
-        schedules.Add( new Schedule () { 
-          Name = FullName, 
-          Category = Categories.StreetSweeping.ToString (),
-          Description = LeftSweepDirection,
-          Upcoming = Scheduler.CalculateDatesForRestOfYear(leftWeekAndDay[0], leftWeekAndDay[1], streetSweepingMonths),
-          Error = Error
-        });
-
-        schedules.Add (new Schedule () { 
-          Name = FullName, 
-          Category = Categories.StreetSweeping.ToString (),
-          Description = RightSweepDirection,
-          Upcoming = Scheduler.CalculateDatesForRestOfYear(rightWeekAndDay[0], rightWeekAndDay[1], streetSweepingMonths),
-          Error = Error
-        });
-      }
-
-      return schedules;
-    }
-
-    private int [] GetWeekAndDay(string sweep) {
-      var weekAndDay = new int [2];
-      var valueIsEmpty = String.IsNullOrEmpty (sweep);
-      var secondValueIsX = sweep.Length > 1 && sweep.ToUpper()[1] == 'X'; // This condition should not occur in the data anymore.
-      var streetNotMaintainedByDenver = sweep.ToUpper() == "NDM";
-      var valueIsN = sweep.ToUpper() == "N";
-
-    if (valueIsEmpty)
-      Error = String.Format("{0} Reason: No data Available.", noSchedules);
-    else if (streetNotMaintainedByDenver)
-      Error = String.Format("{0} Reason: Street not maintained by the City and County of Denver.", noSchedules);
-    else if (secondValueIsX)
-        Error = String.Format ("{0} Reason: Week {1}, day unknown", noSchedules, sweep[0]);
-    else if (valueIsN)
-      Error = "Nightly"; // this really isn't an error
-    else {
-      weekAndDay[0] = int.Parse (sweep [0].ToString ());
-      weekAndDay[1] = int.Parse (sweep [1].ToString ()) - 1; // Day of Week index is 0 - 6
-    }
-
-      return weekAndDay;
-    }
-
-    private void CalculateSweepDirection()
-    {
-      // Result is left: N, right: S if
-      // Quad: SE, Dir: E or W
-      // Quad: NE, Dir: E or W
-      // Quad: E, Dir: E
-      var isEW = (AddressQuadrant.Equals("E") && StreetDirection.Equals("E"))
-                 || ((AddressQuadrant.Equals("SE") || AddressQuadrant.Equals("NE"))
-                    && (StreetDirection.Equals("E") || StreetDirection.Equals("W")));
-
-      // Result is left: E, right: W if
-      // Quad: SE, Dir: N or S
-      // Quad: SW, Dir: N or S
-      // Quad: S, Dir: E
-      var isSN = (AddressQuadrant.Equals("S") && StreetDirection.Equals("E"))
-                 || ((AddressQuadrant.Equals("SE") || AddressQuadrant.Equals("SW")) 
-                     && (StreetDirection.Equals("N") || StreetDirection.Equals("S")));
-
-      // Results is left: W, right: E if
-      // Quad: NE, Dir: N or S
-      // Quad: NW, Dir: N or S
-      // Quad: N, Dir: E
-      var isNS = (AddressQuadrant.Equals("N") && StreetDirection.Equals("E"))
-                 || ((AddressQuadrant.Equals("NE") || AddressQuadrant.Equals("NW")) 
-                     && (StreetDirection.Equals("N") || StreetDirection.Equals("S")));
-
-      // Result is left: S, right: N if
-      // Quad: SW, Dir: E or W
-      // Quad: NW, Dir: E or W
-      // Quad: W, Dir: N
-      var isWE = (AddressQuadrant.Equals("W") && StreetDirection.Equals("N"))
-                 || ((AddressQuadrant.Equals("SW") || AddressQuadrant.Equals("NW")) 
-                     && (StreetDirection.Equals("E") || StreetDirection.Equals("W")));
-
-      if (isEW) {
-        LeftSweepDirection = "East";
-        RightSweepDirection = "West";
-      } else if (isSN) {
-        LeftSweepDirection = "South";
-        RightSweepDirection = "North";
-      } else if (isNS) {
-        LeftSweepDirection = "North";
-        RightSweepDirection = "South";
-      } else if (isWE) {
-        LeftSweepDirection = "West";
-        RightSweepDirection = "East";
-      }
     }
   }
 }
