@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Schedules.API;
 using Nancy.Authentication.Token;
 using Nancy.Authentication.Token.Storage;
+using Nancy.Conventions;
 
 namespace Schedules.API
 {
@@ -43,6 +44,14 @@ namespace Schedules.API
         System.Console.Error.WriteLine(exception.ToString());
         return null;
       });
+    }
+
+    protected override void ConfigureConventions(NancyConventions nancyConventions)
+    {
+      nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("docs", "swagger-ui"));
+
+      base.ConfigureConventions(nancyConventions);
+
     }
   }
 }

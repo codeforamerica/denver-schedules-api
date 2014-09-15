@@ -100,6 +100,18 @@
     <Reference Include="Twilio.Api">
       <HintPath>..\packages\Twilio.3.6.16\lib\3.5\Twilio.Api.dll</HintPath>
     </Reference>
+    <Reference Include="Swagger.ObjectModel">
+      <HintPath>..\packages\Swagger.ObjectModel.0.1.0-alpha2\lib\net40\Swagger.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Swagger">
+      <HintPath>..\packages\Nancy.Swagger.0.1.0-alpha2\lib\net40\Nancy.Swagger.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Swagger.Annotations">
+      <HintPath>..\packages\Nancy.Swagger.Annotations.0.1.0-alpha2\lib\net40\Nancy.Swagger.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Metadata.Module">
+      <HintPath>..\packages\Nancy.MetaData.0.23.2\lib\net40\Nancy.Metadata.Module.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -136,6 +148,29 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="web.config" />
+    <Content Include="swagger-ui\index.html" />
+    <Content Include="swagger-ui\o2c.html" />
+    <Content Include="swagger-ui\swagger-ui.js" />
+    <Content Include="swagger-ui\swagger-ui.min.js" />
+    <Content Include="swagger-ui\css\reset.css" />
+    <Content Include="swagger-ui\css\screen.css" />
+    <Content Include="swagger-ui\images\explorer_icons.png" />
+    <Content Include="swagger-ui\images\logo_small.png" />
+    <Content Include="swagger-ui\images\pet_store_api.png" />
+    <Content Include="swagger-ui\images\throbber.gif" />
+    <Content Include="swagger-ui\images\wordnik_api.png" />
+    <Content Include="swagger-ui\lib\backbone-min.js" />
+    <Content Include="swagger-ui\lib\handlebars-1.0.0.js" />
+    <Content Include="swagger-ui\lib\highlight.7.3.pack.js" />
+    <Content Include="swagger-ui\lib\jquery-1.8.0.min.js" />
+    <Content Include="swagger-ui\lib\jquery.ba-bbq.min.js" />
+    <Content Include="swagger-ui\lib\jquery.slideto.min.js" />
+    <Content Include="swagger-ui\lib\jquery.wiggle.min.js" />
+    <Content Include="swagger-ui\lib\shred.bundle.js" />
+    <Content Include="swagger-ui\lib\swagger-oauth.js" />
+    <Content Include="swagger-ui\lib\swagger.js" />
+    <Content Include="swagger-ui\lib\underscore-min.js" />
+    <Content Include="swagger-ui\lib\shred\content.js" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -186,5 +221,6 @@
     <Folder Include="Tasks\Schedules\" />
     <Folder Include="Tasks\Reminders\" />
     <Folder Include="Tasks\Sending\" />
+    <Folder Include="swagger-ui\" />
   </ItemGroup>
 </Project>

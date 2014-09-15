@@ -3,6 +3,8 @@ using Nancy.Authentication.Token;
 using Schedules.API.Models;
 using Nancy.ModelBinding;
 using System;
+using Nancy.Metadata.Module;
+using Nancy.Swagger;
 
 namespace Schedules.API.Modules
 {
@@ -29,6 +31,26 @@ namespace Schedules.API.Modules
         var token = tokenizer.Tokenize(identity, Context);
         return Response.AsJson(new Authenticate { Token = token });
       };
+    }
+  }
+
+  public class AuthenticateMetadataModule: MetadataModule<SwaggerRouteData>
+  {
+    public AuthenticateMetadataModule ()
+    {
+//      Nancy.Swagger.SwaggerModelData model = new SwaggerModelData (System.Type.FilterNameIgnoreCase);
+//      Nancy.Swagger.Modules.SwaggerModule model = 
+
+        Describe["PostAuthentication"] = description => description.AsSwagger(with =>
+        {
+          with.ResourcePath("/authenticate");
+          with.Summary("Authenticate a user.");
+          with.Notes("Needed to send reminders.");
+          with.Model<User>();
+          with.BodyParam<User>("A User object", required: true);
+          //        with.Response(HttpStatusCode.Unauthorized, "User not authenticated.");
+          //        with.Response(HttpStatusCode.OK, "User authenticated.");
+        });
     }
   }
 }
