@@ -12,27 +12,27 @@ namespace Schedules.API.Tests.Tasks.Reminders
   {
     protected CreateReminder CreateReminder;
     protected readonly DateTime JulyOne = DateTime.Parse("2014-07-01");
-    const string smsContact = "5555555555";
-    const string emailContact = "example@email.com";
+    public const string SmsContact = "5555555555";
+    public const string EmailContact = "example@email.com";
 
-    protected void SetUpSms(string message="this is a test", string contact=smsContact)
+    protected void SetUpSms(string message="this is a test", string contact=SmsContact)
     {
       SetUpContact("sms", message, contact);
     }
 
-    protected void SetUpEmail(string message="this is a test", string contact=emailContact)
+    protected void SetUpEmail(string message="this is a test", string contact=EmailContact)
     {
       SetUpContact("email", message, contact);
     }
 
     protected void TearDownEmail()
     {
-      TearDown(emailContact);
+      TearDown(EmailContact);
     }
 
     protected void TearDownSMS()
     {
-      TearDown(smsContact);
+      TearDown(SmsContact);
     }
 
     private void TearDown(string contact)
