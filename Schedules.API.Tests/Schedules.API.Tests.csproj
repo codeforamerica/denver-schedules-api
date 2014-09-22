@@ -94,6 +94,7 @@
     <Compile Include="Tasks\Sending\PostRemindersSendTests.cs" />
     <Compile Include="Modules\Sending\RemindersSendTests.cs" />
     <Compile Include="Tasks\Schedules\CreateSchedulesFromStreetSweepingTests.cs" />
+    <Compile Include="Tasks\Reminders\CreateRemindersTestsBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
