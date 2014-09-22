@@ -176,6 +176,7 @@
     <Compile Include="Helpers\EnvironmentVariableHelper.cs" />
     <Compile Include="Tasks\Schedules\CreateSchedulesFromStreetSweeping.cs" />
     <Compile Include="Tasks\Reminders\FetchRemindersForContact.cs" />
+    <Compile Include="Tasks\Sending\SendSMSConfirmation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
