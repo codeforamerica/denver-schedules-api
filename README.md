@@ -24,7 +24,7 @@ The Denver Street Sweeping API reads and parses the street sweeping data from th
 
 ### Platform pieces
 * [Heroku](http://heroku.com) is used for hosting the app.
-* [Travis](https://travis-ci.org/) CI is used for continuous integration service. 
+* [Travis CI](https://travis-ci.org/) is used for continuous integration service. 
 
 ### Libraries
 * [Nancy](http://nancyfx.org/) is the web framework for the API.
