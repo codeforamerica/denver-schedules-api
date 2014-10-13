@@ -7,6 +7,7 @@ Denver Street Sweeping API
 
 * [What is Denver Street Sweeping](#what-is-denver-street-sweeping)
 * [Technical details and developer documentation](#technical-details)
+* [License](#license)
 
 ##What Is Denver Street Sweeping?
 
@@ -72,7 +73,7 @@ We use the GitHub issue tracker to track bugs and features. Before submitting a 
 [branch]: http://learn.github.com/p/branching.html
 [pr]: http://help.github.com/send-pull-requests/
 
-## License
+##License
 See the [LICENSE][] for details.
 
 [license]: https://github.com/codeforamerica/denver-schedules-api/blob/master/LICENSE
