@@ -28,9 +28,7 @@ Denver Street Sweeping is a web application developed by the 2014 Code for Ameri
 
 The Denver Street Sweeping API reads and parses the street sweeping data from the City and County of Denver.
 
-**Languages**: 
-* C#
-* Ruby (build tools, not necessary but helpful)
+**Languages**: C#, (Ruby is used for build tools. It isn't necessary but helpful)
 
 To get help with Ruby, use [this guide][howto]
 
