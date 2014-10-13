@@ -3,11 +3,19 @@ Denver Street Sweeping API
 
 [![Build Status][build_png]][travis]
 
-*Current Status*: As of October 2014 Denver Street Sweeping is available on [http://streetsweep.co/](streetsweep.co) as a pilot project for the City and County of Denver.
+[build_png]: https://travis-ci.org/codeforamerica/denver-schedules-api.png?branch=master
+[travis]: https://travis-ci.org/codeforamerica/denver-schedules-api
+
+*Current Status*: As of October 2014 Denver Street Sweeping is available on [http://streetsweep.co/][ss] as a pilot project for the City and County of Denver. 
 
 * [What is Denver Street Sweeping](#what-is-denver-street-sweeping)
 * [Technical details and developer documentation](#technical-details)
 * [License](#license)
+
+This is the repo for Denver Street Sweeping's Backend API. If you're looking for the front-end client code, [visit this url][client].
+
+[ss]: http://streetsweep.co
+[client]: https://github.com/codeforamerica/denver-schedules
 
 ##What Is Denver Street Sweeping?
 
@@ -20,34 +28,49 @@ Denver Street Sweeping is a web application developed by the 2014 Code for Ameri
 
 The Denver Street Sweeping API reads and parses the street sweeping data from the City and County of Denver.
 
-**Languages**: C#, Ruby (build tools, not necessary but helpful)
+**Languages**: 
+* C#
+* Ruby (build tools, not necessary but helpful)
+
+To get help with Ruby, use [this guide][howto]
+
+[howto]: https://github.com/codeforamerica/howto/blob/master/Ruby.md
 
 ### Platform pieces
-* [Heroku](http://heroku.com) is used for hosting the app.
-* [Travis CI](https://travis-ci.org/) is used for continuous integration service. 
+* [Heroku][heroku] is used for hosting the app.
+* [Travis CI][travisci] is used for continuous integration service. 
+
+[heroku]: http://heroku.com
+[travisci]: https://travis-ci.org/
 
 ### Libraries
-* [Nancy](http://nancyfx.org/) is the web framework for the API.
-* [Dapper](https://github.com/StackExchange/dapper-dot-net) is a mini-object operational mapper for the API.
-* [Simpler](https://github.com/gregoryjscott/Simpler) is a command pattern library for the API.
+* [Nancy][nancy] is the web framework for the API.
+* [Dapper][dapper] is a mini-object operational mapper for the API.
+* [Simpler][simpler] is a command pattern library for the API.
+
+[nancy]: http://nancyfx.org/
+[dapper]: https://github.com/StackExchange/dapper-dot-net
+[simpler]: https://github.com/gregoryjscott/Simpler
 
 ### Service Dependencies
-* [Twilio](https://www.twilio.com/try-twilio) is used to send SMS reminders.
-* [Mandrill](https://mandrill.com/signup/) is used to send Email reminders.
+* [Twilio][twilio] is used to send SMS reminders.
+* [Mandrill][mandrill] is used to send Email reminders.
+
+[twilio]: https://www.twilio.com/try-twilio
+[mandrill]: https://mandrill.com/signup/
 
 ### Code
 
-[https://github.com/codeforamerica/denver-schedules-api](https://github.com/codeforamerica/denver-schedules-api)
+Denver Street Sweeping is composed of an [API backend][backend] and a [client front end][client]. The API reads the data. The front end takes data from the API, formats it, and serves up the website. 
 
-A commit to the appropriate branch on github triggers a build, tests, and deployment.
+[This is the backend repo][backend]. A commit to the appropriate branch on github triggers a build, tests, and deployment.
 
 * [Continuous Integration][travis] (travis)
 * [Staging][staging] (branch: master)
 * [Production][prod] (branch: production)
 
+[backend]: https://github.com/codeforamerica/denver-schedules-api
 [prod]: http://production-denver-now-api.herokuapp.com/
-[build_png]: https://travis-ci.org/codeforamerica/denver-schedules-api.png?branch=master
-[travis]: https://travis-ci.org/codeforamerica/denver-schedules-api
 [staging]: http://staging-denver-now-api.herokuapp.com/schedules
 
 ### Installation, Usage
