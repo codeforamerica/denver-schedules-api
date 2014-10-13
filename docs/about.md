@@ -7,7 +7,9 @@ Denver Street Sweeping is a web application developed by the 2014 Code for Ameri
 
 The project was developed as one of several projects the 2014 Code for America Fellows worked on in Denver. The team discovered the problem after interviewing residents and looking at 311 call data. We found that street sweeping is ongoing concern for Denver residents and set out to help build an app to help residents avoid street sweeping tickets. 
 
-See more here: [http://youtu.be/_FJn4fM4bdA](http://youtu.be/_FJn4fM4bdA)
+Watch [this video][video] to learn more.
+
+[video]: http://youtu.be/_FJn4fM4bdA
 
 ## Design Principles
 
@@ -24,6 +26,12 @@ Denver Street Sweeping was never intended to be the perfect street sweeping app,
 
 ## Research and references
 
-* [Street Sweeping Statistics In Denver](https://docs.google.com/spreadsheets/d/1sPYKVcEkDPQxyAwbuoKs3GzG3rUJ_Rsj9PwOu7Vn3KQ/edit?usp=sharing)
-* [Denver Post Articles](https://bitly.com/bundles/o_5b65tcr36i/1)
+* [Street Sweeping Statistics In Denver][stats]
+* [Collection of Denver Post articles about street sweeping][articles]
+* [Behind the Scenes: Code for America Does Denver][govtech]
+* [The 2014 Fellowship in Denver][cfa]
 
+[stats]: https://docs.google.com/spreadsheets/d/1sPYKVcEkDPQxyAwbuoKs3GzG3rUJ_Rsj9PwOu7Vn3KQ/edit?usp=sharing
+[articles]: https://bitly.com/bundles/o_5b65tcr36i/1
+[govtech]: http://www.govtech.com/data/Behind-the-Scenes-Code-For-America-Does-Denver.html
+[cfa]: http://www.codeforamerica.org/governments/denver/
