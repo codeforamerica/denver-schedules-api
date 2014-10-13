@@ -3,19 +3,19 @@ Denver Street Sweeping API
 
 [![Build Status][build_png]][travis]
 
-*Current Status*: As of October 2014 Denver Street Sweeping is available on [streetsweep.co](streetsweep.co) as a pilot project for the City and County of Denver.
+*Current Status*: As of October 2014 Denver Street Sweeping is available on [http://streetsweep.co/](streetsweep.co) as a pilot project for the City and County of Denver.
 
-* [What is Denver Street Sweeping](#what-is-denver-street-sweeping?)
+* [What is Denver Street Sweeping](#what-is-denver-street-sweeping)
 * [Technical details and developer documentation](#technical-details)
 
-## What Is Denver Street Sweeping?
+##What Is Denver Street Sweeping?
 
 Denver Street Sweeping is a web application developed by the 2014 Code for America Fellows in Denver. The app uses Street Sweeping data from the City and County of Denver. It allows residents of Denver to lookup an address and find the corresponding street sweeping schedule for that address. The resident can then sign up for schedule reminders by Email or SMS. The web app is responsive.
 
 [Read more about Denver Street Sweeping here](/docs/about.md)
 
 
-## Technical Details
+##Technical Details
 
 The Denver Street Sweeping API reads and parses the street sweeping data from the City and County of Denver.
 

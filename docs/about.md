@@ -26,5 +26,4 @@ Denver Street Sweeping was never intended to be the perfect street sweeping app,
 
 * [Street Sweeping Statistics In Denver](https://docs.google.com/spreadsheets/d/1sPYKVcEkDPQxyAwbuoKs3GzG3rUJ_Rsj9PwOu7Vn3KQ/edit?usp=sharing)
 * [Denver Post Articles](https://bitly.com/bundles/o_5b65tcr36i/1)
-* [311 Data](schedule_metrics_by_year.html)
 
