@@ -12,12 +12,10 @@ namespace Schedules.API.Tasks
 
     public static DbConnection Connect() {
       // Reference: github.com/gregoryjscott/chic/TaskExtensions
-      //var providerName = EnvironmentVariableHelper.GetEnvironmentVariable(providerKey);
-      //var connectionString = EnvironmentVariableHelper.GetEnvironmentVariable(connectionKey);
+      var providerName = EnvironmentVariableHelper.GetEnvironmentVariable(providerKey);
+      var connectionString = EnvironmentVariableHelper.GetEnvironmentVariable(connectionKey);
 
      
-      var providerName = "Npgsql";
-      var connectionString = "Server=localhost;UserId=yunhao;Password=yunhao;Port=5432;Database=denver_schedules_development"; 
 
       DbProviderFactory factory;
       try{
