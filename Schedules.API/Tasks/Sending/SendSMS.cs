@@ -17,15 +17,19 @@ namespace Schedules.API.Tasks.Sending
       var token = EnvironmentVariableHelper.GetEnvironmentVariable(tokenKey);
       var number = EnvironmentVariableHelper.GetEnvironmentVariable(numberKey);
 
+
+     
+
       var client = new TwilioRestClient (sid, token);
 
       foreach (var reminder in In.DueReminders) 
       {
         var contact = "+" + reminder.Contact;
-        var result = client.SendSmsMessage(number, contact, reminder.Message);
+        var result = client.SendSmsMessage(number, contact , reminder.Message);
         var error = result.RestException;
         if (error == null) {
           Out.Sent++;
+          Console.WriteLine("Sent!");
         } else {
           Out.Errors++;
           Console.WriteLine(

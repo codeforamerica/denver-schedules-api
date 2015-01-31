@@ -15,6 +15,8 @@ namespace Schedules.API.Tasks
       var providerName = EnvironmentVariableHelper.GetEnvironmentVariable(providerKey);
       var connectionString = EnvironmentVariableHelper.GetEnvironmentVariable(connectionKey);
 
+     
+
       DbProviderFactory factory;
       try{
         factory = DbProviderFactories.GetFactory (providerName);
